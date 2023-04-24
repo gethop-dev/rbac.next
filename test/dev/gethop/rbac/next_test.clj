@@ -228,7 +228,7 @@
             resource-id (-> app-resources :application :id)
             context-type-name :application
             permission-name :application/manage
-            has-permission (rbac/has-permission db user-id resource-id context-type-name permission-name)]
+            has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
         (is (= has-permission true))))
 
     (testing "Check role of app-user-1 has expected value for application context"
@@ -252,7 +252,7 @@
             resource-id (-> app-resources :organization-1 :id)
             context-type-name :organization
             permission-name :organization/manage
-            has-permission (rbac/has-permission db user-id resource-id context-type-name permission-name)]
+            has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
         (is (= has-permission false))))
 
     (testing "app-user-1 has :application/manage permission on :organization-1 resource"
@@ -260,7 +260,7 @@
             resource-id (-> app-resources :organization-1 :id)
             context-type-name :organization
             permission-name :application/manage
-            has-permission (rbac/has-permission db user-id resource-id context-type-name permission-name)]
+            has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
         (is (= has-permission true))))
 
     (testing "app-user-1 has :plant/manage permission on :plant-1 resource"
@@ -268,7 +268,7 @@
             resource-id (-> app-resources :plant-1 :id)
             context-type-name :plant
             permission-name :plant/manage
-            has-permission (rbac/has-permission db user-id resource-id context-type-name permission-name)]
+            has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
         (is (= has-permission true))))
 
     (testing "app-user-1 :application/manage permission on :plant-1 resource"
@@ -276,7 +276,7 @@
             resource-id (-> app-resources :plant-1 :id)
             context-type-name :plant
             permission-name :application/manage
-            has-permission (rbac/has-permission db user-id resource-id context-type-name permission-name)]
+            has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
         (is (= has-permission true))))
 
     (testing "app-user-1 has :asset/manage permission on :plant-1 resource"
@@ -284,7 +284,7 @@
             resource-id (-> app-resources :plant-1 :id)
             context-type-name :plant
             permission-name :asset/manage
-            has-permission (rbac/has-permission db user-id resource-id context-type-name permission-name)]
+            has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
         (is (= has-permission true))))
 
     (testing "app-user-1 doesn't have :asset/manage permission on :asset-1 resource"
@@ -292,7 +292,7 @@
             resource-id (-> app-resources :asset-1 :id)
             context-type-name :asset
             permission-name :asset/manage
-            has-permission (rbac/has-permission db user-id resource-id context-type-name permission-name)]
+            has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
         (is (= has-permission false))))))
 
 (comment

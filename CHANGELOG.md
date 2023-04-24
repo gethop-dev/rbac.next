@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Rename `has-permission` to `has-permission?` to better convey the fact that this is a predicate function.
+
 ## [0.1.0-alpha-1] - 2023.04.24
 - First public release. This is alpha quality software.
 

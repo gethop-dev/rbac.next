@@ -979,17 +979,17 @@
       :role-assignments (map db-role-assignment->role-assignment return-values)})))
 
 ;; -----------------------------------------------------------
-(s/def ::has-permission-args (s/cat :db-spec ::db-spec
-                                    :user-id ::user-id
-                                    :resource-id ::resource-id
-                                    :context-type-name ::context-type-name
-                                    :permission-name ::permission-name))
-(s/def ::has-permission-ret boolean?)
-(s/fdef has-permission
-  :args ::has-permission-args
-  :ret  ::has-permission-ret)
+(s/def ::has-permission?-args (s/cat :db-spec ::db-spec
+                                     :user-id ::user-id
+                                     :resource-id ::resource-id
+                                     :context-type-name ::context-type-name
+                                     :permission-name ::permission-name))
+(s/def ::has-permission?-ret boolean?)
+(s/fdef has-permission?
+  :args ::has-permission?-args
+  :ret  ::has-permission?-ret)
 
-(defn has-permission
+(defn has-permission?
   [db-spec user-id resource-id context-type-name permission-name]
   (let [;; WITH RECURSE construct Inspired by familiy tree example at
         ;; https://sqlite.org/lang_with.html
