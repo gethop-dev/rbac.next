@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS rbac_permission (
     UNIQUE (name));
 -- ;;
 CREATE TABLE IF NOT EXISTS rbac_role_permission (
-    role_id uuid REFERENCES rbac_role(id) ON UPDATE CASCADE,
+    role_id uuid NOT NULL REFERENCES rbac_role(id) ON UPDATE CASCADE,
     permission_id uuid NOT NULL REFERENCES rbac_permission(id) ON UPDATE CASCADE,
     permission_value SMALLINT NOT NULL,
     PRIMARY KEY (role_id, permission_id));
