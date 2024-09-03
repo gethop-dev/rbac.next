@@ -139,7 +139,7 @@
   (jdbc/execute! db [(slurp (io/resource rbac-tables-down-sql))]))
 
 (use-fixtures
-  :once (fn reset-db [f]
+  :each (fn reset-db [f]
           (enable-instrumentation)
           (setup-app-objects)
           (setup-rbac-tables)
@@ -295,18 +295,98 @@
             has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
         (is (= has-permission false))))))
 
+(deftest create-role!
+  (let [role-to-create (first test-roles)]
+    (testing "create-role! succeeds"
+      (let [{:keys [success? role]} (rbac/create-role! db role-to-create)]
+        (is success?)
+        (is (= (dissoc role :id) role-to-create))
+        (is (:id role))))
+    (testing "create-role! fails with extra rol attributes"
+      (let [{:keys [success?]} (rbac/create-role! db role-to-create)]
+        (is (not success?))))))
+
+(deftest create-roles!
+  (testing "create-roles! succeeds"
+    (let [result (rbac/create-roles! db test-roles)]
+      (is (every? identity (map (fn [role-to-create {:keys [success? role]}]
+                                  (and success?
+                                       (= (dissoc role :id) role-to-create)
+                                       (:id role)))
+                                test-roles
+                                result))))))
+
+(deftest get-roles
+  (testing "get-roles succeeds"
+    (let [created-roles (map :role (rbac/create-roles! db test-roles))
+          {:keys [success? roles]} (rbac/get-roles db)]
+      (is success?)
+      (is (= created-roles roles)))))
+
+(deftest get-rol-by-*
+  (let [created-roles (map :role (rbac/create-roles! db test-roles))]
+    (testing "get-role-by-id succeeds"
+      (let [{:keys [success? role]} (rbac/get-role-by-id db (-> created-roles
+                                                                first
+                                                                :id))]
+        (is success?)
+        (is (= (first created-roles) role))))
+    (testing "get-role-by-name succeeds"
+      (let [{:keys [success? role]} (rbac/get-role-by-name db (-> created-roles
+                                                                  first
+                                                                  :name))]
+        (is success?)
+        (is (= (first created-roles) role))))))
+
+(deftest update-role!
+  (let [created-roles (map :role (rbac/create-roles! db test-roles))
+        role-to-update (-> created-roles first (assoc :name :updated-role))]
+    (testing "update-role! succeeds"
+      (let [{:keys [success? role]} (rbac/update-role! db role-to-update)]
+        (is success?)
+        (is (= role-to-update role))))
+    (testing "update-role! fails without role :id"
+      (let [{:keys [success?]} (rbac/update-role! db (dissoc role-to-update :id))]
+        (is (not success?))))))
+
+(deftest update-roles!
+  (let [created-roles (map :role (rbac/create-roles! db test-roles))
+        roles-to-update (map (fn [role]
+                               (update role :name
+                                       (fn [k]
+                                         (keyword (namespace k)
+                                                  (str "updated-"
+                                                       (name k))))))
+                             created-roles)]
+    (testing "update-roles! succeeds"
+      (let [result (rbac/update-roles! db roles-to-update)]
+        (is (every? :success? result))
+        (mapv #(is (= %1 %2)) roles-to-update (map :role result))))
+    (testing "update-roles! fails without role :id"
+      (let [{:keys [success?]} (rbac/update-roles! db (map #(dissoc % :id) roles-to-update))]
+        (is (not success?))))))
+
+(deftest delete-role!
+  (let [created-role (first (map :role (rbac/create-roles! db test-roles)))]
+    (testing "delete-role! succeeds"
+      (let [result (rbac/delete-role! db created-role)]
+        (is (:success? result))))
+    (testing "delete-role! fails without role :id"
+      (is (thrown? AssertionError (rbac/delete-role! db (dissoc created-role :id)))))))
+
+(deftest delete-role-by*!
+  (let [created-roles (take 2 (map :role (rbac/create-roles! db test-roles)))]
+    (testing "delete-role-by-id! succeeds"
+      (let [result (rbac/delete-role-by-id! db (-> created-roles first :id))]
+        (is (:success? result))))
+    (testing "delete-role-by-name! succeeds"
+      (let [result (rbac/delete-role-by-name! db (-> created-roles second :name))]
+        (is (:success? result))))))
+
 (comment
   ;; TODO: Create all the individual unit tests by leveraging the example code below.
 
   ;; -----------------------------------------------------
-  (rbac/create-roles! db roles)
-  (rbac/create-role! db (first roles))
-  (rbac/get-roles db)
-  (rbac/get-role-by-id db
-                       (-> (rbac/get-role-by-name db :application/manager)
-                           :role
-                           :id))
-  (rbac/get-role-by-name db :application/manager)
   (rbac/update-role! db
                      (-> (rbac/get-role-by-name db :application/manager)
                          :role
