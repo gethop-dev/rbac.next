@@ -79,6 +79,18 @@
   :ret  ::create-role!-ret)
 
 (defn create-role!
+  "Create a `role`, in the database specified by `db-spec`.
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `role` is a map with the following keys and values:
+
+   :name A mandatory key which contains a keyword with the role name.
+   :description An optional key which contains a string with the
+                description of the role.
+
+  E.g.,
+     {:name        :asset-manager
+      :description \"Role used to manage the assets in the application\"}"
   [db-spec role]
   {:pre [(and (s/valid? ::db-spec db-spec)
               (s/valid? ::role role))]}
@@ -102,8 +114,14 @@
   :ret  ::create-roles!-ret)
 
 (defn create-roles!
+  "Create a collection of `roles`, in the database specified by `db-spec`.
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `roles` is collection of `role`, as specified in `create-role!`"
   [db-spec roles]
   (doall (map #(create-role! db-spec %) roles)))
+  {:pre [(s/valid? ::db-spec db-spec)
+         (s/valid? ::roles roles)]}
 
 (s/def ::get-roles-args (s/cat :db-spec ::db-spec))
 (s/def ::get-roles-ret (s/keys :req-un [::success?]
@@ -113,7 +131,11 @@
   :ret  ::get-roles-ret)
 
 (defn get-roles
+  "Get all role definitions, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.  "
   [db-spec]
+  {:pre [(s/valid? ::db-spec db-spec)]}
   (let [return (get-* db-spec :rbac_role :roles)]
     (update return :roles #(map db-role->role %))))
 
@@ -133,7 +155,12 @@
   :ret  ::get-role-by-id-ret)
 
 (defn get-role-by-id
+  "Get the role whose id is `role-id`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec role-id]
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::id role-id))]}
   (get-role-by-* db-spec :id role-id))
 
 (s/def ::get-role-by-name-args (s/cat :db-spec ::db-spec
@@ -145,7 +172,12 @@
   :ret  ::get-role-by-name-ret)
 
 (defn get-role-by-name
+  "Get the role whose name is `name`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.  "
   [db-spec name]
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::name name))]}
   (get-role-by-* db-spec :name (kw->str name)))
 
 (s/def ::update-role!-args (s/cat :db-spec ::db-spec
@@ -157,6 +189,11 @@
   :ret  ::update-role!-ret)
 
 (defn update-role!
+  "Update `role` definitionn, in the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `role` is a map, as specified in `create-role!`. Except
+  in this case, the role `id` is mandatory."
   [db-spec role]
   (let [result (jdbc.sql/update! db-spec
                                  :rbac-role
@@ -166,6 +203,8 @@
     (if (> (::jdbc/update-count result) 0)
       {:success? true
        :role role}
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::role role))]}
       {:success? false})))
 
 (s/def ::update-roles!-args (s/cat :db-spec ::db-spec
@@ -177,8 +216,15 @@
   :ret  ::update-roles!-ret)
 
 (defn update-roles!
+  "Update a collection of `roles`, in the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `roles` is collection of `role`, as specified in
+  `create-role!`. Except in this case, the role `id` is mandatory."
   [db-spec roles]
   (doall (map #(update-role! db-spec %) roles)))
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::roles roles))]}
 
 (s/def ::delete-role!-args (s/cat :db-spec ::db-spec
                                   :role ::role))
@@ -188,7 +234,14 @@
   :ret  ::delete-role!-ret)
 
 (defn delete-role!
+  "Delete `role` definition, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `role` is a map, as specified in `create-role!`. Except
+  in this case, the role `id` is mandatory."
   [db-spec role]
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::role role)
   (delete-where-x! db-spec :rbac-role [:= :id (:id role)]))
 
 (s/def ::delete-role-by-id!-args (s/cat :db-spec ::db-spec
@@ -199,7 +252,12 @@
   :ret  ::delete-role-by-id!-ret)
 
 (defn delete-role-by-id!
+  "Delete `role` whose id is `role-id`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec role-id]
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::id role-id))]}
   (delete-where-x! db-spec :rbac-role [:= :id role-id]))
 
 (s/def ::delete-role-by-name!-args (s/cat :db-spec ::db-spec
@@ -210,7 +268,12 @@
   :ret  ::delete-role-by-name!-ret)
 
 (defn delete-role-by-name!
+  "Delete `role` whose name is `name`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec name]
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::name name))]}
   (delete-where-x! db-spec :rbac-role [:= :name (kw->str name)]))
 
 (s/def ::delete-roles!-args (s/cat :db-spec ::db-spec
@@ -221,8 +284,15 @@
   :ret  ::delete-roles!-ret)
 
 (defn delete-roles!
+  "Delete `roles` definitions, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `roles` is a collection of maps, as specified in
+  `create-role!`. Except in this case, the role `id` is mandatory."
   [db-spec roles]
   (doall (map #(delete-role-by-name! db-spec (:name %)) roles)))
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::roles roles))]}
 
 (s/def ::delete-roles-by-ids!-args (s/cat :db-spec ::db-spec
                                           :ids ::ids))
