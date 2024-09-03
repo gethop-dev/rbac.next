@@ -271,7 +271,7 @@
             has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
         (is (= has-permission true))))
 
-    (testing "app-user-1 :application/manage permission on :plant-1 resource"
+    (testing "app-user-1 has :application/manage permission on :plant-1 resource"
       (let [user-id (-> app-users :app-user-1 :id)
             resource-id (-> app-resources :plant-1 :id)
             context-type-name :plant
