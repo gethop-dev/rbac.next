@@ -10,10 +10,10 @@
 (def ^:const ^:private db
   (System/getenv "JDBC_DATABASE_URL"))
 
-(defn enable-instrumentation []
+(defn- enable-instrumentation []
   (-> (stest/enumerate-namespace 'dev.gethop.rbac.next) stest/instrument))
 
-(defonce ^:const app-users
+(defonce ^{:private true, :const true} app-users
   {:app-user-1 {:id (UUID/randomUUID)
                 :username "first.user"
                 :email "first.user@magnet.coop"}
@@ -21,7 +21,7 @@
                 :username "second.user"
                 :email "second.user@magnet.coop"}})
 
-(defonce ^:const app-resources
+(defonce ^{:private true, :const true} app-resources
   {:application {:id (UUID/randomUUID)
                  :name "Application"
                  :description "Application description"}
@@ -44,7 +44,7 @@
              :name "Asset 2"
              :description "Asset 2 description"}})
 
-(defonce ^:const context-types
+(defonce ^{:private true, :const true} context-types
   {:application {:name :application
                  :description "Application context"}
    :organization {:name :organization
@@ -54,35 +54,35 @@
    :asset {:name :asset
            :description "Assets context"}})
 
-(defonce ^:const application-context
+(defonce ^{:private true, :const true} application-context
   {:context-type-name (get-in context-types [:application :name])
    :resource-id (get-in app-resources [:application :id])})
 
-(defonce ^:const organization-1-context
+(defonce ^{:private true, :const true} organization-1-context
   {:context-type-name (get-in context-types [:organization :name])
    :resource-id (get-in app-resources [:organization-1 :id])})
 
-(defonce ^:const plant-1-context
+(defonce ^{:private true, :const true} plant-1-context
   {:context-type-name (get-in context-types [:plant :name])
    :resource-id (get-in app-resources [:plant-1 :id])})
 
-(defonce ^:const asset-1-context
+(defonce ^{:private true, :const true} asset-1-context
   {:context-type-name (get-in context-types [:asset :name])
    :resource-id (get-in app-resources [:asset-1 :id])})
 
-(defonce ^:const organization-2-context
+(defonce ^{:private true, :const true} organization-2-context
   {:context-type-name (get-in context-types [:organization :name])
    :resource-id (get-in app-resources [:organization-2 :id])})
 
-(defonce ^:const plant-2-context
+(defonce ^{:private true, :const true} plant-2-context
   {:context-type-name (get-in context-types [:plant :name])
    :resource-id (get-in app-resources [:plant-2 :id])})
 
-(defonce ^:const asset-2-context
+(defonce ^{:private true, :const true} asset-2-context
   {:context-type-name (get-in context-types [:asset :name])
    :resource-id (get-in app-resources [:asset-2 :id])})
 
-(defonce ^:const roles
+(defonce ^{:private true, :const true} test-roles
   [{:name :application/manager
     :description "Application manager"}
    {:name :organization/manager
@@ -94,7 +94,7 @@
    {:name :asset-1/manager
     :description "Asset 1 manager"}])
 
-(defonce ^:const permissions
+(defonce ^{:private true, :const true} test-permissions
   [{:name :application/manage
     :description "Manage Application"
     :context-type-name :application}
@@ -108,16 +108,16 @@
     :description "Manage Asset"
     :context-type-name :asset}])
 
-(defonce ^:const rbac-tables-up-sql
+(defonce ^{:private true, :const true} rbac-tables-up-sql
   "dev.gethop.rbac.next/rbac-tables.pg.up.sql")
 
-(defonce ^:const rbac-tables-down-sql
+(defonce ^{:private true, :const true} rbac-tables-down-sql
   "dev.gethop.rbac.next/rbac-tables.pg.down.sql")
 
-(defonce ^:const app-tables-up-sql
+(defonce ^{:private true, :const true} app-tables-up-sql
   "_files/app-tables.up.sql")
 
-(defonce ^:const app-tables-down-sql
+(defonce ^{:private true, :const true} app-tables-down-sql
   "_files/app-tables.down.sql")
 
 (defn- setup-app-objects []
