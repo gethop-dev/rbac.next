@@ -120,9 +120,9 @@
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
   `roles` is collection of `role`, as specified in `create-role!`"
   [db-spec roles]
-  (doall (map #(create-role! db-spec %) roles)))
   {:pre [(s/valid? ::db-spec db-spec)
          (s/valid? ::roles roles)]}
+  (mapv #(create-role! db-spec %) roles))
 
 (s/def ::get-roles-args (s/cat :db-spec ::db-spec))
 (s/def ::get-roles-ret (s/keys :req-un [::success?]
@@ -138,7 +138,7 @@
   [db-spec]
   {:pre [(s/valid? ::db-spec db-spec)]}
   (let [return (get-* db-spec :rbac_role :roles)]
-    (update return :roles #(map db-role->role %))))
+    (update return :roles #(mapv db-role->role %))))
 
 (defn- get-role-by-*
   [db-spec column value]
@@ -226,9 +226,9 @@
   `roles` is collection of `role`, as specified in
   `create-role!`. Except in this case, the role `id` is mandatory."
   [db-spec roles]
-  (doall (map #(update-role! db-spec %) roles)))
   {:pre [(and (s/valid? ::db-spec db-spec)
               (s/valid? ::roles roles))]}
+  (mapv #(update-role! db-spec %) roles))
 
 (s/def ::delete-role!-args (s/cat :db-spec ::db-spec
                                   :role ::role))
@@ -294,9 +294,9 @@
   `roles` is a collection of maps, as specified in
   `create-role!`. Except in this case, the role `id` is mandatory."
   [db-spec roles]
-  (doall (map #(delete-role-by-name! db-spec (:name %)) roles)))
   {:pre [(and (s/valid? ::db-spec db-spec)
               (s/valid? ::roles roles))]}
+  (mapv #(delete-role-by-name! db-spec (:id %)) roles))
 
 (s/def ::delete-roles-by-ids!-args (s/cat :db-spec ::db-spec
                                           :ids ::ids))
@@ -307,7 +307,7 @@
 
 (defn delete-roles-by-ids!
   [db-spec ids]
-  (doall (map #(delete-role-by-id! db-spec %) ids)))
+  (mapv #(delete-role-by-id! db-spec %) ids))
 
 (s/def ::delete-roles-by-names!-args (s/cat :db-spec ::db-spec
                                             :names ::names))
@@ -318,7 +318,7 @@
 
 (defn delete-roles-by-names!
   [db-spec names]
-  (doall (map #(delete-role-by-name! db-spec %) names)))
+  (mapv #(delete-role-by-name! db-spec %) names))
 
 ;; -----------------------------------------------------------
 (defn- context-type->db-context-type
@@ -364,7 +364,7 @@
 
 (defn create-context-types!
   [db-spec context-types]
-  (doall (map #(create-context-type! db-spec %) context-types)))
+  (mapv #(create-context-type! db-spec %) context-types))
 
 (s/def ::get-context-types-args (s/cat :db-spec ::db-spec))
 (s/def ::get-context-types-ret (s/keys :req-un [::success?]
@@ -376,7 +376,7 @@
 (defn get-context-types
   [db-spec]
   (let [return (get-* db-spec :rbac_context_type :context-types)]
-    (update return :context-types #(map db-context-type->context-type %))))
+    (update return :context-types #(mapv db-context-type->context-type %))))
 
 (s/def ::get-context-type-args (s/cat :db-spec ::db-spec
                                       :context-type-name ::context-type-name))
@@ -429,7 +429,7 @@
 
 (defn update-context-types!
   [db-spec context-types]
-  (doall (map #(update-context-type! db-spec %) context-types)))
+  (mapv #(update-context-type! db-spec %) context-types))
 
 (s/def ::delete-context-type!-args (s/cat :db-spec ::db-spec
                                           :context-type ::context-type))
@@ -452,7 +452,7 @@
 
 (defn delete-context-types!
   [db-spec context-types]
-  (doall (map #(delete-context-type! db-spec %) context-types)))
+  (mapv #(delete-context-type! db-spec %) context-types))
 
 ;; -----------------------------------------------------------
 (defn- context->db-context
@@ -509,7 +509,7 @@
 (defn get-contexts
   [db-spec]
   (let [return (get-* db-spec :rbac_context :contexts)]
-    (update return :contexts #(map db-context->context %))))
+    (update return :contexts #(mapv db-context->context %))))
 
 (s/def ::get-context-args (s/cat :db-spec ::db-spec
                                  :context-type-name ::context-type-name
@@ -563,7 +563,7 @@
 
 (defn update-contexts!
   [db-spec contexts]
-  (doall (map #(update-context! db-spec %) contexts)))
+  (mapv #(update-context! db-spec %) contexts))
 
 (s/def ::delete-context!-args (s/cat :db-spec ::db-spec
                                      :context ::context))
@@ -587,7 +587,7 @@
 
 (defn delete-contexts!
   [db-spec contexts]
-  (doall (map #(delete-context! db-spec %) contexts)))
+  (mapv #(delete-context! db-spec %) contexts))
 
 ;; -----------------------------------------------------------
 (defn- perm->db-perm
@@ -640,7 +640,7 @@
 
 (defn create-permissions!
   [db-spec permissions]
-  (doall (map #(create-permission! db-spec %) permissions)))
+  (mapv #(create-permission! db-spec %) permissions))
 
 (s/def ::get-permissions-args (s/cat :db-spec ::db-spec))
 (s/def ::get-permissions-ret (s/keys :req-un [::success?]
@@ -654,7 +654,7 @@
   (let [result (get-* db-spec :rbac_permission :permissions)]
     (if-not (:success? result)
       {:success? false}
-      (update result :permissions #(map db-perm->perm %)))))
+      (update result :permissions #(mapv db-perm->perm %)))))
 
 (defn- get-permission-by-*
   [db-spec column value]
@@ -720,7 +720,7 @@
 
 (defn update-permissions!
   [db-spec permissions]
-  (doall (map #(update-permission! db-spec %) permissions)))
+  (mapv #(update-permission! db-spec %) permissions))
 
 (s/def ::delete-permission!-args (s/cat :db-spec ::db-spec
                                         :permission ::permission))
@@ -764,7 +764,7 @@
 
 (defn delete-permissions!
   [db-spec permissions]
-  (doall (map #(delete-permission! db-spec %) permissions)))
+  (mapv #(delete-permission! db-spec %) permissions))
 
 (s/def ::delete-permissions-by-ids!-args (s/cat :db-spec ::db-spec
                                                 :ids ::ids))
@@ -775,7 +775,7 @@
 
 (defn delete-permissions-by-ids!
   [db-spec ids]
-  (doall (map #(delete-permission-by-id! db-spec %) ids)))
+  (mapv #(delete-permission-by-id! db-spec %) ids))
 
 (s/def ::delete-permission-by-names!-args (s/cat :db-spec ::db-spec
                                                  :names ::names))
@@ -786,7 +786,7 @@
 
 (defn delete-permissions-by-names!
   [db-spec names]
-  (doall (map #(delete-permission-by-name! db-spec %) names)))
+  (mapv #(delete-permission-by-name! db-spec %) names))
 
 ;; -----------------------------------------------------------
 (s/def ::user-id (s/or :string-id ::string-id
@@ -908,7 +908,7 @@
 
 (defn grant-role-permissions!
   [db-spec role permissions]
-  (doall (map #(set-perm-with-value! db-spec role % :permission-granted) permissions)))
+  (mapv #(set-perm-with-value! db-spec role % :permission-granted) permissions))
 
 (s/def ::deny-role-permission!-args (s/cat :db-spec ::db-spec
                                            :role ::role
@@ -932,7 +932,7 @@
 
 (defn deny-role-permissions!
   [db-spec role permissions]
-  (doall (map #(set-perm-with-value! db-spec role % :permission-denied) permissions)))
+  (mapv #(set-perm-with-value! db-spec role % :permission-denied) permissions))
 
 (s/def ::remove-role-permission!-args (s/cat :db-spec ::db-spec
                                              :role ::role
@@ -958,7 +958,7 @@
 
 (defn remove-role-permissions!
   [db-spec role permissions]
-  (doall (map #(remove-role-permission! db-spec role %) permissions)))
+  (mapv #(remove-role-permission! db-spec role %) permissions))
 
 ;; -----------------------------------------------------------
 
@@ -1007,7 +1007,7 @@
 
 (defn assign-roles!
   [db-spec role-assignments]
-  (doall (map #(assign-role! db-spec %) role-assignments)))
+  (mapv #(assign-role! db-spec %) role-assignments))
 
 (s/def ::unassign-role!-args (s/cat :db-spec ::db-spec
                                     :role-assignment ::role-assignment))
@@ -1032,7 +1032,7 @@
 
 (defn unassign-roles!
   [db-spec unassignments]
-  (doall (map #(unassign-role! db-spec %) unassignments)))
+  (mapv #(unassign-role! db-spec %) unassignments))
 
 (s/def ::get-role-assignments-by-user-args (s/cat :db-spec ::db-spec
                                                   :user-id ::user-id
@@ -1066,7 +1066,7 @@
          return-values (jdbc.sql/query db-spec (hsql/format query)
                                        jdbc/unqualified-snake-kebab-opts)]
      {:success? true
-      :role-assignments (map db-role-assignment->role-assignment return-values)})))
+      :role-assignments (mapv db-role-assignment->role-assignment return-values)})))
 
 ;; -----------------------------------------------------------
 (s/def ::has-permission?-args (s/cat :db-spec ::db-spec
