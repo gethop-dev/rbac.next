@@ -145,7 +145,7 @@
   (let [{:keys [success? values]} (get-*-where-y db-spec :rbac-role
                                                  [:= column value])]
     {:success? success?
-     :role (first (map db-role->role values))}))
+     :role (db-role->role (first values))}))
 
 (s/def ::get-role-by-id-args (s/cat :db-spec ::db-spec
                                     :role-id ::id))
