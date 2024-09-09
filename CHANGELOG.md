@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated dependencies to latest stable versions.
 - Catch SQL exceptions due to constraint violations locally, instead
   of letting them bubble up to the application.
+- **[BREAKING CHANGE]** Use namespaced keywords to grant and deny permissions.
 
 ## [0.1.0-alpha-2] - 2023.04.24
 

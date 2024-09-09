@@ -839,7 +839,7 @@
   (delete-where-x! db-spec :rbac-super-admin [:= :user-id user-id]))
 
 ;; -----------------------------------------------------------
-(s/def ::permission-value #{:permission-granted :permission-denied})
+(s/def ::permission-value #{::permission-granted ::permission-denied})
 
 (defn- set-perm-with-value!
   [db-spec role permission permission-value]
@@ -847,8 +847,8 @@
          (s/valid? ::permission permission)
          (s/valid? ::permission-value permission-value)]}
   (let [perm-val (case permission-value
-                   :permission-granted 1
-                   :permission-denied -1)
+                   ::permission-granted 1
+                   ::permission-denied -1)
         role-permission {:role-id (:id role)
                          :permission-id (:id permission)
                          :permission-value perm-val}]
@@ -896,7 +896,7 @@
 
 (defn grant-role-permission!
   [db-spec role permission]
-  (set-perm-with-value! db-spec role permission :permission-granted))
+  (set-perm-with-value! db-spec role permission ::permission-granted))
 
 (s/def ::grant-role-permissions!-args (s/cat :db-spec ::db-spec
                                              :role ::role
@@ -908,7 +908,7 @@
 
 (defn grant-role-permissions!
   [db-spec role permissions]
-  (mapv #(set-perm-with-value! db-spec role % :permission-granted) permissions))
+  (mapv #(set-perm-with-value! db-spec role % ::permission-granted) permissions))
 
 (s/def ::deny-role-permission!-args (s/cat :db-spec ::db-spec
                                            :role ::role
@@ -920,7 +920,7 @@
 
 (defn deny-role-permission!
   [db-spec role permission]
-  (set-perm-with-value! db-spec role permission :permission-denied))
+  (set-perm-with-value! db-spec role permission ::permission-denied))
 
 (s/def ::deny-role-permissions!-args (s/cat :db-spec ::db-spec
                                             :role ::role
@@ -932,7 +932,7 @@
 
 (defn deny-role-permissions!
   [db-spec role permissions]
-  (mapv #(set-perm-with-value! db-spec role % :permission-denied) permissions))
+  (mapv #(set-perm-with-value! db-spec role % ::permission-denied) permissions))
 
 (s/def ::remove-role-permission!-args (s/cat :db-spec ::db-spec
                                              :role ::role
