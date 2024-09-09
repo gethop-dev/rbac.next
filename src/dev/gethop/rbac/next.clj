@@ -213,8 +213,7 @@
 
 (s/def ::update-roles!-args (s/cat :db-spec ::db-spec
                                    :roles ::roles))
-(s/def ::update-roles!-ret (s/keys :req-un [::success?]
-                                   :opt-un [::roles]))
+(s/def ::update-roles!-ret (s/coll-of ::update-role!-ret))
 (s/fdef update-roles!
   :args ::update-roles!-args
   :ret  ::update-roles!-ret)
@@ -246,6 +245,7 @@
   [db-spec role]
   {:pre [(and (s/valid? ::db-spec db-spec)
               (s/valid? ::role role)
+              (s/valid? ::id (:id role)))]}
   (delete-where-x! db-spec :rbac-role [:= :id (:id role)]))
 
 (s/def ::delete-role-by-id!-args (s/cat :db-spec ::db-spec
