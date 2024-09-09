@@ -94,15 +94,16 @@
   [db-spec role]
   {:pre [(and (s/valid? ::db-spec db-spec)
               (s/valid? ::role role))]}
-  (let [role-id (UUID/randomUUID)
-        db-role (-> role
-                    (assoc :id role-id)
-                    (role->db-role))
-        result (jdbc.sql/insert! db-spec :rbac-role db-role
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (seq result)
+  (try
+    (let [role-id (UUID/randomUUID)
+          db-role (-> role
+                      (assoc :id role-id)
+                      (role->db-role))]
+      (jdbc.sql/insert! db-spec :rbac-role db-role
+                        jdbc/unqualified-snake-kebab-opts)
       {:success? true
-       :role (assoc role :id role-id)}
+       :role (assoc role :id role-id)})
+    (catch Exception _
       {:success? false})))
 
 (s/def ::roles (s/coll-of ::role))
@@ -195,16 +196,19 @@
   `role` is a map, as specified in `create-role!`. Except
   in this case, the role `id` is mandatory."
   [db-spec role]
-  (let [result (jdbc.sql/update! db-spec
-                                 :rbac-role
-                                 (role->db-role role)
-                                 ["id = ?" (:id role)]
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (> (::jdbc/update-count result) 0)
-      {:success? true
-       :role role}
   {:pre [(and (s/valid? ::db-spec db-spec)
               (s/valid? ::role role))]}
+  (try
+    (let [result (jdbc.sql/update! db-spec
+                                   :rbac-role
+                                   (role->db-role role)
+                                   ["id = ?" (:id role)]
+                                   jdbc/unqualified-snake-kebab-opts)]
+      (if (> (::jdbc/update-count result) 0)
+        {:success? true
+         :role role}
+        {:success? false}))
+    (catch Exception _
       {:success? false})))
 
 (s/def ::update-roles!-args (s/cat :db-spec ::db-spec
@@ -341,12 +345,13 @@
 
 (defn create-context-type!
   [db-spec context-type]
-  (let [db-context-type (context-type->db-context-type context-type)
-        result (jdbc.sql/insert! db-spec :rbac-context-type db-context-type
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (seq result)
+  (try
+    (let [db-context-type (context-type->db-context-type context-type)]
+      (jdbc.sql/insert! db-spec :rbac-context-type db-context-type
+                        jdbc/unqualified-snake-kebab-opts)
       {:success? true
-       :context-type context-type}
+       :context-type context-type})
+    (catch Exception _
       {:success? false})))
 
 (s/def ::context-types (s/coll-of ::context-type))
@@ -400,15 +405,18 @@
 
 (defn update-context-type!
   [db-spec context-type]
-  (let [db-context-type (context-type->db-context-type context-type)
-        result (jdbc.sql/update! db-spec
-                                 :rbac-context-type
-                                 db-context-type
-                                 ["name = ?" (:name db-context-type)]
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (> (::jdbc/update-count result) 0)
-      {:success? true
-       :context-type context-type}
+  (try
+    (let [db-context-type (context-type->db-context-type context-type)
+          result (jdbc.sql/update! db-spec
+                                   :rbac-context-type
+                                   db-context-type
+                                   ["name = ?" (:name db-context-type)]
+                                   jdbc/unqualified-snake-kebab-opts)]
+      (if (> (::jdbc/update-count result) 0)
+        {:success? true
+         :context-type context-type}
+        {:success? false}))
+    (catch Exception _
       {:success? false})))
 
 (s/def ::update-context-types!-args (s/cat :db-spec ::db-spec
@@ -532,14 +540,17 @@
 
 (defn update-context!
   [db-spec context]
-  (let [result (jdbc.sql/update! db-spec
-                                 :rbac-context
-                                 (context->db-context context)
-                                 ["id = ?" (:id context)]
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (> (::jdbc/update-count result) 0)
-      {:success? true
-       :context context}
+  (try
+    (let [result (jdbc.sql/update! db-spec
+                                   :rbac-context
+                                   (context->db-context context)
+                                   ["id = ?" (:id context)]
+                                   jdbc/unqualified-snake-kebab-opts)]
+      (if (> (::jdbc/update-count result) 0)
+        {:success? true
+         :context context}
+        {:success? false}))
+    (catch Exception _
       {:success? false})))
 
 (s/def ::update-contexts!-args (s/cat :db-spec ::db-spec
@@ -606,15 +617,16 @@
 
 (defn create-permission!
   [db-spec permission]
-  (let [permission-id (UUID/randomUUID)
-        db-permission (-> permission
-                          (assoc :id permission-id)
-                          perm->db-perm)
-        result (jdbc.sql/insert! db-spec :rbac-permission db-permission
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (seq result)
+  (try
+    (let [permission-id (UUID/randomUUID)
+          db-permission (-> permission
+                            (assoc :id permission-id)
+                            perm->db-perm)]
+      (jdbc.sql/insert! db-spec :rbac-permission db-permission
+                        jdbc/unqualified-snake-kebab-opts)
       {:success? true
-       :permission (assoc permission :id permission-id)}
+       :permission (assoc permission :id permission-id)})
+    (catch Exception _
       {:success? false})))
 
 (s/def ::permissions (s/coll-of ::permission))
@@ -685,14 +697,17 @@
 
 (defn update-permission!
   [db-spec permission]
-  (let [result (jdbc.sql/update! db-spec
-                                 :rbac-permission
-                                 (perm->db-perm permission)
-                                 ["id = ?" (:id permission)]
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (> (::jdbc/update-count result) 0)
-      {:success? true
-       :permission permission}
+  (try
+    (let [result (jdbc.sql/update! db-spec
+                                   :rbac-permission
+                                   (perm->db-perm permission)
+                                   ["id = ?" (:id permission)]
+                                   jdbc/unqualified-snake-kebab-opts)]
+      (if (> (::jdbc/update-count result) 0)
+        {:success? true
+         :permission permission}
+        {:success? false}))
+    (catch Exception _
       {:success? false})))
 
 (s/def ::update-permissions!-args (s/cat :db-spec ::db-spec
@@ -786,10 +801,11 @@
 
 (defn add-super-admin!
   [db-spec user-id]
-  (let [result (jdbc.sql/insert! db-spec :rbac-super-admin {:user-id user-id}
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (seq result)
-      {:success? true}
+  (try
+    (jdbc.sql/insert! db-spec :rbac-super-admin {:user-id user-id}
+                      jdbc/unqualified-snake-kebab-opts)
+    {:success? true}
+    (catch Exception _
       {:success? false})))
 
 (s/def ::super-admin?-args (s/cat :db-spec ::db-spec
@@ -840,32 +856,35 @@
     ;; can't rely on any specific "UPSERT" syntax (different db
     ;; engines use different syntax for it). We need to fall back to
     ;; simulate it using database transactions.
-    (jdbc/with-transaction [tx db-spec]
-      (let [result (jdbc.sql/update! tx
-                                     :rbac-role-permission
-                                     role-permission
-                                     ["role_id = ? AND permission_id = ?"
-                                      (:id role) (:id permission)]
-                                     jdbc/unqualified-snake-kebab-opts)
-            count (::jdbc/update-count result)]
-        (cond
-          ;; Nothing was updated, so insert a new row.
-          (zero? count)
-          (let [result (jdbc.sql/insert! tx :rbac-role-permission role-permission
-                                         jdbc/unqualified-snake-kebab-opts)]
-            (if (seq result)
-              {:success? true}
-              {:success? false}))
+    (try
+      (jdbc/with-transaction [tx db-spec]
+        (let [result (jdbc.sql/update! tx
+                                       :rbac-role-permission
+                                       role-permission
+                                       ["role_id = ? AND permission_id = ?"
+                                        (:id role) (:id permission)]
+                                       jdbc/unqualified-snake-kebab-opts)
+              count (::jdbc/update-count result)]
+          (cond
+            ;; Nothing was updated, so insert a new row.
+            (zero? count)
+            (let [result (jdbc.sql/insert! tx :rbac-role-permission role-permission
+                                           jdbc/unqualified-snake-kebab-opts)]
+              (if (seq result)
+                {:success? true}
+                {:success? false}))
 
-          ;; A single row updated, we are good to go!
-          (= 1 count)
-          {:success? true}
+            ;; A single row updated, we are good to go!
+            (= 1 count)
+            {:success? true}
 
-          ;; Whoops, we updated too many rows. Roll the update back.
-          ;; Throwing an exception will roll back the update,
-          ;; leaving the database untouched.
-          :else
-          (throw (Exception. "Tried to update more than one row")))))))
+            ;; Whoops, we updated too many rows. Roll the update back.
+            :else
+            (do
+              (.rollback tx)
+              {:success? false}))))
+      (catch Exception _
+        {:success? false}))))
 
 (s/def ::grant-role-permission!-args (s/cat :db-spec ::db-spec
                                             :role ::role
@@ -968,13 +987,14 @@
 
 (defn assign-role!
   [db-spec {:keys [role context user]}]
-  (let [role-assignement {:role-id (:id role)
-                          :context-id (:id context)
-                          :user-id (:id user)}
-        result (jdbc.sql/insert! db-spec :rbac-role-assignment role-assignement
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (seq result)
-      {:success? true}
+  (try
+    (let [role-assignement {:role-id (:id role)
+                            :context-id (:id context)
+                            :user-id (:id user)}]
+      (jdbc.sql/insert! db-spec :rbac-role-assignment role-assignement
+                        jdbc/unqualified-snake-kebab-opts)
+      {:success? true})
+    (catch Exception _
       {:success? false})))
 
 (s/def ::role-assignments (s/coll-of ::role-assignment))
