@@ -4,10 +4,19 @@ CREATE TABLE IF NOT EXISTS rbac_context_type (
 -- ;;
 CREATE TABLE IF NOT EXISTS rbac_context (
     id uuid PRIMARY KEY,
-    context_type_name VARCHAR(127) NOT NULL REFERENCES rbac_context_type(name) ON UPDATE CASCADE,
-    resource_id uuid NOT NULL,
-    parent uuid REFERENCES rbac_context(id) ON UPDATE CASCADE,
-    UNIQUE(context_type_name, resource_id));
+    context_type_name VARCHAR(127),
+    resource_id UUID NOT NULL,
+    CONSTRAINT rbac_context_context_type_name_fk FOREIGN KEY(context_type_name) REFERENCES rbac_context_type(name) ON UPDATE CASCADE,
+    CONSTRAINT rbac_context_type_name_resource_id_uniq UNIQUE(context_type_name, resource_id));
+-- ;;
+CREATE INDEX IF NOT EXISTS rbac_context_resource_id_idx ON rbac_context(resource_id);
+-- ;;
+CREATE TABLE IF NOT EXISTS rbac_context_parent (
+    child_id UUID NOT NULL,
+    parent_id UUID NOT NULL,
+    PRIMARY KEY (child_id, parent_id),
+    CONSTRAINT rbac_context_parent_child_id_fk FOREIGN KEY(child_id) REFERENCES rbac_context(id),
+    CONSTRAINT rbac_context_parent_parent_id_fk FOREIGN KEY(parent_id) REFERENCES rbac_context(id));
 -- ;;
 CREATE TABLE IF NOT EXISTS rbac_role (
     id uuid PRIMARY KEY,
@@ -20,6 +29,8 @@ CREATE TABLE IF NOT EXISTS rbac_role_assignment (
     context_id uuid NOT NULL REFERENCES rbac_context(id) ON UPDATE CASCADE,
     user_id uuid NOT NULL,
     PRIMARY KEY (role_id, context_id, user_id));
+-- ;;
+CREATE INDEX IF NOT EXISTS rbac_role_assignment_context_id_idx ON rbac_role_assignment(context_id);
 -- ;;
 CREATE TABLE IF NOT EXISTS rbac_super_admin (
     user_id uuid PRIMARY KEY);

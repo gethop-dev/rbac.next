@@ -149,12 +149,16 @@
 
 (deftest test-1
   (let [_ (rbac/create-context-types! db (vals context-types))
-        application-ctx (:context (rbac/create-context! db application-context nil))
-        organization-1-ctx (:context (rbac/create-context! db organization-1-context application-ctx))
-        plant-1-ctx (:context (rbac/create-context! db plant-1-context organization-1-ctx))
-        _ (:context (rbac/create-context! db asset-1-context plant-1-ctx))
-        created-roles (rbac/create-roles! db roles)
-        _ (rbac/create-permissions! db permissions)
+        application-ctx (:context (rbac/create-context! db application-context []))
+        organization-1-ctx (:context (rbac/create-context! db organization-1-context [application-ctx]))
+        organization-2-ctx (:context (rbac/create-context! db organization-2-context []))
+        add-parents-success? (rbac/add-parent-contexts! db organization-2-ctx [application-ctx])
+        plant-1-ctx (:context (rbac/create-context! db plant-1-context [organization-1-ctx]))
+        plant-2-ctx (:context (rbac/create-context! db plant-2-context [organization-2-ctx]))
+        _asset-1-ctx (:context (rbac/create-context! db asset-1-context [plant-1-ctx]))
+        _asset-2-ctx (:context (rbac/create-context! db asset-2-context [plant-2-ctx]))
+        created-roles (rbac/create-roles! db test-roles)
+        _ (rbac/create-permissions! db test-permissions)
         ;; -------
         _ (rbac/grant-role-permissions! db
                                         (:role (rbac/get-role-by-name db :application/manager))
@@ -293,7 +297,11 @@
             context-type-name :asset
             permission-name :asset/manage
             has-permission (rbac/has-permission? db user-id resource-id context-type-name permission-name)]
-        (is (= has-permission false))))))
+        (is (= has-permission false))))
+    (testing "organization-2-ctx has its parents successfully added"
+      (is (:success? add-parents-success?)))
+    (testing "organization-2-ctx has its parents successfully removed"
+      (is (rbac/remove-parent-contexts! db organization-2-ctx [application-ctx])))))
 
 (deftest create-role!
   (let [role-to-create (first test-roles)]

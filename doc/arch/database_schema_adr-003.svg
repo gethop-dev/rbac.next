@@ -1,0 +1,5576 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   style="background-color: rgb(255, 255, 255);"
+   version="1.1"
+   width="1752px"
+   height="824px"
+   viewBox="-0.5 -0.5 1752 824"
+   id="svg1906"
+   sodipodi:docname="database_schema_adr-003.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <sodipodi:namedview
+     id="namedview1908"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.5347777"
+     inkscape:cx="983.20426"
+     inkscape:cy="326.43163"
+     inkscape:window-width="2400"
+     inkscape:window-height="1258"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1906" />
+  <defs
+     id="defs158">
+    <clipPath
+       id="mx-clip-1514-216-124-30-0">
+      <rect
+         x="1514"
+         y="216"
+         width="124"
+         height="30"
+         id="rect2" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1484-216-24-30-0">
+      <rect
+         x="1484"
+         y="216"
+         width="24"
+         height="30"
+         id="rect5" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1514-251-124-26-0">
+      <rect
+         x="1514"
+         y="251"
+         width="124"
+         height="26"
+         id="rect8" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1514-277-124-26-0">
+      <rect
+         x="1514"
+         y="277"
+         width="124"
+         height="26"
+         id="rect11" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1514-303-124-26-0">
+      <rect
+         x="1514"
+         y="303"
+         width="124"
+         height="26"
+         id="rect14" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1464-270-124-30-0">
+      <rect
+         x="1464"
+         y="270"
+         width="124"
+         height="30"
+         id="rect17" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1434-270-24-30-0">
+      <rect
+         x="1434"
+         y="270"
+         width="24"
+         height="30"
+         id="rect20" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1464-305-124-26-0">
+      <rect
+         x="1464"
+         y="305"
+         width="124"
+         height="26"
+         id="rect23" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1464-331-124-26-0">
+      <rect
+         x="1464"
+         y="331"
+         width="124"
+         height="26"
+         id="rect26" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1464-357-124-26-0">
+      <rect
+         x="1464"
+         y="357"
+         width="124"
+         height="26"
+         id="rect29" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-84-117-174-30-0">
+      <rect
+         x="84"
+         y="117"
+         width="174"
+         height="30"
+         id="rect32" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-54-117-24-30-0">
+      <rect
+         x="54"
+         y="117"
+         width="24"
+         height="30"
+         id="rect35" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-84-152-174-26-0">
+      <rect
+         x="84"
+         y="152"
+         width="174"
+         height="26"
+         id="rect38" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-84-178-174-26-0">
+      <rect
+         x="84"
+         y="178"
+         width="174"
+         height="26"
+         id="rect41" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-314-451-184-30-0">
+      <rect
+         x="314"
+         y="451"
+         width="184"
+         height="30"
+         id="rect44" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-284-451-24-30-0">
+      <rect
+         x="284"
+         y="451"
+         width="24"
+         height="30"
+         id="rect47" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-314-486-184-26-0">
+      <rect
+         x="314"
+         y="486"
+         width="184"
+         height="26"
+         id="rect50" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-314-512-184-26-0">
+      <rect
+         x="314"
+         y="512"
+         width="184"
+         height="26"
+         id="rect53" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-324-117-144-30-0">
+      <rect
+         x="324"
+         y="117"
+         width="144"
+         height="30"
+         id="rect56" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-294-117-24-30-0">
+      <rect
+         x="294"
+         y="117"
+         width="24"
+         height="30"
+         id="rect59" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-324-152-144-26-0">
+      <rect
+         x="324"
+         y="152"
+         width="144"
+         height="26"
+         id="rect62" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-584-141-212-30-0">
+      <rect
+         x="584"
+         y="141"
+         width="212"
+         height="30"
+         id="rect65" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-554-141-24-30-0">
+      <rect
+         x="554"
+         y="141"
+         width="24"
+         height="30"
+         id="rect68" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-584-176-212-26-0">
+      <rect
+         x="584"
+         y="176"
+         width="212"
+         height="26"
+         id="rect71" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-554-322-271-30-0">
+      <rect
+         x="554"
+         y="322"
+         width="271"
+         height="30"
+         id="rect74" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-524-322-24-30-0">
+      <rect
+         x="524"
+         y="322"
+         width="24"
+         height="30"
+         id="rect77" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-554-357-271-26-0">
+      <rect
+         x="554"
+         y="357"
+         width="271"
+         height="26"
+         id="rect80" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-554-383-271-26-0">
+      <rect
+         x="554"
+         y="383"
+         width="271"
+         height="26"
+         id="rect83" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-524-409-24-37-0">
+      <rect
+         x="524"
+         y="409"
+         width="24"
+         height="37"
+         id="rect86" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-584-561-231-30-0">
+      <rect
+         x="584"
+         y="561"
+         width="231"
+         height="30"
+         id="rect89" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-533-561-42-30-0">
+      <rect
+         x="533"
+         y="561"
+         width="42"
+         height="30"
+         id="rect92" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-533-591-42-44-0">
+      <rect
+         x="533"
+         y="591"
+         width="42"
+         height="44"
+         id="rect95" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-584-650-231-26-0">
+      <rect
+         x="584"
+         y="650"
+         width="231"
+         height="26"
+         id="rect98" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-936-532-42-44-0">
+      <rect
+         x="936"
+         y="532"
+         width="42"
+         height="44"
+         id="rect101" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-936-576-42-40-0">
+      <rect
+         x="936"
+         y="576"
+         width="42"
+         height="40"
+         id="rect104" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-936-621-42-33-0">
+      <rect
+         x="936"
+         y="621"
+         width="42"
+         height="33"
+         id="rect107" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1229-548-124-30-0">
+      <rect
+         x="1229"
+         y="548"
+         width="124"
+         height="30"
+         id="rect110" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1199-548-24-30-0">
+      <rect
+         x="1199"
+         y="548"
+         width="24"
+         height="30"
+         id="rect113" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1229-583-124-26-0">
+      <rect
+         x="1229"
+         y="583"
+         width="124"
+         height="26"
+         id="rect116" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1229-609-124-26-0">
+      <rect
+         x="1229"
+         y="609"
+         width="124"
+         height="26"
+         id="rect119" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1229-635-124-26-0">
+      <rect
+         x="1229"
+         y="635"
+         width="124"
+         height="26"
+         id="rect122" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-914-249-262-30-0">
+      <rect
+         x="914"
+         y="249"
+         width="262"
+         height="30"
+         id="rect125" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-884-249-24-30-0">
+      <rect
+         x="884"
+         y="249"
+         width="24"
+         height="30"
+         id="rect128" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-884-284-24-39-0">
+      <rect
+         x="884"
+         y="284"
+         width="24"
+         height="39"
+         id="rect131" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1199-749-24-44-0">
+      <rect
+         x="1199"
+         y="749"
+         width="24"
+         height="44"
+         id="rect134" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1414-313-124-30-0">
+      <rect
+         x="1414"
+         y="313"
+         width="124"
+         height="30"
+         id="rect137" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1384-313-24-30-0">
+      <rect
+         x="1384"
+         y="313"
+         width="24"
+         height="30"
+         id="rect140" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1414-348-124-26-0">
+      <rect
+         x="1414"
+         y="348"
+         width="124"
+         height="26"
+         id="rect143" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1414-374-124-26-0">
+      <rect
+         x="1414"
+         y="374"
+         width="124"
+         height="26"
+         id="rect146" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-1414-400-124-26-0">
+      <rect
+         x="1414"
+         y="400"
+         width="124"
+         height="26"
+         id="rect149" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-936-52-42-44-0">
+      <rect
+         x="936"
+         y="52"
+         width="42"
+         height="44"
+         id="rect152" />
+    </clipPath>
+    <clipPath
+       id="mx-clip-936-96-42-40-0">
+      <rect
+         x="936"
+         y="96"
+         width="42"
+         height="40"
+         id="rect155" />
+    </clipPath>
+  </defs>
+  <rect
+     fill="#ffffff"
+     width="100%"
+     height="100%"
+     x="0"
+     y="0"
+     id="rect160" />
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-1"
+     id="g166">
+    <g
+       id="g164">
+      <path
+         d="m 1235.75,538 c -73.4,0 -91.75,59 -33.03,70.8 -58.72,25.96 7.34,82.6 55.05,59 33.03,47.2 143.13,47.2 179.83,0 73.4,0 73.4,-47.2 27.53,-70.8 45.87,-47.2 -27.53,-94.4 -91.75,-70.8 -45.88,-35.4 -119.28,-35.4 -137.63,11.8 z"
+         fill-opacity="0.5"
+         fill="#ffe6cc"
+         stroke="#d79b00"
+         stroke-opacity="0.5"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path162" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-2"
+     id="g172">
+    <g
+       id="g170">
+      <path
+         d="m 1386,214.5 c -92,0 -115,83.5 -41.4,100.2 -73.6,36.74 9.2,116.9 69,83.5 41.4,66.8 179.4,66.8 225.4,0 92,0 92,-66.8 34.5,-100.2 C 1731,231.2 1639,164.4 1558.5,197.8 1501,147.7 1409,147.7 1386,214.5 Z"
+         fill-opacity="0.5"
+         fill="#ffe6cc"
+         stroke="#d79b00"
+         stroke-opacity="0.5"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path168" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-3"
+     id="g298">
+    <g
+       id="g180">
+      <path
+         d="m 1479.5,215.5 v -26 h 162 v 26"
+         fill="#ffe6cc"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path174" />
+      <path
+         d="m 1479.5,215.5 v 118 h 162 v -118"
+         fill="#ffffff"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path176" />
+      <path
+         d="m 1479.5,215.5 h 162"
+         fill="none"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path178" />
+    </g>
+    <g
+       id="g186">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g184">
+        <text
+           x="1560"
+           y="208"
+           id="text182">plant</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-4"
+       id="g214">
+      <g
+         id="g192">
+        <rect
+           x="1479.5"
+           y="215.5"
+           width="162"
+           height="30"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect188" />
+        <path
+           d="m 1479.5,215.5 m 162,0 m 0,30 h -162"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path190" />
+      </g>
+      <g
+         id="g198">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-1514-216-124-30-0)"
+           font-size="12px"
+           id="g196"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="1515"
+             y="235"
+             id="text194">id UUID</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-5"
+         id="g212">
+        <g
+           id="g204">
+          <rect
+             x="1479.5"
+             y="215.5"
+             width="32"
+             height="30"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect200" />
+          <path
+             d="m 1479.5,215.5 m 32,0 v 30 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path202" />
+        </g>
+        <g
+           id="g210">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-1484-216-24-30-0)"
+             font-size="12px"
+             id="g208">
+            <text
+               x="1485"
+               y="235"
+               id="text206">PK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-6"
+       id="g236">
+      <g
+         id="g220">
+        <rect
+           x="1479.5"
+           y="245.5"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect216" />
+        <path
+           d="m 1479.5,245.5 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path218" />
+      </g>
+      <g
+         id="g226">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-1514-251-124-26-0)"
+           font-size="11px"
+           id="g224">
+          <text
+             x="1515"
+             y="262"
+             id="text222">name</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-7"
+         id="g234">
+        <g
+           id="g232">
+          <rect
+             x="1479.5"
+             y="245.5"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect228" />
+          <path
+             d="m 1479.5,245.5 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path230" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-8"
+       id="g258">
+      <g
+         id="g242">
+        <rect
+           x="1479.5"
+           y="271.5"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect238" />
+        <path
+           d="m 1479.5,271.5 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path240" />
+      </g>
+      <g
+         id="g248">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-1514-277-124-26-0)"
+           font-size="11px"
+           id="g246">
+          <text
+             x="1515"
+             y="288"
+             id="text244">description</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-9"
+         id="g256">
+        <g
+           id="g254">
+          <rect
+             x="1479.5"
+             y="271.5"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect250" />
+          <path
+             d="m 1479.5,271.5 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path252" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-10"
+       id="g280">
+      <g
+         id="g264">
+        <rect
+           x="1479.5"
+           y="297.5"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect260" />
+        <path
+           d="m 1479.5,297.5 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path262" />
+      </g>
+      <g
+         id="g270">
+        <g
+           fill="#000000"
+           font-family="Helvetica"
+           clip-path="url(#mx-clip-1514-303-124-26-0)"
+           font-size="12px"
+           id="g268">
+          <text
+             x="1515"
+             y="315"
+             id="text266">....</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-11"
+         id="g278">
+        <g
+           id="g276">
+          <rect
+             x="1479.5"
+             y="297.5"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect272" />
+          <path
+             d="m 1479.5,297.5 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path274" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-12"
+       id="g296">
+      <g
+         id="g286">
+        <rect
+           x="1479.5"
+           y="323.5"
+           width="162"
+           height="10"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect282" />
+        <path
+           d="m 1479.5,323.5 m 162,0 m 0,10 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path284" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-13"
+         id="g294">
+        <g
+           id="g292">
+          <rect
+             x="1479.5"
+             y="323.5"
+             width="32"
+             height="10"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect288" />
+          <path
+             d="m 1479.5,323.5 m 32,0 v 10 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path290" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-14"
+     id="g424">
+    <g
+       id="g306">
+      <path
+         d="m 1429.5,269.5 v -26 h 162 v 26"
+         fill="#ffe6cc"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path300" />
+      <path
+         d="m 1429.5,269.5 v 118 h 162 v -118"
+         fill="#ffffff"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path302" />
+      <path
+         d="m 1429.5,269.5 h 162"
+         fill="none"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path304" />
+    </g>
+    <g
+       id="g312">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g310">
+        <text
+           x="1510"
+           y="262"
+           id="text308">line</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-15"
+       id="g340">
+      <g
+         id="g318">
+        <rect
+           x="1429.5"
+           y="269.5"
+           width="162"
+           height="30"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect314" />
+        <path
+           d="m 1429.5,269.5 m 162,0 m 0,30 h -162"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path316" />
+      </g>
+      <g
+         id="g324">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-1464-270-124-30-0)"
+           font-size="12px"
+           id="g322"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="1465"
+             y="289"
+             id="text320">id UUID</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-16"
+         id="g338">
+        <g
+           id="g330">
+          <rect
+             x="1429.5"
+             y="269.5"
+             width="32"
+             height="30"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect326" />
+          <path
+             d="m 1429.5,269.5 m 32,0 v 30 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path328" />
+        </g>
+        <g
+           id="g336">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-1434-270-24-30-0)"
+             font-size="12px"
+             id="g334">
+            <text
+               x="1435"
+               y="289"
+               id="text332">PK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-17"
+       id="g362">
+      <g
+         id="g346">
+        <rect
+           x="1429.5"
+           y="299.5"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect342" />
+        <path
+           d="m 1429.5,299.5 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path344" />
+      </g>
+      <g
+         id="g352">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-1464-305-124-26-0)"
+           font-size="11px"
+           id="g350">
+          <text
+             x="1465"
+             y="316"
+             id="text348">name</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-18"
+         id="g360">
+        <g
+           id="g358">
+          <rect
+             x="1429.5"
+             y="299.5"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect354" />
+          <path
+             d="m 1429.5,299.5 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path356" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-19"
+       id="g384">
+      <g
+         id="g368">
+        <rect
+           x="1429.5"
+           y="325.5"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect364" />
+        <path
+           d="m 1429.5,325.5 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path366" />
+      </g>
+      <g
+         id="g374">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-1464-331-124-26-0)"
+           font-size="11px"
+           id="g372">
+          <text
+             x="1465"
+             y="342"
+             id="text370">description</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-20"
+         id="g382">
+        <g
+           id="g380">
+          <rect
+             x="1429.5"
+             y="325.5"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect376" />
+          <path
+             d="m 1429.5,325.5 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path378" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-21"
+       id="g406">
+      <g
+         id="g390">
+        <rect
+           x="1429.5"
+           y="351.5"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect386" />
+        <path
+           d="m 1429.5,351.5 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path388" />
+      </g>
+      <g
+         id="g396">
+        <g
+           fill="#000000"
+           font-family="Helvetica"
+           clip-path="url(#mx-clip-1464-357-124-26-0)"
+           font-size="12px"
+           id="g394">
+          <text
+             x="1465"
+             y="369"
+             id="text392">....</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-22"
+         id="g404">
+        <g
+           id="g402">
+          <rect
+             x="1429.5"
+             y="351.5"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect398" />
+          <path
+             d="m 1429.5,351.5 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path400" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-23"
+       id="g422">
+      <g
+         id="g412">
+        <rect
+           x="1429.5"
+           y="377.5"
+           width="162"
+           height="10"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect408" />
+        <path
+           d="m 1429.5,377.5 m 162,0 m 0,10 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path410" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-24"
+         id="g420">
+        <g
+           id="g418">
+          <rect
+             x="1429.5"
+             y="377.5"
+             width="32"
+             height="10"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect414" />
+          <path
+             d="m 1429.5,377.5 m 32,0 v 10 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path416" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-25"
+     id="g438">
+    <g
+       id="g428">
+      <path
+         d="m 1210,215 h 130 v 160 h -45 l -20,30 v -30 h -65 z"
+         fill="#dae8fc"
+         stroke="#6c8ebf"
+         stroke-miterlimit="10"
+         transform="rotate(90,1275,310)"
+         pointer-events="all"
+         id="path426" />
+    </g>
+    <g
+       id="g436">
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g434">
+        <switch
+           id="switch432">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 154px; height: 1px; padding-top: 310px; margin-left: 1214px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: left;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;"><xhtml:b>resource_id</xhtml:b>
+ is the id of an existing resource that already exists in another application specific table (e.g. plant, asset, circuit, location, ...) </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="1214"
+             y="314"
+             fill="#000000"
+             font-family="Verdana"
+             font-size="12px"
+             id="text430">resource_id is the id of an existing resource that already exists in another application specific table (e.g. plant, asset, circuit, location, ...)</text>
+        </switch>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-26"
+     id="g444">
+    <g
+       id="g442">
+      <rect
+         x="20"
+         y="20"
+         width="482"
+         height="246"
+         fill-opacity="0.5"
+         fill="#e3c800"
+         stroke="#b09500"
+         stroke-opacity="0.5"
+         pointer-events="all"
+         id="rect440" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-27"
+     id="g548">
+    <g
+       id="g452">
+      <path
+         d="M 50,117 V 91 h 212 v 26"
+         fill="#e3c800"
+         stroke="#b09500"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path446" />
+      <path
+         d="m 50,117 v 92 h 212 v -92"
+         fill="#ffffff"
+         stroke="#b09500"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path448" />
+      <path
+         d="M 50,117 H 262"
+         fill="none"
+         stroke="#b09500"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path450" />
+    </g>
+    <g
+       id="g458">
+      <g
+         fill="#ffffff"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g456">
+        <text
+           x="155.5"
+           y="109.5"
+           id="text454">role_allow_assign</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-28"
+       id="g486">
+      <g
+         id="g464">
+        <rect
+           x="50"
+           y="117"
+           width="212"
+           height="30"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect460" />
+        <path
+           d="m 50,117 m 212,0 m 0,30 H 50"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path462" />
+      </g>
+      <g
+         id="g470">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-84-117-174-30-0)"
+           font-size="12px"
+           id="g468"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="85.5"
+             y="136.5"
+             id="text466">id</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-29"
+         id="g484">
+        <g
+           id="g476">
+          <rect
+             x="50"
+             y="117"
+             width="32"
+             height="30"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect472" />
+          <path
+             d="m 50,117 m 32,0 v 30 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path474" />
+        </g>
+        <g
+           id="g482">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-54-117-24-30-0)"
+             font-size="12px"
+             id="g480">
+            <text
+               x="55.5"
+               y="136.5"
+               id="text478">PK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-30"
+       id="g508">
+      <g
+         id="g492">
+        <rect
+           x="50"
+           y="147"
+           width="212"
+           height="26"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect488" />
+        <path
+           d="m 50,147 m 212,0 m 0,26 m -212,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path490" />
+      </g>
+      <g
+         id="g498">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-84-152-174-26-0)"
+           font-size="11px"
+           id="g496">
+          <text
+             x="85.5"
+             y="163.5"
+             id="text494">role_id (FK on role.id)</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-31"
+         id="g506">
+        <g
+           id="g504">
+          <rect
+             x="50"
+             y="147"
+             width="32"
+             height="26"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect500" />
+          <path
+             d="m 50,147 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path502" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-32"
+       id="g530">
+      <g
+         id="g514">
+        <rect
+           x="50"
+           y="173"
+           width="212"
+           height="26"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect510" />
+        <path
+           d="m 50,173 m 212,0 m 0,26 m -212,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path512" />
+      </g>
+      <g
+         id="g520">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-84-178-174-26-0)"
+           font-size="11px"
+           id="g518">
+          <text
+             x="85.5"
+             y="189.5"
+             id="text516">allow_assign (FK on role.id)</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-33"
+         id="g528">
+        <g
+           id="g526">
+          <rect
+             x="50"
+             y="173"
+             width="32"
+             height="26"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect522" />
+          <path
+             d="m 50,173 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path524" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-34"
+       id="g546">
+      <g
+         id="g536">
+        <rect
+           x="50"
+           y="199"
+           width="212"
+           height="10"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect532" />
+        <path
+           d="m 50,199 m 212,0 m 0,10 m -212,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path534" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-35"
+         id="g544">
+        <g
+           id="g542">
+          <rect
+             x="50"
+             y="199"
+             width="32"
+             height="10"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect538" />
+          <path
+             d="m 50,199 m 32,0 v 10 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path540" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-36"
+     id="g666">
+    <g
+       id="g562">
+      <path
+         d="m 280,451 v -26 h 222 v 26"
+         fill="#e0e0e0"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path552">
+        <title
+           id="title550">Holds the list of roles that exist in the application</title>
+      </path>
+      <path
+         d="m 280,451 v 92 h 222 v -92"
+         fill="#ffffff"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path556">
+        <title
+           id="title554">Holds the list of roles that exist in the application</title>
+      </path>
+      <path
+         d="M 280,451 H 502"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path560">
+        <title
+           id="title558">Holds the list of roles that exist in the application</title>
+      </path>
+    </g>
+    <g
+       id="g570">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g568">
+        <title
+           id="title564">Holds the list of roles that exist in the application</title>
+        <text
+           x="390.5"
+           y="443.5"
+           id="text566">rbac_role</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-37"
+       id="g598">
+      <g
+         id="g576">
+        <rect
+           x="280"
+           y="451"
+           width="222"
+           height="30"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect572" />
+        <path
+           d="m 280,451 m 222,0 m 0,30 H 280"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path574" />
+      </g>
+      <g
+         id="g582">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-314-451-184-30-0)"
+           font-size="12px"
+           id="g580"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="315.5"
+             y="470.5"
+             id="text578">id UUID</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-38"
+         id="g596">
+        <g
+           id="g588">
+          <rect
+             x="280"
+             y="451"
+             width="32"
+             height="30"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect584" />
+          <path
+             d="m 280,451 m 32,0 v 30 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path586" />
+        </g>
+        <g
+           id="g594">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-284-451-24-30-0)"
+             font-size="12px"
+             id="g592">
+            <text
+               x="285.5"
+               y="470.5"
+               id="text590">PK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-39"
+       id="g626">
+      <g
+         id="g608">
+        <rect
+           x="280"
+           y="481"
+           width="222"
+           height="26"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect602">
+          <title
+             id="title600">This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+</title>
+        </rect>
+        <path
+           d="m 280,481 m 222,0 m 0,26 m -222,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path606">
+          <title
+             id="title604">This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+</title>
+        </path>
+      </g>
+      <g
+         id="g616">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-314-486-184-26-0)"
+           font-size="11px"
+           id="g614">
+          <title
+             id="title610">This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+This field holds the name of the permission, that is presented in the UI when managing permissions, or when
+
+</title>
+          <text
+             x="315.5"
+             y="497.5"
+             id="text612">name VARCHAR(127) NOT NULL</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-40"
+         id="g624">
+        <g
+           id="g622">
+          <rect
+             x="280"
+             y="481"
+             width="32"
+             height="26"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect618" />
+          <path
+             d="m 280,481 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path620" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-41"
+       id="g648">
+      <g
+         id="g632">
+        <rect
+           x="280"
+           y="507"
+           width="222"
+           height="26"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect628" />
+        <path
+           d="m 280,507 m 222,0 m 0,26 m -222,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path630" />
+      </g>
+      <g
+         id="g638">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-314-512-184-26-0)"
+           font-size="11px"
+           id="g636">
+          <text
+             x="315.5"
+             y="523.5"
+             id="text634">description TEXT</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-42"
+         id="g646">
+        <g
+           id="g644">
+          <rect
+             x="280"
+             y="507"
+             width="32"
+             height="26"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect640" />
+          <path
+             d="m 280,507 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path642" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-43"
+       id="g664">
+      <g
+         id="g654">
+        <rect
+           x="280"
+           y="533"
+           width="222"
+           height="10"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect650" />
+        <path
+           d="m 280,533 m 222,0 m 0,10 m -222,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path652" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-44"
+         id="g662">
+        <g
+           id="g660">
+          <rect
+             x="280"
+             y="533"
+             width="32"
+             height="10"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect656" />
+          <path
+             d="m 280,533 m 32,0 v 10 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path658" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-45"
+     id="g772">
+    <g
+       id="g674">
+      <path
+         d="M 290,117 V 91 h 182 v 26"
+         fill="#e3c800"
+         stroke="#b09500"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path668" />
+      <path
+         d="M 290,117 V 231 H 472 V 117"
+         fill="#ffffff"
+         stroke="#b09500"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path670" />
+      <path
+         d="M 290,117 H 472"
+         fill="none"
+         stroke="#b09500"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path672" />
+    </g>
+    <g
+       id="g680">
+      <g
+         fill="#ffffff"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g678">
+        <text
+           x="380.5"
+           y="109.5"
+           id="text676">role_context_type</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-46"
+       id="g708">
+      <g
+         id="g686">
+        <rect
+           x="290"
+           y="117"
+           width="182"
+           height="30"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect682" />
+        <path
+           d="m 290,117 m 182,0 m 0,30 H 290"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path684" />
+      </g>
+      <g
+         id="g692">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-324-117-144-30-0)"
+           font-size="12px"
+           id="g690"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="325.5"
+             y="136.5"
+             id="text688">id</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-47"
+         id="g706">
+        <g
+           id="g698">
+          <rect
+             x="290"
+             y="117"
+             width="32"
+             height="30"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect694" />
+          <path
+             d="m 290,117 m 32,0 v 30 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path696" />
+        </g>
+        <g
+           id="g704">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-294-117-24-30-0)"
+             font-size="12px"
+             id="g702">
+            <text
+               x="295.5"
+               y="136.5"
+               id="text700">PK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-48"
+       id="g730">
+      <g
+         id="g714">
+        <rect
+           x="290"
+           y="147"
+           width="182"
+           height="26"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect710" />
+        <path
+           d="m 290,147 m 182,0 m 0,26 m -182,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path712" />
+      </g>
+      <g
+         id="g720">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-324-152-144-26-0)"
+           font-size="11px"
+           id="g718">
+          <text
+             x="325.5"
+             y="163.5"
+             id="text716">role_id (FK on role.id)</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-49"
+         id="g728">
+        <g
+           id="g726">
+          <rect
+             x="290"
+             y="147"
+             width="32"
+             height="26"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect722" />
+          <path
+             d="m 290,147 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path724" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-50"
+       id="g754">
+      <g
+         id="g736">
+        <rect
+           x="290"
+           y="173"
+           width="182"
+           height="48"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect732" />
+        <path
+           d="m 290,173 m 182,0 m 0,48 m -182,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path734" />
+      </g>
+      <g
+         id="g744">
+        <g
+           transform="translate(-0.5,-0.5)"
+           id="g742">
+          <switch
+             id="switch740">
+            <foreignObject
+               style="overflow: visible; text-align: left;"
+               pointer-events="none"
+               width="100%"
+               height="100%"
+               requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+              <xhtml:div
+                 style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 142px; height: 1px; padding-top: 180px; margin-left: 326px;">
+                <xhtml:div
+                   style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 44px; overflow: hidden;"
+                   data-drawio-colors="color: rgb(0, 0, 0); ">
+                  <xhtml:div
+                     style="display: inline-block; font-size: 11px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">context_type_name (FK on context_type)</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </foreignObject>
+            <text
+               x="326"
+               y="191"
+               fill="#000000"
+               font-family="Verdana"
+               font-size="11px"
+               id="text738">context_type_name (FK on context_type)</text>
+          </switch>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-51"
+         id="g752">
+        <g
+           id="g750">
+          <rect
+             x="290"
+             y="173"
+             width="32"
+             height="48"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect746" />
+          <path
+             d="m 290,173 m 32,0 v 48 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path748" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-52"
+       id="g770">
+      <g
+         id="g760">
+        <rect
+           x="290"
+           y="221"
+           width="182"
+           height="10"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect756" />
+        <path
+           d="m 290,221 m 182,0 m 0,10 m -182,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path758" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-53"
+         id="g768">
+        <g
+           id="g766">
+          <rect
+             x="290"
+             y="221"
+             width="32"
+             height="10"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect762" />
+          <path
+             d="m 290,221 m 32,0 v 10 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path764" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-54"
+     id="g854">
+    <g
+       id="g780">
+      <path
+         d="m 550,141 v -26 h 250 v 26"
+         fill="#e0e0e0"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path774" />
+      <path
+         d="m 550,141 v 66 h 250 v -66"
+         fill="#ffffff"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path776" />
+      <path
+         d="M 550,141 H 800"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path778" />
+    </g>
+    <g
+       id="g786">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g784">
+        <text
+           x="674.5"
+           y="133.5"
+           id="text782">rbac_context_type</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-55"
+       id="g814">
+      <g
+         id="g792">
+        <rect
+           x="550"
+           y="141"
+           width="250"
+           height="30"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect788" />
+        <path
+           d="m 550,141 m 250,0 m 0,30 H 550"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path790" />
+      </g>
+      <g
+         id="g798">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-584-141-212-30-0)"
+           font-size="12px"
+           id="g796"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="585.5"
+             y="160.5"
+             id="text794">name VARCHAR(127)</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-56"
+         id="g812">
+        <g
+           id="g804">
+          <rect
+             x="550"
+             y="141"
+             width="32"
+             height="30"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect800" />
+          <path
+             d="m 550,141 m 32,0 v 30 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path802" />
+        </g>
+        <g
+           id="g810">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-554-141-24-30-0)"
+             font-size="12px"
+             id="g808">
+            <text
+               x="555.5"
+               y="160.5"
+               id="text806">PK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-57"
+       id="g836">
+      <g
+         id="g820">
+        <rect
+           x="550"
+           y="171"
+           width="250"
+           height="26"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect816" />
+        <path
+           d="m 550,171 m 250,0 m 0,26 m -250,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path818" />
+      </g>
+      <g
+         id="g826">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-584-176-212-26-0)"
+           font-size="11px"
+           id="g824">
+          <text
+             x="585.5"
+             y="187.5"
+             id="text822">description TEXT</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-58"
+         id="g834">
+        <g
+           id="g832">
+          <rect
+             x="550"
+             y="171"
+             width="32"
+             height="26"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect828" />
+          <path
+             d="m 550,171 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path830" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-59"
+       id="g852">
+      <g
+         id="g842">
+        <rect
+           x="550"
+           y="197"
+           width="250"
+           height="10"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect838" />
+        <path
+           d="m 550,197 m 250,0 m 0,10 m -250,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path840" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-60"
+         id="g850">
+        <g
+           id="g848">
+          <rect
+             x="550"
+             y="197"
+             width="32"
+             height="10"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect844" />
+          <path
+             d="m 550,197 m 32,0 v 10 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path846" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-61"
+     id="g988">
+    <g
+       id="g862">
+      <path
+         d="m 520,322 v -26 h 308.75 v 26"
+         fill="#e0e0e0"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path856" />
+      <path
+         d="M 520,322 V 446 H 828.75 V 322"
+         fill="#ffffff"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path858" />
+      <path
+         d="M 520,322 H 828.75"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path860" />
+    </g>
+    <g
+       id="g868">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g866">
+        <text
+           x="673.88"
+           y="314.5"
+           id="text864">rbac_permission</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-62"
+       id="g896">
+      <g
+         id="g874">
+        <rect
+           x="520"
+           y="322"
+           width="308.75"
+           height="30"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect870" />
+        <path
+           d="m 520,322 m 308.75,0 m 0,30 H 520"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path872" />
+      </g>
+      <g
+         id="g880">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-554-322-271-30-0)"
+           font-size="12px"
+           id="g878"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="555.5"
+             y="341.5"
+             id="text876">id UUID</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-63"
+         id="g894">
+        <g
+           id="g886">
+          <rect
+             x="520"
+             y="322"
+             width="32"
+             height="30"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect882" />
+          <path
+             d="m 520,322 m 32,0 v 30 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path884" />
+        </g>
+        <g
+           id="g892">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-524-322-24-30-0)"
+             font-size="12px"
+             id="g890">
+            <text
+               x="525.5"
+               y="341.5"
+               id="text888">PK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-64"
+       id="g918">
+      <g
+         id="g902">
+        <rect
+           x="520"
+           y="352"
+           width="308.75"
+           height="26"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect898" />
+        <path
+           d="m 520,352 m 308.75,0 m 0,26 M 520,378"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path900" />
+      </g>
+      <g
+         id="g908">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-554-357-271-26-0)"
+           font-size="11px"
+           id="g906">
+          <text
+             x="555.5"
+             y="368.5"
+             id="text904">name VARCHAR(127) NOT NULL</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-65"
+         id="g916">
+        <g
+           id="g914">
+          <rect
+             x="520"
+             y="352"
+             width="32"
+             height="26"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect910" />
+          <path
+             d="m 520,352 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path912" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-66"
+       id="g940">
+      <g
+         id="g924">
+        <rect
+           x="520"
+           y="378"
+           width="308.75"
+           height="26"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect920" />
+        <path
+           d="m 520,378 m 308.75,0 m 0,26 M 520,404"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path922" />
+      </g>
+      <g
+         id="g930">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-554-383-271-26-0)"
+           font-size="11px"
+           id="g928">
+          <text
+             x="555.5"
+             y="394.5"
+             id="text926">description TEXT</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-67"
+         id="g938">
+        <g
+           id="g936">
+          <rect
+             x="520"
+             y="378"
+             width="32"
+             height="26"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect932" />
+          <path
+             d="m 520,378 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path934" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-68"
+       id="g970">
+      <g
+         id="g946">
+        <rect
+           x="520"
+           y="404"
+           width="308.75"
+           height="32"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect942" />
+        <path
+           d="m 520,404 m 308.75,0 m 0,32 M 520,436"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path944" />
+      </g>
+      <g
+         id="g954">
+        <g
+           transform="translate(-0.5,-0.5)"
+           id="g952">
+          <switch
+             id="switch950">
+            <foreignObject
+               style="overflow: visible; text-align: left;"
+               pointer-events="none"
+               width="100%"
+               height="100%"
+               requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+              <xhtml:div
+                 style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 269px; height: 1px; padding-top: 411px; margin-left: 556px;">
+                <xhtml:div
+                   style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 28px; overflow: hidden;"
+                   data-drawio-colors="color: rgb(0, 0, 0); ">
+                  <xhtml:div
+                     style="display: inline-block; font-size: 11px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">context_type_name VARCHAR(127) NOT NULL</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </foreignObject>
+            <text
+               x="556"
+               y="422"
+               fill="#000000"
+               font-family="Verdana"
+               font-size="11px"
+               id="text948">context_type_name VARCHAR(127) NOT NULL</text>
+          </switch>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-69"
+         id="g968">
+        <g
+           id="g960">
+          <rect
+             x="520"
+             y="404"
+             width="32"
+             height="36.57"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect956" />
+          <path
+             d="m 520,404 m 32,0 v 36.57 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path958" />
+        </g>
+        <g
+           id="g966">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-524-409-24-37-0)"
+             font-size="12px"
+             id="g964">
+            <text
+               x="525.5"
+               y="421.5"
+               id="text962">FK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-70"
+       id="g986">
+      <g
+         id="g976">
+        <rect
+           x="520"
+           y="436"
+           width="308.75"
+           height="10"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect972" />
+        <path
+           d="m 520,436 m 308.75,0 m 0,10 M 520,446"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path974" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-71"
+         id="g984">
+        <g
+           id="g982">
+          <rect
+             x="520"
+             y="436"
+             width="32"
+             height="10"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect978" />
+          <path
+             d="m 520,436 m 32,0 v 10 m -32,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path980" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-72"
+     id="g1100">
+    <g
+       id="g996">
+      <path
+         d="m 529.38,561 v -26 h 290 v 26"
+         fill="#e0e0e0"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path990" />
+      <path
+         d="m 529.38,561 v 110 h 290 V 561"
+         fill="#ffffff"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path992" />
+      <path
+         d="m 529.38,561 h 290"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path994" />
+    </g>
+    <g
+       id="g1002">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g1000">
+        <text
+           x="673.88"
+           y="553.5"
+           id="text998">rbac_role_permission</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-73"
+       id="g1030">
+      <g
+         id="g1008">
+        <rect
+           x="529.38"
+           y="561"
+           width="290"
+           height="30"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect1004" />
+        <path
+           d="m 529.38,561 m 290,0 m 0,30 h -290"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1006" />
+      </g>
+      <g
+         id="g1014">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-584-561-231-30-0)"
+           font-size="12px"
+           id="g1012"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="585.88"
+             y="580.5"
+             id="text1010">role_id UUID</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-74"
+         id="g1028">
+        <g
+           id="g1020">
+          <rect
+             x="529.38"
+             y="561"
+             width="50"
+             height="30"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect1016" />
+          <path
+             d="m 529.38,561 m 50,0 v 30 m -50,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1018" />
+        </g>
+        <g
+           id="g1026">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-533-561-42-30-0)"
+             font-size="12px"
+             id="g1024">
+            <text
+               x="534.88"
+               y="580.5"
+               id="text1022">PK,FK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-75"
+       id="g1060">
+      <g
+         id="g1036">
+        <rect
+           x="529.38"
+           y="591"
+           width="290"
+           height="44"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect1032" />
+        <path
+           d="m 529.38,591 m 290,0 m 0,44 h -290"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1034" />
+      </g>
+      <g
+         id="g1044">
+        <g
+           transform="translate(-0.5,-0.5)"
+           id="g1042">
+          <switch
+             id="switch1040">
+            <foreignObject
+               style="overflow: visible; text-align: left;"
+               pointer-events="none"
+               width="100%"
+               height="100%"
+               requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+              <xhtml:div
+                 style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 229px; height: 1px; padding-top: 613px; margin-left: 586px;">
+                <xhtml:div
+                   style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 40px; overflow: hidden;"
+                   data-drawio-colors="color: rgb(0, 0, 0); ">
+                  <xhtml:div
+                     style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; font-weight: bold; text-decoration: underline; white-space: normal; overflow-wrap: normal;">permission_id UUID</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </foreignObject>
+            <text
+               x="586"
+               y="617"
+               fill="#000000"
+               font-family="Verdana"
+               font-size="12px"
+               font-weight="bold"
+               text-decoration="underline"
+               id="text1038"
+               style="text-decoration:underline;text-decoration-line:underline">permission_id UUID</text>
+          </switch>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-76"
+         id="g1058">
+        <g
+           id="g1050">
+          <rect
+             x="529.38"
+             y="591"
+             width="50"
+             height="44"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect1046" />
+          <path
+             d="m 529.38,591 m 50,0 v 44 m -50,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1048" />
+        </g>
+        <g
+           id="g1056">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-533-591-42-44-0)"
+             font-size="12px"
+             id="g1054">
+            <text
+               x="534.88"
+               y="617.5"
+               id="text1052">PK,FK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-77"
+       id="g1076">
+      <g
+         id="g1066">
+        <rect
+           x="529.38"
+           y="635"
+           width="290"
+           height="10"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect1062" />
+        <path
+           d="m 529.38,635 m 290,0 m 0,10 m -290,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1064" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-78"
+         id="g1074">
+        <g
+           id="g1072">
+          <rect
+             x="529.38"
+             y="635"
+             width="50"
+             height="10"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect1068" />
+          <path
+             d="m 529.38,635 m 50,0 v 10 m -50,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1070" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-79"
+       id="g1098">
+      <g
+         id="g1082">
+        <rect
+           x="529.38"
+           y="645"
+           width="290"
+           height="26"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect1078" />
+        <path
+           d="m 529.38,645 m 290,0 m 0,26 m -290,0"
+           fill="none"
+           stroke="#b20000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1080" />
+      </g>
+      <g
+         id="g1088">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-584-650-231-26-0)"
+           font-size="11px"
+           id="g1086">
+          <text
+             x="585.88"
+             y="661.5"
+             id="text1084">permission_value SMALLINT NOT NULL</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-80"
+         id="g1096">
+        <g
+           id="g1094">
+          <rect
+             x="529.38"
+             y="645"
+             width="50"
+             height="26"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect1090" />
+          <path
+             d="m 529.38,645 m 50,0 v 26 m -50,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1092" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-81"
+     id="g1110">
+    <g
+       id="g1108">
+      <path
+         d="m 420,543 v 62 h 109.38"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1102" />
+      <path
+         d="m 424,551 h -8 m 0,-8 4,8 4,-8"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1104" />
+      <path
+         d="m 521.38,609 v -8 m 8,0 -8,4 8,4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1106" />
+    </g>
+  </g>
+  <g
+     id="g1118">
+    <path
+       d="m 932,532 v -26 h 196 v 26"
+       fill="#e0e0e0"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1112" />
+    <path
+       d="m 932,532 v 116.86 h 196 V 532"
+       fill="#ffffff"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1114" />
+    <path
+       d="m 932,532 h 196"
+       fill="none"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1116" />
+  </g>
+  <g
+     id="g1124">
+    <g
+       fill="#000000"
+       font-family="Verdana"
+       text-anchor="middle"
+       font-size="14px"
+       id="g1122">
+      <text
+         x="1029.5"
+         y="524.5"
+         id="text1120">rbac_role_assignment</text>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-83"
+     id="g1154">
+    <g
+       id="g1130">
+      <rect
+         x="932"
+         y="532"
+         width="196"
+         height="44"
+         fill="none"
+         stroke="none"
+         pointer-events="all"
+         id="rect1126" />
+      <path
+         d="m 932,532 m 196,0 m 0,44 H 932"
+         fill="none"
+         stroke="#000000"
+         stroke-linecap="square"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1128" />
+    </g>
+    <g
+       id="g1138">
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g1136">
+        <switch
+           id="switch1134">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 135px; height: 1px; padding-top: 554px; margin-left: 989px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 40px; overflow: hidden;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; font-weight: bold; text-decoration: underline; white-space: normal; overflow-wrap: normal;">role_id UUID</xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="989"
+             y="558"
+             fill="#000000"
+             font-family="Verdana"
+             font-size="12px"
+             font-weight="bold"
+             text-decoration="underline"
+             id="text1132"
+             style="text-decoration:underline;text-decoration-line:underline">role_id UUID</text>
+        </switch>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-84"
+       id="g1152">
+      <g
+         id="g1144">
+        <rect
+           x="932"
+           y="532"
+           width="50"
+           height="44"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect1140" />
+        <path
+           d="m 932,532 m 50,0 v 44 m -50,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1142" />
+      </g>
+      <g
+         id="g1150">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-936-532-42-44-0)"
+           font-size="12px"
+           id="g1148">
+          <text
+             x="937.5"
+             y="558.5"
+             id="text1146">PK,FK</text>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-85"
+     id="g1184">
+    <g
+       id="g1160">
+      <rect
+         x="932"
+         y="576"
+         width="196"
+         height="40"
+         fill="none"
+         stroke="none"
+         pointer-events="all"
+         id="rect1156" />
+      <path
+         d="m 932,576 m 196,0 m 0,40 H 932"
+         fill="none"
+         stroke="#000000"
+         stroke-linecap="square"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1158" />
+    </g>
+    <g
+       id="g1168">
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g1166">
+        <switch
+           id="switch1164">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 135px; height: 1px; padding-top: 596px; margin-left: 989px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 36px; overflow: hidden;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; font-weight: bold; text-decoration: underline; white-space: normal; overflow-wrap: normal;">context_id UUID</xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="989"
+             y="600"
+             fill="#000000"
+             font-family="Verdana"
+             font-size="12px"
+             font-weight="bold"
+             text-decoration="underline"
+             id="text1162"
+             style="text-decoration:underline;text-decoration-line:underline">context_id UUID</text>
+        </switch>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-86"
+       id="g1182">
+      <g
+         id="g1174">
+        <rect
+           x="932"
+           y="576"
+           width="50"
+           height="40"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect1170" />
+        <path
+           d="m 932,576 m 50,0 v 40 m -50,0"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1172" />
+      </g>
+      <g
+         id="g1180">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-936-576-42-40-0)"
+           font-size="12px"
+           id="g1178">
+          <text
+             x="937.5"
+             y="600.5"
+             id="text1176">PK,FK</text>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     id="g1190"
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1">
+    <rect
+       x="932"
+       y="616"
+       width="196"
+       height="32.860001"
+       fill="#ff00ff"
+       stroke="none"
+       pointer-events="all"
+       id="rect1186"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1" />
+    <path
+       d="m 932,616 m 196,0 m 0,32.86 m -196,0"
+       fill="none"
+       stroke="#a50040"
+       stroke-linecap="square"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1188"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1" />
+  </g>
+  <g
+     id="g1198"
+     style="fill:#000000;fill-opacity:1">
+    <g
+       transform="translate(-0.5,-0.5)"
+       id="g1196"
+       style="fill:#000000;fill-opacity:1">
+      <switch
+         id="switch1194"
+         style="fill:#000000;fill-opacity:1">
+        <foreignObject
+           style="overflow: visible; text-align: left;"
+           pointer-events="none"
+           width="100%"
+           height="100%"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div
+             style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 135px; height: 1px; padding-top: 623px; margin-left: 989px;">
+            <xhtml:div
+               style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 29px; overflow: hidden;"
+               data-drawio-colors="color: #ffffff; ">
+              <xhtml:div
+                 style="display: inline-block; font-size: 11px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">user_id UUID NOT NULL</xhtml:div>
+            </xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="989"
+           y="634"
+           fill="#ffffff"
+           font-family="Verdana"
+           font-size="11px"
+           id="text1192"
+           style="text-decoration:underline;text-decoration-line:underline">user_id UUID NOT NULL</text>
+      </switch>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-88"
+     id="g1212">
+    <g
+       id="g1204">
+      <rect
+         x="932"
+         y="616"
+         width="50"
+         height="32.860001"
+         fill="none"
+         stroke="none"
+         pointer-events="all"
+         id="rect1200" />
+      <path
+         d="m 932,616 m 50,0 v 32.86 m -50,0"
+         fill="none"
+         stroke="#000000"
+         stroke-linecap="square"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1202" />
+    </g>
+    <g
+       id="g1210">
+      <g
+         fill="#000000"
+         font-family="Helvetica"
+         clip-path="url(#mx-clip-936-621-42-33-0)"
+         font-size="12px"
+         id="g1208">
+        <text
+           x="937.5"
+           y="633.5"
+           id="text1206">FK</text>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-89"
+     id="g1226">
+    <g
+       id="g1224">
+      <path
+         d="m 472,161 h 78"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1218" />
+      <path
+         d="m 480,157 v 8 m -8,0 8,-4 -8,-4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1220" />
+      <path
+         d="m 542,165 v -8 m 8,0 -8,4 8,4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1222" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-90"
+     id="g1352">
+    <g
+       id="g1234">
+      <path
+         d="m 1195,548 v -26 h 162 v 26"
+         fill="#ffe6cc"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1228" />
+      <path
+         d="m 1195,548 v 118 h 162 V 548"
+         fill="#ffffff"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1230" />
+      <path
+         d="m 1195,548 h 162"
+         fill="none"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1232" />
+    </g>
+    <g
+       id="g1240">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g1238">
+        <text
+           x="1275.5"
+           y="540.5"
+           id="text1236">user</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-91"
+       id="g1268">
+      <g
+         id="g1246">
+        <rect
+           x="1195"
+           y="548"
+           width="162"
+           height="30"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1242" />
+        <path
+           d="m 1195,548 m 162,0 m 0,30 h -162"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1244" />
+      </g>
+      <g
+         id="g1252">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-1229-548-124-30-0)"
+           font-size="12px"
+           id="g1250"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="1230.5"
+             y="567.5"
+             id="text1248">id UUID</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-92"
+         id="g1266">
+        <g
+           id="g1258">
+          <rect
+             x="1195"
+             y="548"
+             width="32"
+             height="30"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1254" />
+          <path
+             d="m 1195,548 m 32,0 v 30 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1256" />
+        </g>
+        <g
+           id="g1264">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-1199-548-24-30-0)"
+             font-size="12px"
+             id="g1262">
+            <text
+               x="1200.5"
+               y="567.5"
+               id="text1260">PK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-93"
+       id="g1290">
+      <g
+         id="g1274">
+        <rect
+           x="1195"
+           y="578"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1270" />
+        <path
+           d="m 1195,578 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1272" />
+      </g>
+      <g
+         id="g1280">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-1229-583-124-26-0)"
+           font-size="11px"
+           id="g1278">
+          <text
+             x="1230.5"
+             y="594.5"
+             id="text1276">username</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-94"
+         id="g1288">
+        <g
+           id="g1286">
+          <rect
+             x="1195"
+             y="578"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1282" />
+          <path
+             d="m 1195,578 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1284" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-95"
+       id="g1312">
+      <g
+         id="g1296">
+        <rect
+           x="1195"
+           y="604"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1292" />
+        <path
+           d="m 1195,604 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1294" />
+      </g>
+      <g
+         id="g1302">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-1229-609-124-26-0)"
+           font-size="11px"
+           id="g1300">
+          <text
+             x="1230.5"
+             y="620.5"
+             id="text1298">email</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-96"
+         id="g1310">
+        <g
+           id="g1308">
+          <rect
+             x="1195"
+             y="604"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1304" />
+          <path
+             d="m 1195,604 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1306" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-97"
+       id="g1334">
+      <g
+         id="g1318">
+        <rect
+           x="1195"
+           y="630"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1314" />
+        <path
+           d="m 1195,630 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1316" />
+      </g>
+      <g
+         id="g1324">
+        <g
+           fill="#000000"
+           font-family="Helvetica"
+           clip-path="url(#mx-clip-1229-635-124-26-0)"
+           font-size="12px"
+           id="g1322">
+          <text
+             x="1230.5"
+             y="647.5"
+             id="text1320">....</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-98"
+         id="g1332">
+        <g
+           id="g1330">
+          <rect
+             x="1195"
+             y="630"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1326" />
+          <path
+             d="m 1195,630 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1328" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-99"
+       id="g1350">
+      <g
+         id="g1340">
+        <rect
+           x="1195"
+           y="656"
+           width="162"
+           height="10"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1336" />
+        <path
+           d="m 1195,656 m 162,0 m 0,10 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1338" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-100"
+         id="g1348">
+        <g
+           id="g1346">
+          <rect
+             x="1195"
+             y="656"
+             width="32"
+             height="10"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1342" />
+          <path
+             d="m 1195,656 m 32,0 v 10 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1344" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <path
+     d="m 880,249 v -26 h 300 v 26"
+     fill="#e0e0e0"
+     stroke="#000000"
+     stroke-miterlimit="10"
+     pointer-events="all"
+     id="path1354" />
+  <path
+     d="m 880,249 v 96 h 300 v -96"
+     fill="#ffffff"
+     stroke="#000000"
+     stroke-miterlimit="10"
+     pointer-events="all"
+     id="path1356" />
+  <path
+     d="m 880,249 h 300"
+     fill="none"
+     stroke="#000000"
+     stroke-miterlimit="10"
+     pointer-events="all"
+     id="path1358" />
+  <g
+     fill="#000000"
+     font-family="Verdana"
+     text-anchor="middle"
+     font-size="14px"
+     id="g1364">
+    <text
+       x="1029.5"
+       y="241.5"
+       id="text1362">rbac_context</text>
+  </g>
+  <g
+     id="g1372">
+    <rect
+       x="880"
+       y="249"
+       width="300"
+       height="30"
+       fill="none"
+       stroke="none"
+       pointer-events="all"
+       id="rect1368" />
+    <path
+       d="m 880,249 m 300,0 m 0,30 H 880"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="square"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1370" />
+  </g>
+  <g
+     id="g1378">
+    <g
+       fill="#000000"
+       font-family="Verdana"
+       font-weight="bold"
+       text-decoration="underline"
+       clip-path="url(#mx-clip-914-249-262-30-0)"
+       font-size="12px"
+       id="g1376"
+       style="text-decoration:underline;text-decoration-line:underline">
+      <text
+         x="915.5"
+         y="268.5"
+         id="text1374">id UUID</text>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-103"
+     id="g1392">
+    <g
+       id="g1384">
+      <rect
+         x="880"
+         y="249"
+         width="32"
+         height="30"
+         fill="none"
+         stroke="none"
+         pointer-events="all"
+         id="rect1380" />
+      <path
+         d="m 880,249 m 32,0 v 30 m -32,0"
+         fill="none"
+         stroke="#000000"
+         stroke-linecap="square"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1382" />
+    </g>
+    <g
+       id="g1390">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         clip-path="url(#mx-clip-884-249-24-30-0)"
+         font-size="12px"
+         id="g1388">
+        <text
+           x="885.5"
+           y="268.5"
+           id="text1386">PK</text>
+      </g>
+    </g>
+  </g>
+  <g
+     id="g1400">
+    <rect
+       x="880"
+       y="279"
+       width="300"
+       height="34"
+       fill="none"
+       stroke="none"
+       pointer-events="all"
+       id="rect1396" />
+    <path
+       d="m 880,279 m 300,0 m 0,34 m -300,0"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="square"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1398" />
+  </g>
+  <g
+     id="g1408">
+    <g
+       transform="translate(-0.5,-0.5)"
+       id="g1406">
+      <switch
+         id="switch1404">
+        <foreignObject
+           style="overflow: visible; text-align: left;"
+           pointer-events="none"
+           width="100%"
+           height="100%"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div
+             style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 260px; height: 1px; padding-top: 286px; margin-left: 916px;">
+            <xhtml:div
+               style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 30px; overflow: hidden;"
+               data-drawio-colors="color: rgb(0, 0, 0); ">
+              <xhtml:div
+                 style="display: inline-block; font-size: 11px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">context_type_name VARCHAR(127) NOT NULL</xhtml:div>
+            </xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="916"
+           y="297"
+           fill="#000000"
+           font-family="Verdana"
+           font-size="11px"
+           id="text1402">context_type_name VARCHAR(127) NOT NULL</text>
+      </switch>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-105"
+     id="g1422">
+    <g
+       id="g1414">
+      <rect
+         x="880"
+         y="279"
+         width="32"
+         height="38.860001"
+         fill="none"
+         stroke="none"
+         pointer-events="all"
+         id="rect1410" />
+      <path
+         d="m 880,279 m 32,0 v 38.86 m -32,0"
+         fill="none"
+         stroke="#000000"
+         stroke-linecap="square"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1412" />
+    </g>
+    <g
+       id="g1420">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         clip-path="url(#mx-clip-884-284-24-39-0)"
+         font-size="12px"
+         id="g1418">
+        <text
+           x="885.5"
+           y="296.5"
+           id="text1416">FK</text>
+      </g>
+    </g>
+  </g>
+  <rect
+     x="880"
+     y="313"
+     width="300"
+     height="32"
+     fill="#ff00ff"
+     stroke="none"
+     pointer-events="all"
+     id="rect1426"
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1" />
+  <path
+     d="m 880,313 m 300,0 m 0,32 m -300,0"
+     fill="none"
+     stroke="#a50040"
+     stroke-linecap="square"
+     stroke-miterlimit="10"
+     pointer-events="all"
+     id="path1428" />
+  <g
+     id="g1438"
+     style="fill:#000500;fill-opacity:1">
+    <g
+       transform="translate(-0.5,-0.5)"
+       id="g1436"
+       style="fill:#000500;fill-opacity:1">
+      <switch
+         id="switch1434"
+         style="fill:#000500;fill-opacity:1">
+        <foreignObject
+           style="overflow: visible; text-align: left;"
+           pointer-events="none"
+           width="100%"
+           height="100%"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+          <xhtml:div
+             style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 260px; height: 1px; padding-top: 320px; margin-left: 916px;">
+            <xhtml:div
+               style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 28px; overflow: hidden;"
+               data-drawio-colors="color: #ffffff; ">
+              <xhtml:div
+                 style="display: inline-block; font-size: 11px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">resource_id UUID NOT NULL</xhtml:div>
+            </xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="916"
+           y="331"
+           fill="#ffffff"
+           font-family="Verdana"
+           font-size="11px"
+           id="text1432">resource_id UUID NOT NULL</text>
+      </switch>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-107"
+     id="g1446">
+    <g
+       id="g1444">
+      <rect
+         x="880"
+         y="313"
+         width="32"
+         height="32"
+         fill="none"
+         stroke="none"
+         pointer-events="all"
+         id="rect1440" />
+      <path
+         d="m 880,313 m 32,0 v 32 m -32,0"
+         fill="none"
+         stroke="#000000"
+         stroke-linecap="square"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1442" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-108"
+     id="g1458">
+    <g
+       id="g1456">
+      <path
+         d="m 800,156 h 40 v 140 h 40"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1452" />
+      <path
+         d="m 872,300 v -8 m 8,0 -8,4 8,4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1454" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-109"
+     id="g1466">
+    <g
+       id="g1464">
+      <path
+         d="M 1030,345 V 506"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1460" />
+      <path
+         d="m 1026,498 h 8 m 0,8 -4,-8 -4,8"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1462" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-110"
+     id="g1474">
+    <g
+       id="g1472">
+      <path
+         d="M 391,543 V 795 H 901 V 554 h 31"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1468" />
+      <path
+         d="m 924,558 v -8 m 8,0 -8,4 8,4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1470" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-111"
+     id="g1482">
+    <g
+       id="g1480">
+      <path
+         d="M 390,425 V 285 231"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1476" />
+      <path
+         d="m 394,239 h -8 m 0,-8 4,8 4,-8"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1478" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-112"
+     id="g1496">
+    <g
+       id="g1486">
+      <rect
+         x="110"
+         y="30"
+         width="302"
+         height="50"
+         fill="none"
+         stroke="none"
+         pointer-events="all"
+         id="rect1484" />
+    </g>
+    <g
+       id="g1494">
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g1492">
+        <switch
+           id="switch1490">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 300px; height: 1px; padding-top: 55px; margin-left: 111px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                 data-drawio-colors="color: #000000; ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                  <xhtml:div
+                     align="left"
+                     style="font-size: 18px">
+                    <xhtml:font
+                       style="font-size: 18px">Optional, Advanced Functionality</xhtml:font>
+                  </xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="261"
+             y="59"
+             fill="#000000"
+             font-family="Verdana"
+             font-size="12px"
+             text-anchor="middle"
+             id="text1488">Optional, Advanced Functionality</text>
+        </switch>
+      </g>
+    </g>
+  </g>
+  <g
+     id="g1510">
+    <path
+       d="m 1195,749 v -26 h 162 v 26"
+       fill="#e0e0e0"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1500">
+      <title
+         id="title1498">Holds the list of roles that exist in the application</title>
+    </path>
+    <path
+       d="m 1195,749 v 44 h 162 v -44"
+       fill="#ffffff"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1504">
+      <title
+         id="title1502">Holds the list of roles that exist in the application</title>
+    </path>
+    <path
+       d="m 1195,749 h 162"
+       fill="none"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1508">
+      <title
+         id="title1506">Holds the list of roles that exist in the application</title>
+    </path>
+  </g>
+  <g
+     id="g1518">
+    <g
+       fill="#000000"
+       font-family="Verdana"
+       text-anchor="middle"
+       font-size="14px"
+       id="g1516">
+      <title
+         id="title1512">Holds the list of roles that exist in the application</title>
+      <text
+         x="1275.5"
+         y="741.5"
+         id="text1514">rbac_super_admin</text>
+    </g>
+  </g>
+  <rect
+     x="1195"
+     y="749"
+     width="162"
+     height="44"
+     fill="#ff00ff"
+     stroke="none"
+     pointer-events="all"
+     id="rect1520"
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1" />
+  <path
+     d="m 1195,749 m 162,0 m 0,44 h -162"
+     fill="none"
+     stroke="#a50040"
+     stroke-linecap="square"
+     stroke-miterlimit="10"
+     pointer-events="all"
+     id="path1522" />
+  <g
+     transform="translate(-0.5,-0.5)"
+     id="g1530"
+     style="fill:#000000;fill-opacity:1">
+    <switch
+       id="switch1528"
+       style="fill:#000000;fill-opacity:1">
+      <foreignObject
+         style="overflow: visible; text-align: left;"
+         pointer-events="none"
+         width="100%"
+         height="100%"
+         requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+        <xhtml:div
+           style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 122px; height: 1px; padding-top: 771px; margin-left: 1231px;">
+          <xhtml:div
+             style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 40px; overflow: hidden;"
+             data-drawio-colors="color: #ffffff; ">
+            <xhtml:div
+               style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; font-weight: bold; text-decoration: underline; white-space: normal; overflow-wrap: normal;">user_id UUID</xhtml:div>
+          </xhtml:div>
+        </xhtml:div>
+      </foreignObject>
+      <text
+         x="1231"
+         y="774"
+         fill="#ffffff"
+         font-family="Verdana"
+         font-size="12px"
+         font-weight="bold"
+         text-decoration="underline"
+         id="text1526"
+         style="text-decoration:underline;text-decoration-line:underline">user_id UUID</text>
+    </switch>
+  </g>
+  <g
+     id="g1538">
+    <rect
+       x="1195"
+       y="749"
+       width="32"
+       height="44"
+       fill="none"
+       stroke="none"
+       pointer-events="all"
+       id="rect1534" />
+    <path
+       d="m 1195,749 m 32,0 v 44 m -32,0"
+       fill="none"
+       stroke="#000000"
+       stroke-linecap="square"
+       stroke-miterlimit="10"
+       pointer-events="all"
+       id="path1536" />
+  </g>
+  <g
+     id="g1544">
+    <g
+       fill="#000000"
+       font-family="Verdana"
+       clip-path="url(#mx-clip-1199-749-24-44-0)"
+       font-size="12px"
+       id="g1542">
+      <text
+         x="1200.5"
+         y="775.5"
+         id="text1540">PK</text>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-116"
+     id="g1564">
+    <g
+       id="g1554">
+      <path
+         d="m 1445.5,456.5 h 70 v 217 h -15 l -20,30 v -30 h -35 z"
+         fill="#dae8fc"
+         stroke="#6c8ebf"
+         stroke-miterlimit="10"
+         transform="rotate(90,1480.5,580)"
+         pointer-events="all"
+         id="path1552" />
+    </g>
+    <g
+       id="g1562">
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g1560">
+        <switch
+           id="switch1558">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 211px; height: 1px; padding-top: 580px; margin-left: 1393px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: left;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">This user table is the application user table, not a new one specific for role based access control.</xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="1393"
+             y="584"
+             fill="#000000"
+             font-family="Verdana"
+             font-size="12px"
+             id="text1556">This user table is the application user table, not a new one specific for role based access control.</text>
+        </switch>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-117"
+     id="g1578">
+    <g
+       id="g1568">
+      <path
+         d="M 590,25 H 792 V 83 H 711 L 705.14,113 691,83 H 590 Z"
+         fill="#dae8fc"
+         stroke="#6c8ebf"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1566" />
+    </g>
+    <g
+       id="g1576">
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g1574">
+        <switch
+           id="switch1572">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 196px; height: 1px; padding-top: 54px; margin-left: 594px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: left;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;"><xhtml:b>name </xhtml:b>
+is a keyword like :application, :organization, :plant, etc.</xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="594"
+             y="58"
+             fill="#000000"
+             font-family="Verdana"
+             font-size="12px"
+             id="text1570">name is a keyword like :application, :organization, :plant, etc.</text>
+        </switch>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-118"
+     id="g1592">
+    <g
+       id="g1590">
+      <path
+         d="m 828.75,371 h 30 v 232 h -39.37"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1580" />
+      <circle
+         cx="840.75"
+         cy="371"
+         fill="#ffffff"
+         stroke="#000000"
+         pointer-events="all"
+         id="ellipse1582"
+         r="3" />
+      <path
+         d="m 828.75,375 8,-4 -8,-4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1584" />
+      <circle
+         cx="831.38"
+         cy="603"
+         fill="#ffffff"
+         stroke="#000000"
+         pointer-events="all"
+         id="ellipse1586"
+         r="3" />
+      <path
+         d="m 819.38,607 8,-4 -8,-4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1588" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-119"
+     id="g1602">
+    <g
+       id="g1600">
+      <path
+         d="m 674.4,296 v -34.5 q 0,-10 0.13,-20 L 675,207"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1594" />
+      <path
+         d="m 670.4,288 h 8 m 0,8 -4,-8 -4,8"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1596" />
+      <path
+         d="m 678.89,215.05 -8,-0.1 m 0.11,-8 3.89,8.05 4.11,-7.95"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1598" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-120"
+     id="g1616">
+    <g
+       id="g1606">
+      <path
+         d="m 563,671 h 248 v 54 H 707 l -20,30 V 725 H 563 Z"
+         fill="#dae8fc"
+         stroke="#10739e"
+         stroke-miterlimit="10"
+         transform="matrix(1,0,0,-1,0,1426)"
+         pointer-events="all"
+         id="path1604" />
+    </g>
+    <g
+       id="g1614">
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g1612">
+        <switch
+           id="switch1610">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 242px; height: 1px; padding-top: 728px; margin-left: 567px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: left;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;"><xhtml:b>permission_value</xhtml:b>
+ is an integer value, with (-1) meaning <xhtml:b>denied</xhtml:b>
+, and (+1) meaning <xhtml:b>granted</xhtml:b>
+</xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="567"
+             y="732"
+             fill="#000000"
+             font-family="Verdana"
+             font-size="12px"
+             id="text1608">permission_value is an integer value, with (-1) meaning denied, and (+1) meaning granted</text>
+        </switch>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-121"
+     id="g1624">
+    <g
+       id="g1622">
+      <path
+         d="M 280,466 H 156 V 209"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1618" />
+      <path
+         d="m 160,217 h -8 m 0,-8 4,8 4,-8"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1620" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-122"
+     id="g1750">
+    <g
+       id="g1632">
+      <path
+         d="m 1379.5,312.5 v -26 h 162 v 26"
+         fill="#ffe6cc"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1626" />
+      <path
+         d="m 1379.5,312.5 v 118 h 162 v -118"
+         fill="#ffffff"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1628" />
+      <path
+         d="m 1379.5,312.5 h 162"
+         fill="none"
+         stroke="#d79b00"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1630" />
+    </g>
+    <g
+       id="g1638">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g1636">
+        <text
+           x="1460"
+           y="305"
+           id="text1634">asset</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-123"
+       id="g1666">
+      <g
+         id="g1644">
+        <rect
+           x="1379.5"
+           y="312.5"
+           width="162"
+           height="30"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1640" />
+        <path
+           d="m 1379.5,312.5 m 162,0 m 0,30 h -162"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1642" />
+      </g>
+      <g
+         id="g1650">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           font-weight="bold"
+           text-decoration="underline"
+           clip-path="url(#mx-clip-1414-313-124-30-0)"
+           font-size="12px"
+           id="g1648"
+           style="text-decoration:underline;text-decoration-line:underline">
+          <text
+             x="1415"
+             y="332"
+             id="text1646">id UUID</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-124"
+         id="g1664">
+        <g
+           id="g1656">
+          <rect
+             x="1379.5"
+             y="312.5"
+             width="32"
+             height="30"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1652" />
+          <path
+             d="m 1379.5,312.5 m 32,0 v 30 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1654" />
+        </g>
+        <g
+           id="g1662">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-1384-313-24-30-0)"
+             font-size="12px"
+             id="g1660">
+            <text
+               x="1385"
+               y="332"
+               id="text1658">PK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-125"
+       id="g1688">
+      <g
+         id="g1672">
+        <rect
+           x="1379.5"
+           y="342.5"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1668" />
+        <path
+           d="m 1379.5,342.5 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1670" />
+      </g>
+      <g
+         id="g1678">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-1414-348-124-26-0)"
+           font-size="11px"
+           id="g1676">
+          <text
+             x="1415"
+             y="359"
+             id="text1674">npi</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-126"
+         id="g1686">
+        <g
+           id="g1684">
+          <rect
+             x="1379.5"
+             y="342.5"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1680" />
+          <path
+             d="m 1379.5,342.5 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1682" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-127"
+       id="g1710">
+      <g
+         id="g1694">
+        <rect
+           x="1379.5"
+           y="368.5"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1690" />
+        <path
+           d="m 1379.5,368.5 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1692" />
+      </g>
+      <g
+         id="g1700">
+        <g
+           fill="#000000"
+           font-family="Verdana"
+           clip-path="url(#mx-clip-1414-374-124-26-0)"
+           font-size="11px"
+           id="g1698">
+          <text
+             x="1415"
+             y="385"
+             id="text1696">timezone</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-128"
+         id="g1708">
+        <g
+           id="g1706">
+          <rect
+             x="1379.5"
+             y="368.5"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1702" />
+          <path
+             d="m 1379.5,368.5 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1704" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-129"
+       id="g1732">
+      <g
+         id="g1716">
+        <rect
+           x="1379.5"
+           y="394.5"
+           width="162"
+           height="26"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1712" />
+        <path
+           d="m 1379.5,394.5 m 162,0 m 0,26 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1714" />
+      </g>
+      <g
+         id="g1722">
+        <g
+           fill="#000000"
+           font-family="Helvetica"
+           clip-path="url(#mx-clip-1414-400-124-26-0)"
+           font-size="12px"
+           id="g1720">
+          <text
+             x="1415"
+             y="412"
+             id="text1718">....</text>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-130"
+         id="g1730">
+        <g
+           id="g1728">
+          <rect
+             x="1379.5"
+             y="394.5"
+             width="32"
+             height="26"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1724" />
+          <path
+             d="m 1379.5,394.5 m 32,0 v 26 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1726" />
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-131"
+       id="g1748">
+      <g
+         id="g1738">
+        <rect
+           x="1379.5"
+           y="420.5"
+           width="162"
+           height="10"
+           fill="#ffe6cc"
+           stroke="none"
+           pointer-events="all"
+           id="rect1734" />
+        <path
+           d="m 1379.5,420.5 m 162,0 m 0,10 m -162,0"
+           fill="none"
+           stroke="#d79b00"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1736" />
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-132"
+         id="g1746">
+        <g
+           id="g1744">
+          <rect
+             x="1379.5"
+             y="420.5"
+             width="32"
+             height="10"
+             fill="#ffe6cc"
+             stroke="none"
+             pointer-events="all"
+             id="rect1740" />
+          <path
+             d="m 1379.5,420.5 m 32,0 v 10 m -32,0"
+             fill="none"
+             stroke="#d79b00"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1742" />
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-133"
+     id="g1764">
+    <g
+       id="g1754">
+      <rect
+         x="1581"
+         y="324"
+         width="149"
+         height="72"
+         fill="none"
+         stroke="none"
+         pointer-events="all"
+         id="rect1752" />
+    </g>
+    <g
+       id="g1762">
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g1760">
+        <switch
+           id="switch1758">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 147px; height: 1px; padding-top: 360px; margin-left: 1582px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 17px; font-family: &quot;Helvetica&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                  <xhtml:div>APPLICATION</xhtml:div>
+                  <xhtml:div>RESOURCES</xhtml:div>
+                  <xhtml:div>(ENTITIES)</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="1656"
+             y="365"
+             fill="#000000"
+             font-family="Helvetica"
+             font-size="17px"
+             text-anchor="middle"
+             id="text1756">APPLICATION RESOURCES (ENTITIES)</text>
+        </switch>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-134"
+     id="g1778">
+    <g
+       id="g1768">
+      <rect
+         x="1340.5"
+         y="615"
+         width="149"
+         height="72"
+         fill="none"
+         stroke="none"
+         pointer-events="all"
+         id="rect1766" />
+    </g>
+    <g
+       id="g1776">
+      <g
+         transform="translate(-0.5,-0.5)"
+         id="g1774">
+        <switch
+           id="switch1772">
+          <foreignObject
+             style="overflow: visible; text-align: left;"
+             pointer-events="none"
+             width="100%"
+             height="100%"
+             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+            <xhtml:div
+               style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 147px; height: 1px; padding-top: 651px; margin-left: 1342px;">
+              <xhtml:div
+                 style="box-sizing: border-box; font-size: 0px; text-align: center;"
+                 data-drawio-colors="color: rgb(0, 0, 0); ">
+                <xhtml:div
+                   style="display: inline-block; font-size: 17px; font-family: &quot;Helvetica&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                  <xhtml:div>APPLICATION</xhtml:div>
+                  <xhtml:div>USERS</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+          </foreignObject>
+          <text
+             x="1415"
+             y="656"
+             fill="#000000"
+             font-family="Helvetica"
+             font-size="17px"
+             text-anchor="middle"
+             id="text1770">APPLICATION USERS</text>
+        </switch>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-135"
+     id="g1786">
+    <g
+       id="g1784">
+      <path
+         d="m 1195,563 h -44 v 74 h -23"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1780" />
+      <path
+         d="m 1136,633 v 8 m -8,0 8,-4 -8,-4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1782" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-136"
+     id="g1794">
+    <g
+       id="g1792">
+      <path
+         d="m 1195,760 h -24 V 575 l 24,0.02"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1788" />
+      <path
+         d="m 1191,579.02 v -8"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1790" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-137"
+     id="g1870">
+    <g
+       id="g1802">
+      <path
+         d="M 932,52 V 26 h 196 v 26"
+         fill="#e0e0e0"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1796" />
+      <path
+         d="m 932,52 v 84 h 196 V 52"
+         fill="#ffffff"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1798" />
+      <path
+         d="m 932,52 h 196"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1800" />
+    </g>
+    <g
+       id="g1808">
+      <g
+         fill="#000000"
+         font-family="Verdana"
+         text-anchor="middle"
+         font-size="14px"
+         id="g1806">
+        <text
+           x="1029.5"
+           y="44.5"
+           id="text1804">rbac_context_parent</text>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-138"
+       id="g1838">
+      <g
+         id="g1814">
+        <rect
+           x="932"
+           y="52"
+           width="196"
+           height="44"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect1810" />
+        <path
+           d="m 932,52 m 196,0 m 0,44 H 932"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1812" />
+      </g>
+      <g
+         id="g1822">
+        <g
+           transform="translate(-0.5,-0.5)"
+           id="g1820">
+          <switch
+             id="switch1818">
+            <foreignObject
+               style="overflow: visible; text-align: left;"
+               pointer-events="none"
+               width="100%"
+               height="100%"
+               requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+              <xhtml:div
+                 style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 135px; height: 1px; padding-top: 74px; margin-left: 989px;">
+                <xhtml:div
+                   style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 40px; overflow: hidden;"
+                   data-drawio-colors="color: rgb(0, 0, 0); ">
+                  <xhtml:div
+                     style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; font-weight: bold; text-decoration: underline; white-space: normal; overflow-wrap: normal;">child_id UUID</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </foreignObject>
+            <text
+               x="989"
+               y="78"
+               fill="#000000"
+               font-family="Verdana"
+               font-size="12px"
+               font-weight="bold"
+               text-decoration="underline"
+               id="text1816"
+               style="text-decoration:underline;text-decoration-line:underline">child_id UUID</text>
+          </switch>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-139"
+         id="g1836">
+        <g
+           id="g1828">
+          <rect
+             x="932"
+             y="52"
+             width="50"
+             height="44"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect1824" />
+          <path
+             d="m 932,52 m 50,0 v 44 m -50,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1826" />
+        </g>
+        <g
+           id="g1834">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-936-52-42-44-0)"
+             font-size="12px"
+             id="g1832">
+            <text
+               x="937.5"
+               y="78.5"
+               id="text1830">PK,FK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       data-cell-id="TQ_akjkCryWkIhkPGeND-140"
+       id="g1868">
+      <g
+         id="g1844">
+        <rect
+           x="932"
+           y="96"
+           width="196"
+           height="40"
+           fill="none"
+           stroke="none"
+           pointer-events="all"
+           id="rect1840" />
+        <path
+           d="m 932,96 m 196,0 m 0,40 H 932"
+           fill="none"
+           stroke="#000000"
+           stroke-linecap="square"
+           stroke-miterlimit="10"
+           pointer-events="all"
+           id="path1842" />
+      </g>
+      <g
+         id="g1852">
+        <g
+           transform="translate(-0.5,-0.5)"
+           id="g1850">
+          <switch
+             id="switch1848">
+            <foreignObject
+               style="overflow: visible; text-align: left;"
+               pointer-events="none"
+               width="100%"
+               height="100%"
+               requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+              <xhtml:div
+                 style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 135px; height: 1px; padding-top: 116px; margin-left: 989px;">
+                <xhtml:div
+                   style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 36px; overflow: hidden;"
+                   data-drawio-colors="color: rgb(0, 0, 0); ">
+                  <xhtml:div
+                     style="display: inline-block; font-size: 12px; font-family: &quot;Verdana&quot;; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; font-weight: bold; text-decoration: underline; white-space: normal; overflow-wrap: normal;">parent_id UUID</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </foreignObject>
+            <text
+               x="989"
+               y="120"
+               fill="#000000"
+               font-family="Verdana"
+               font-size="12px"
+               font-weight="bold"
+               text-decoration="underline"
+               id="text1846"
+               style="text-decoration:underline;text-decoration-line:underline">parent_id UUID</text>
+          </switch>
+        </g>
+      </g>
+      <g
+         data-cell-id="TQ_akjkCryWkIhkPGeND-141"
+         id="g1866">
+        <g
+           id="g1858">
+          <rect
+             x="932"
+             y="96"
+             width="50"
+             height="40"
+             fill="none"
+             stroke="none"
+             pointer-events="all"
+             id="rect1854" />
+          <path
+             d="m 932,96 m 50,0 v 40 m -50,0"
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="square"
+             stroke-miterlimit="10"
+             pointer-events="all"
+             id="path1856" />
+        </g>
+        <g
+           id="g1864">
+          <g
+             fill="#000000"
+             font-family="Verdana"
+             clip-path="url(#mx-clip-936-96-42-40-0)"
+             font-size="12px"
+             id="g1862">
+            <text
+               x="937.5"
+               y="120.5"
+               id="text1860">PK,FK</text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-142"
+     id="g1880">
+    <g
+       id="g1878">
+      <path
+         d="M 880,264 H 861 V 74 h 71"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1872" />
+      <path
+         d="m 880,260 -8,4 8,4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1874" />
+      <path
+         d="m 932,70 -8,4 8,4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1876" />
+    </g>
+  </g>
+  <g
+     data-cell-id="TQ_akjkCryWkIhkPGeND-143"
+     id="g1890">
+    <g
+       id="g1888">
+      <path
+         d="m 1180,264 h 21 V 116 h -73"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="stroke"
+         id="path1882" />
+      <path
+         d="m 1180,268 8,-4 -8,-4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1884" />
+      <path
+         d="m 1128,120 8,-4 -8,-4"
+         fill="none"
+         stroke="#000000"
+         stroke-miterlimit="10"
+         pointer-events="all"
+         id="path1886" />
+    </g>
+  </g>
+  <switch
+     id="switch1904">
+    <g
+       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+       id="g1898" />
+    <a
+       transform="translate(0,-5)"
+       xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems"
+       target="_blank"
+       id="a1902">
+      <text
+         text-anchor="middle"
+         font-size="10px"
+         x="50%"
+         y="100%"
+         id="text1900">Text is not SVG - cannot display</text>
+    </a>
+  </switch>
+</svg>

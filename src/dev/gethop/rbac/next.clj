@@ -1,6 +1,5 @@
 (ns dev.gethop.rbac.next
-  (:require [clojure.set :as set]
-            [clojure.spec.alpha :as s]
+  (:require [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [honey.sql :as hsql]
             [next.jdbc :as jdbc]
@@ -458,47 +457,79 @@
 (defn- context->db-context
   [context]
   (-> context
-      (set/rename-keys {:parent-id :parent})
       (update :context-type-name kw->str)))
 
 (defn- db-context->context
   [db-context]
   (-> db-context
-      (set/rename-keys {:parent :parent-id})
       (update-if-exists :context-type-name str->kw)))
 
 (s/def ::resource-id (s/or :string-id ::string-id
                            :int-id pos-int?
                            :uuid uuid?))
-(s/def ::parent-id (s/nilable ::id))
-(s/def ::context (s/keys :req-un [::context-type-name
-                                  ::resource-id]
-                         :opt-un [::id
-                                  ::parent-id]))
+(s/def ::new-context (s/keys :req-un [::context-type-name
+                                      ::resource-id]))
+(s/def ::context (s/keys :req-un [::id
+                                  ::context-type-name
+                                  ::resource-id]))
+(s/def ::contexts (s/coll-of ::context))
 (s/def ::create-context!-args (s/cat :db-spec ::db-spec
-                                     :context ::context
-                                     :parent-context (s/nilable ::context)))
-(s/def ::create-context!-ret (s/keys :req-un [::success?]))
+                                     :context ::new-context
+                                     :parent-contexts ::contexts))
+(s/def ::create-context!-ret (s/keys :req-un [::success?]
+                                     :opt-un [::context]))
 (s/fdef create-context!
   :args ::create-context!-args
   :ret  ::create-context!-ret)
 
 (defn create-context!
-  "To be able to create the top-level context, pass `nil` for PARENT-CONTEXT"
-  [db-spec context parent-context]
+  "Create a `context`, in the database specified by `db-spec`.
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+
+  `context` is a map with the following keys and values:
+     :resource-id The application id that identifies the resource for
+                  which the context is created.
+     :context-type-name The name of the context type to use for this
+                        context. It must be a valid context-type-name
+                        previously created using `create-context-type!`
+   E.g.,
+     {:resource-id #uuid \"28b81079-a2b7-419d-92b1-7249bc326ea1\"
+      :context-type-name \"device\"}
+
+  `parent-contexts` is a collection of already existing contexts, that
+  will be set as the parents for `context`. To be able to create a
+  top-level context, pass an empty collection."
+  [db-spec context parent-contexts]
   (let [context-id (UUID/randomUUID)
         db-context (-> context
                        (assoc :id context-id)
-                       (assoc :parent-id (:id parent-context))
                        (context->db-context))
-        result (jdbc.sql/insert! db-spec :rbac-context db-context
-                                 jdbc/unqualified-snake-kebab-opts)]
-    (if (seq result)
-      {:success? true
-       :context (assoc context :id context-id :parent-id (:id parent-context))}
-      {:success? false})))
+        parent-ids (mapv :id parent-contexts)
+        success-result {:success? true
+                        :context (assoc context :id context-id)}]
+    (try
+      (jdbc/with-transaction [tx db-spec]
+        (jdbc.sql/insert! tx :rbac-context db-context
+                          jdbc/unqualified-snake-kebab-opts)
+        (if-not (seq parent-ids)
+          success-result
+          (let [rows (mapv (fn [child-id parent-id]
+                             {:child-id child-id
+                              :parent-id parent-id})
+                           (repeat context-id)
+                           parent-ids)
+                jdbc-opts (assoc jdbc/unqualified-snake-kebab-opts :batch true)
+                result (jdbc.sql/insert-multi! tx :rbac-context-parent
+                                               rows jdbc-opts)]
+            (if (and (seq rows) (not (seq result)))
+              (do
+                (.rollback tx)
+                {:success? false})
+              success-result))))
+      (catch Exception _
+        {:success? false}))))
 
-(s/def ::contexts (s/coll-of ::context))
 (s/def ::get-contexts-args (s/cat :db-spec ::db-spec))
 (s/def ::get-contexts-ret (s/keys :req-un [::success?
                                            ::contexts]))
@@ -586,8 +617,128 @@
   :ret  ::delete-contexts!-ret)
 
 (defn delete-contexts!
+  "FIXME FIXME FIXME FIXME"
   [db-spec contexts]
   (mapv #(delete-context! db-spec %) contexts))
+
+(defn- add-parent-child-context-rows!
+  [db-spec rows]
+  (try
+    (let [query {:insert-into :rbac-context-parent
+                 :values rows
+                 :on-conflict [:child-id :parent-id]
+                 :do-nothing true}]
+      (jdbc/execute-one! db-spec (hsql/format query)
+                         (assoc jdbc/unqualified-snake-kebab-opts
+                                :batch true))
+      {:success? true})
+    (catch Exception _
+      {:success? false})))
+
+(defn- remove-parent-child-context-rows!
+  [db-spec where-cond]
+  (try
+    (let [query {:delete-from [:rbac-context-parent]
+                 :where where-cond}]
+      (jdbc/execute-one! db-spec (hsql/format query)
+                         jdbc/unqualified-snake-kebab-opts)
+      {:success? true})
+    (catch Exception _
+      {:success? false})))
+
+(s/def ::add-parent-contexts!-args (s/cat :db-spec ::db-spec
+                                          :context ::context
+                                          :parent-contexts ::contexts))
+(s/def ::add-parent-contexts!-ret (s/keys :req-un [::success?]))
+(s/fdef add-parent-contexts!
+  :args ::add-parent-contexts!-args
+  :ret  ::add-parent-contexts!-ret)
+
+(defn add-parent-contexts!
+  [db-spec context parent-contexts]
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::context context)
+              (s/valid? ::contexts parent-contexts))]}
+  (if-not (seq parent-contexts)
+    {:success? true}
+    (let [parent-ids (mapv :id parent-contexts)
+          rows (mapv (fn [child-id parent-id]
+                       {:child-id child-id
+                        :parent-id parent-id})
+                     (repeat (:id context))
+                     parent-ids)]
+      (add-parent-child-context-rows! db-spec rows))))
+
+(s/def ::remove-parent-contexts!-args (s/cat :db-spec ::db-spec
+                                             :context ::context
+                                             :parent-contexts ::contexts))
+(s/def ::remove-parent-contexts!-ret (s/keys :req-un [::success?]))
+(s/fdef remove-parent-contexts!
+  :args ::remove-parent-contexts!-args
+  :ret  ::remove-parent-contexts!-ret)
+
+(defn remove-parent-contexts!
+  [db-spec context parent-contexts]
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::context context)
+              (s/valid? ::contexts parent-contexts))]}
+  (if-not (seq parent-contexts)
+    {:success? true}
+    (let [child-ids (mapv :id parent-contexts)
+          where-cond [:and
+                      [:= :child-id (:id context)]
+                      (case (count parent-contexts)
+                        1 [:= :parent-id (-> parent-contexts first :id)]
+                        [:= :parent-id [:any [:array child-ids]]])]]
+      (remove-parent-child-context-rows! db-spec where-cond))))
+
+(s/def ::add-child-contexts!-args (s/cat :db-spec ::db-spec
+                                         :context ::context
+                                         :child-contexts ::contexts))
+(s/def ::add-child-contexts!-ret (s/keys :req-un [::success?]))
+(s/fdef add-child-contexts!
+  :args ::add-child-contexts!-args
+  :ret  ::add-child-contexts!-ret)
+
+(defn add-child-contexts!
+  "FIXME FIXME FIXME FIXME"
+  [db-spec context child-contexts]
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::context context)
+              (s/valid? ::contexts child-contexts))]}
+  (if-not (seq child-contexts)
+    {:success? true}
+    (let [child-ids (mapv :id child-contexts)
+          rows (mapv (fn [parent-id child-id]
+                       {:child-id child-id
+                        :parent-id parent-id})
+                     (repeat (:id context))
+                     child-ids)]
+      (add-parent-child-context-rows! db-spec rows))))
+
+(s/def ::remove-child-contexts!-args (s/cat :db-spec ::db-spec
+                                            :context ::context
+                                            :child-contexts ::contexts))
+(s/def ::remove-child-contexts!-ret (s/keys :req-un [::success?]))
+(s/fdef remove-child-contexts!
+  :args ::remove-child-contexts!-args
+  :ret  ::remove-child-contexts!-ret)
+
+(defn remove-child-contexts!
+  "FIXME FIXME FIXME FIXME"
+  [db-spec context child-contexts]
+  {:pre [(and (s/valid? ::db-spec db-spec)
+              (s/valid? ::context context)
+              (s/valid? ::contexts child-contexts))]}
+  (if-not (seq child-contexts)
+    {:success? true}
+    (let [child-ids (mapv :id child-contexts)
+          where-cond [:and
+                      [:= :parent-id (:id context)]
+                      (case (count child-contexts)
+                        1 [:= :child-id (-> child-contexts first :id)]
+                        [:= :child-id [:any [:array child-ids]]])]]
+      (remove-parent-child-context-rows! db-spec where-cond))))
 
 ;; -----------------------------------------------------------
 (defn- perm->db-perm
@@ -965,14 +1116,13 @@
 (defn- db-role-assignment->role-assignment
   [{:keys [role-id role-name role-description
            context-id context-resource-id context-type-name
-           context-parent assignment-user-id]}]
+           assignment-user-id]}]
   {:role {:id role-id
           :name (str->kw role-name)
           :description role-description}
    :context {:id context-id
              :resource-id context-resource-id
-             :context-type-name (str->kw context-type-name)
-             :parent-id context-parent}
+             :context-type-name (str->kw context-type-name)}
    :user {:id assignment-user-id}})
 
 (s/def ::role-assignment (s/keys :req-un [::role
@@ -1054,7 +1204,6 @@
                          [:context.id :context-id]
                          [:context.resource-id :context-resource-id]
                          [:context.context-type-name :context-type-name]
-                         [:context.parent :context-parent]
                          [:assignment.user-id :assignment-user-id]]
                 :from [[:rbac-role-assignment :assignment]]
                 :join [[:rbac-role :role] [:= :assignment.role-id :role.id]
@@ -1081,40 +1230,24 @@
 
 (defn has-permission?
   [db-spec user-id resource-id context-type-name permission-name]
-  (let [;; WITH RECURSE construct Inspired by familiy tree example at
-        ;; https://sqlite.org/lang_with.html
-        ancestors {:with-recursive
-                   [[[:parent-of {:columns [:id :resource-id :context-type-name :parent]}]
-                     {:select [:id :resource-id :context-type-name :parent]
-                      :from [:rbac-context]}]
-                    [[:ancestor-of-context {:columns [:id, :resource-id]}]
-                     {:union-all
-                      [{:select [:parent-of.parent
-                                 :parent-of.resource-id
-                                 :parent-of.context-type-name]
-                        :from [:parent-of]
-                        :where [:and
-                                [:= :resource-id resource-id]
-                                [:= :context-type-name (kw->str context-type-name)]]}
-                       {:select [:parent-of.parent
-                                 :parent-of.resource-id
-                                 :parent-of.context-type-name]
-                        :from [:parent-of]
-                        :join [:ancestor-of-context
-                               [:using :id]]}]}]]
-                   :select [:rbac-context.id]
-                   :from [:rbac-context :ancestor-of-context]
-                   :where [:= :ancestor-of-context.id :rbac-context.id]}
-        applicable-contexts {:select [:rc.id]
-                             :from [[:rbac-context :rc]]
-                             :where [:or
-                                     [:and
-                                      [:= :rc.resource-id resource-id]
-                                      [:= :rc.context-type-name (kw->str context-type-name)]]
-                                     [:= :rc.id [:any ancestors]]]}
-        query (hsql/format
-               {:with
-                [[:super-admin
+  (let [query (hsql/format
+               {:with-recursive
+                [[[:ancestor-of-context {:columns [:id]}]
+                  {:union
+                   [{:select [:id]
+                     :from [:rbac-context]
+                     :where [:and
+                             [:= :resource-id resource-id]
+                             [:= :context-type-name (kw->str context-type-name)]]}
+                    {:select [:rcp.parent-id]
+                     :from [[:ancestor-of-context :aoc]]
+                     :inner-join [[:rbac-context-parent :rcp] [:= :rcp.child-id :aoc.id]]}]}]
+                 [:applicable-contexts
+                  {:select [:id]
+                   :from [:rbac-context]
+                   :join [[:ancestor-of-context]
+                          [:using :id]]}]
+                 [:super-admin
                   {:select [[user-id :user-id]
                             [[:exists {:select [:user-id]
                                        :from   [:rbac-super-admin]
@@ -1132,13 +1265,12 @@
                    :where  [:and
                             [:= :rra.user-id user-id]
                             [:= :rp.name (kw->str permission-name)]
-                            [:= :rra.context-id [:any applicable-contexts]]]}]]
-                :select [[:sa.super-admin :super-admin]
-                         [:hp.has-permission :has-permission]]
+                            [:= :rra.context-id [:any {:select [:id]
+                                                       :from [:applicable-contexts]}]]]}]]
+                :select [[[:or :sa.super-admin :hp.has-permission] :has-permission]]
                 :from   [[:super-admin :sa]]
                 :join   [[:has-permission :hp] [:= :hp.user-id :sa.user-id]]})
         return-values (jdbc.sql/query db-spec query jdbc/unqualified-snake-kebab-opts)]
     (if (empty? return-values)
       false
-      (let [{:keys [super-admin has-permission]} (first return-values)]
-        (or super-admin has-permission)))))
+      (-> (first return-values) :has-permission))))

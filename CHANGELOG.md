@@ -11,6 +11,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Catch SQL exceptions due to constraint violations locally, instead
   of letting them bubble up to the application.
 - **[BREAKING CHANGE]** Use namespaced keywords to grant and deny permissions.
+- **[BREAKING CHANGE]** The context hierarchy model has
+  changed. Previously it was implemented as a regular tree, and a given
+  context could only have a single parent context (ancestor), and there
+  was a *single* root context (represented by a context whose parent
+  context was `nil`). Now the implementation is a full Directed Acyclic
+  Graph (DAG), where each context can have zero or more parent
+  contents. This means that we can also have multiple independent root
+  contexts (contexts that don't have *any* ancestors).
+
+  As a consequence, the underlying database model has changed. A new
+  table is used (`rbac_context_parent`), and the parent-child
+  relationship information needs to be moved from the `rbac_context`
+  table to the new `rbac_context_parent` table. Something like the
+  following SQL queries should be enough:
+
+  ```
+  BEGIN;
+  -- ;;
+  CREATE TABLE IF NOT EXISTS rbac_context_parent
+    (child_id UUID NOT NULL,
+     parent_id UUID NOT NULL,
+     PRIMARY KEY (child_id, parent_id),
+     CONSTRAINT rbac_context_parent_child_id_fk FOREIGN KEY(child_id) REFERENCES rbac_context(id),
+     CONSTRAINT rbac_context_parent_parent_id_fk FOREIGN KEY(parent_id) REFERENCES rbac_context(id));
+  -- ;;
+  INSERT INTO rbac_context_parent (child_id, parent_id)
+    (SELECT
+         id AS child_id,
+         parent AS parent_id
+     FROM
+         rbac_context
+     WHERE parent IS NOT NULL);
+  -- ;;
+  ALTER TABLE rbac_context DROP COLUMN parent;
+  -- ;;
+  COMMIT;
+  ```
 
 ## [0.1.0-alpha-2] - 2023.04.24
 
