@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-alpha-3] - 2024.09.11
+
 ### Changed
 - Updated dependencies to latest stable versions.
 - Catch SQL exceptions due to constraint violations locally, instead
@@ -59,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First public release. This is alpha quality software.
 
-[Unreleased]: https://github.com/gethop-dev/rbac.next/compare/v0.1.0.alpha-1...main
+[Unreleased]: https://github.com/gethop-dev/rbac.next/compare/v0.1.0.alpha-3...main
+[0.1.0-alpha-3]: https://github.com/gethop-dev/rbac.next/compare/v0.1.0-alpha-2...v0.1.0-alpha-3
 [0.1.0-alpha-2]: https://github.com/gethop-dev/rbac.next/compare/v0.1.0-alpha-1...v0.1.0-alpha-2
 [0.1.0-alpha-1]: https://github.com/gethop-dev/rbac.next/releases/tag/v0.1.0.alpha-1
