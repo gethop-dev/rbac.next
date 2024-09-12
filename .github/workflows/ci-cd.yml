@@ -40,7 +40,7 @@ jobs:
       - name: Install Clojure Tools
         uses: DeLaGuardo/setup-clojure@12.5
         with:
-          lein: 2.12.2
+          lein: 2.11.2
           clj-kondo: 2024.08.29
 
       - name: Create rbac DB
