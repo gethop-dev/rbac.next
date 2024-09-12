@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated leiningen and clj-kondo to latest stable versions.
+
 ## [0.1.0-alpha-3] - 2024.09.11
 
 ### Changed

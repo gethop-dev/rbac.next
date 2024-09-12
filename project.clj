@@ -3,7 +3,7 @@
   :url "https://github.com/gethop-dev/rbac"
   :license {:name "Mozilla Public Licence 2.0"
             :url "https://www.mozilla.org/en-US/MPL/2.0/"}
-  :min-lein-version "2.9.8"
+  :min-lein-version "2.12.2"
   :dependencies [[org.clojure/clojure "1.11.4"]
                  [com.github.seancorfield/next.jdbc "1.3.939"]
                  [com.github.seancorfield/honeysql "2.6.1161"]]
