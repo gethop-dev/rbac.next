@@ -1,50 +1,58 @@
+BEGIN;
+--;;
 CREATE TABLE IF NOT EXISTS rbac_context_type (
     name VARCHAR(127) PRIMARY KEY,
     description TEXT);
--- ;;
+--;;
 CREATE TABLE IF NOT EXISTS rbac_context (
     id uuid PRIMARY KEY,
     context_type_name VARCHAR(127),
     resource_id UUID NOT NULL,
     CONSTRAINT rbac_context_context_type_name_fk FOREIGN KEY(context_type_name) REFERENCES rbac_context_type(name) ON UPDATE CASCADE,
     CONSTRAINT rbac_context_type_name_resource_id_uniq UNIQUE(context_type_name, resource_id));
--- ;;
+--;;
 CREATE INDEX IF NOT EXISTS rbac_context_resource_id_idx ON rbac_context(resource_id);
--- ;;
+--;;
 CREATE TABLE IF NOT EXISTS rbac_context_parent (
     child_id UUID NOT NULL,
     parent_id UUID NOT NULL,
     PRIMARY KEY (child_id, parent_id),
-    CONSTRAINT rbac_context_parent_child_id_fk FOREIGN KEY(child_id) REFERENCES rbac_context(id),
-    CONSTRAINT rbac_context_parent_parent_id_fk FOREIGN KEY(parent_id) REFERENCES rbac_context(id));
--- ;;
+    CONSTRAINT rbac_context_parent_child_id_fk FOREIGN KEY(child_id) REFERENCES rbac_context(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT rbac_context_parent_parent_id_fk FOREIGN KEY(parent_id) REFERENCES rbac_context(id) ON UPDATE CASCADE ON DELETE CASCADE);
+--;;
 CREATE TABLE IF NOT EXISTS rbac_role (
     id uuid PRIMARY KEY,
     name VARCHAR(127) NOT NULL,
     description TEXT,
-    UNIQUE (name));
--- ;;
+    CONSTRAINT rbac_role_name_uniq UNIQUE(name));
+--;;
 CREATE TABLE IF NOT EXISTS rbac_role_assignment (
-    role_id uuid NOT NULL REFERENCES rbac_role(id) ON UPDATE CASCADE,
-    context_id uuid NOT NULL REFERENCES rbac_context(id) ON UPDATE CASCADE,
+    role_id uuid NOT NULL,
+    context_id uuid NOT NULL,
     user_id uuid NOT NULL,
-    PRIMARY KEY (role_id, context_id, user_id));
--- ;;
+    PRIMARY KEY (role_id, context_id, user_id),
+    CONSTRAINT rbac_role_assignment_role_id_fk FOREIGN KEY(role_id) REFERENCES rbac_role(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT rbac_role_assignment_context_id_fk FOREIGN KEY(context_id) REFERENCES rbac_context(id) ON UPDATE CASCADE ON DELETE CASCADE);
+--;;
 CREATE INDEX IF NOT EXISTS rbac_role_assignment_context_id_idx ON rbac_role_assignment(context_id);
--- ;;
+--;;
 CREATE TABLE IF NOT EXISTS rbac_super_admin (
     user_id uuid PRIMARY KEY);
--- ;;
+--;;
 CREATE TABLE IF NOT EXISTS rbac_permission (
     id uuid PRIMARY KEY,
     name VARCHAR(127) NOT NULL,
     description TEXT,
-    context_type_name VARCHAR(127) NOT NULL REFERENCES rbac_context_type(name) ON UPDATE CASCADE,
-    UNIQUE (name));
--- ;;
+    context_type_name VARCHAR(127) NOT NULL,
+    CONSTRAINT rbac_permission_name_uniq UNIQUE(name),
+    CONSTRAINT rbac_permission_context_type_name_fk FOREIGN KEY (context_type_name) REFERENCES rbac_context_type(name) ON UPDATE CASCADE);
+--;;
 CREATE TABLE IF NOT EXISTS rbac_role_permission (
-    role_id uuid NOT NULL REFERENCES rbac_role(id) ON UPDATE CASCADE,
-    permission_id uuid NOT NULL REFERENCES rbac_permission(id) ON UPDATE CASCADE,
+    role_id uuid NOT NULL,
+    permission_id uuid NOT NULL,
     permission_value SMALLINT NOT NULL,
-    PRIMARY KEY (role_id, permission_id));
--- ;;
+    PRIMARY KEY (role_id, permission_id),
+    CONSTRAINT rbac_role_permission_permission_id_fk FOREIGN KEY (permission_id) REFERENCES rbac_permission(id) ON UPDATE CASCADE,
+    CONSTRAINT rbac_role_permission_role_id_fk FOREIGN KEY (role_id) REFERENCES rbac_role(id) ON UPDATE CASCADE ON DELETE CASCADE);
+--;;
+COMMIT;

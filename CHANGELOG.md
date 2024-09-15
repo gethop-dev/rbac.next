@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated leiningen and clj-kondo to latest stable versions.
+- Updated suggested Postgresql table definitions to include ON CASCADE DELETE for the cases where it makes sense.
 
 ## [0.1.0-alpha-3] - 2024.09.11
 
