@@ -18,7 +18,43 @@ CREATE TABLE IF NOT EXISTS rbac_context_parent (
     parent_id UUID NOT NULL,
     PRIMARY KEY (child_id, parent_id),
     CONSTRAINT rbac_context_parent_child_id_fk FOREIGN KEY(child_id) REFERENCES rbac_context(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT rbac_context_parent_parent_id_fk FOREIGN KEY(parent_id) REFERENCES rbac_context(id) ON UPDATE CASCADE ON DELETE CASCADE);
+    CONSTRAINT rbac_context_parent_parent_id_fk FOREIGN KEY(parent_id) REFERENCES rbac_context(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT rbac_context_parent_no_parent_of_self CHECK (child_id <> parent_id));
+--;;
+CREATE OR REPLACE FUNCTION rbac_context_parent_detect_cycle()
+    RETURNS TRIGGER
+    LANGUAGE plpgsql AS
+$func$
+DECLARE
+    cycle_path RECORD;
+BEGIN
+    -- Because this function is used in a TRIGGER, it has access to a
+    -- special table called `NEW`, which holds the new row to be
+    -- inserted or updated when the trigger is execute.
+    WITH RECURSIVE list_parents(child_id) AS
+                   (
+                    SELECT rcp.child_id
+                    FROM rbac_context_parent AS rcp
+                    WHERE rcp.parent_id = NEW.child_id
+                    UNION ALL
+                    SELECT rcp.child_id
+                    FROM rbac_context_parent AS rcp, list_parents as lp
+                    WHERE rcp.parent_id = lp.child_id
+                   ) CYCLE child_id SET is_cycle USING path
+    SELECT child_id, path INTO cycle_path
+    FROM list_parents WHERE list_parents.child_id = NEW.parent_id LIMIT 1;
+  IF cycle_path IS NOT NULL
+  THEN
+    RAISE EXCEPTION 'Cycle detected (%)', cycle_path;
+  ELSE
+    RETURN NEW;
+  END IF;
+END
+$func$;
+--;;
+CREATE OR REPLACE TRIGGER rbac_context_parent_prevent_cycle
+    BEFORE INSERT OR UPDATE ON rbac_context_parent
+    FOR EACH ROW EXECUTE FUNCTION rbac_context_parent_detect_cycle();
 --;;
 CREATE TABLE IF NOT EXISTS rbac_role (
     id uuid PRIMARY KEY,

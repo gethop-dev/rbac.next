@@ -301,7 +301,13 @@
     (testing "organization-2-ctx has its parents successfully added"
       (is (:success? add-parents-success?)))
     (testing "organization-2-ctx has its parents successfully removed"
-      (is (rbac/remove-parent-contexts! db organization-2-ctx [application-ctx])))))
+      (is (rbac/remove-parent-contexts! db organization-2-ctx [application-ctx])))
+    (testing "A child context cannot be its own parent"
+      (let [{:keys [success?]} (rbac/add-parent-contexts! db application-ctx [application-ctx])]
+        (is (not success?))))
+    (testing "Cycles in child-parent relationships are not allowed"
+      (let [{:keys [success?]} (rbac/add-parent-contexts! db application-ctx [organization-1-ctx])]
+        (is (not success?))))))
 
 (deftest create-role!
   (let [role-to-create (first test-roles)]
