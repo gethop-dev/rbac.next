@@ -6,10 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-alpha-4] - 2024.09.16
+
 ### Changed
 
 - Updated leiningen and clj-kondo to latest stable versions.
 - Updated suggested Postgresql table definitions to include ON CASCADE DELETE for the cases where it makes sense.
+- Add constraints to the recommended Postgresql tables definitions, to prevent cycles in the context child-parent relationship. Otherwise, when checking permissions, we can get infinite loops.
 
 ## [0.1.0-alpha-3] - 2024.09.11
 
