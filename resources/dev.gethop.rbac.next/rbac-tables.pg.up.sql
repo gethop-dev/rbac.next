@@ -30,7 +30,7 @@ DECLARE
 BEGIN
     -- Because this function is used in a TRIGGER, it has access to a
     -- special table called `NEW`, which holds the new row to be
-    -- inserted or updated when the trigger is execute.
+    -- inserted or updated when the trigger is executed.
     WITH RECURSIVE list_parents(child_id) AS
                    (
                     SELECT rcp.child_id
