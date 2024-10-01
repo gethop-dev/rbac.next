@@ -59,7 +59,7 @@
   (-> db-role
       (update-if-exists :name str->kw)))
 
-(s/def ::db-spec ::jdbc.specs/db-spec)
+(s/def ::db-spec ::jdbc.specs/proto-connectable)
 (s/def ::id uuid?)
 (s/def ::string-id (s/and string? (complement str/blank?)))
 (s/def ::ids (s/coll-of ::id))

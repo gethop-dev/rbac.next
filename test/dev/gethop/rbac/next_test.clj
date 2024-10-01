@@ -1,5 +1,6 @@
 (ns dev.gethop.rbac.next-test
   (:require [clojure.java.io :as io]
+            [clojure.spec.alpha :as s]
             [clojure.spec.test.alpha :as stest]
             [clojure.test :refer :all]
             [dev.gethop.rbac.next :as rbac]
@@ -146,6 +147,26 @@
           (f)
           (destroy-rbac-tables)
           (destroy-app-objects)))
+
+(deftest connectable-spec
+  (let [db-spec db
+        logger-fn (fn [_operation _statement])
+        options {:read-only true}]
+    (is (s/valid? ::rbac/db-spec db-spec))
+    (is (s/valid? ::rbac/db-spec (-> db-spec (jdbc/with-logging logger-fn))))
+    (is (s/valid? ::rbac/db-spec (-> db-spec (jdbc/with-options options))))
+    (is (s/valid? ::rbac/db-spec (-> db-spec
+                                     (jdbc/with-logging logger-fn)
+                                     (jdbc/with-options options))))
+    (is (s/valid? ::rbac/db-spec (-> db-spec
+                                     (jdbc/with-options options)
+                                     (jdbc/with-logging logger-fn))))
+    (jdbc/with-transaction [tx db-spec]
+      (is (s/valid? ::rbac/db-spec tx)))
+    (jdbc/with-transaction+options [tx db-spec options]
+      (is (s/valid? ::rbac/db-spec tx)))
+    (jdbc/with-transaction+options [tx (-> db-spec (jdbc/with-options options))]
+      (is (s/valid? ::rbac/db-spec tx)))))
 
 (deftest test-1
   (let [_ (rbac/create-context-types! db (vals context-types))
