@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-alpha-5] - 2024.10.01
+
 ### Fixed
 - The `db-spec` spec only accepted a subset of the valid "connectable" things that next.jdbc accepts. As we started adding pre-conditionchecks for the validity of the db-spec arguments to several functions, this resulted in assertions being thrown when using other kinds of "connectables".
 
