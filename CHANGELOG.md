@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Pre-populate clj-kondo imports, to avoid false positives
+
 ## [0.1.0-alpha-5] - 2024.10.01
 
 ### Fixed
