@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS rbac_context (
     context_type_name VARCHAR(127),
     resource_id UUID NOT NULL,
     CONSTRAINT rbac_context_context_type_name_fk FOREIGN KEY(context_type_name) REFERENCES rbac_context_type(name) ON UPDATE CASCADE,
-    CONSTRAINT rbac_context_type_name_resource_id_uniq UNIQUE(context_type_name, resource_id));
+    CONSTRAINT rbac_context_context_type_name_resource_id_uniq UNIQUE(context_type_name, resource_id));
 --;;
 CREATE INDEX IF NOT EXISTS rbac_context_resource_id_idx ON rbac_context(resource_id);
 --;;
