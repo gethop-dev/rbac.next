@@ -542,6 +542,32 @@
   (let [return (get-* db-spec :rbac_context :contexts)]
     (update return :contexts #(mapv db-context->context %))))
 
+(s/def ::context-selector (s/keys :req-un [::context-type-name
+                                           ::resource-id]))
+(s/def ::context-selectors (s/coll-of ::context-selector))
+(s/def ::get-contexts-by-selectors-args (s/cat :db-spec ::db-spec :context-selectors ::context-selectors))
+(s/def ::get-contexts-by-selectors-ret (s/keys :req-un [::success?
+                                                        ::contexts]))
+(s/fdef get-contexts-by-selectors
+  :args ::get-contexts-by-selectors-args
+  :ret  ::get-contexts-by-selectors-ret)
+
+(defn get-contexts-by-selectors
+  [db-spec context-selectors]
+  {:pre [(s/valid? ::db-spec db-spec)
+         (s/valid? ::context-selectors context-selectors)]}
+  (let [{:keys [success? values]}
+        (get-*-where-y db-spec :rbac-context
+                       (reduce
+                        (fn [condition {:keys [context-type-name resource-id]}]
+                          (conj condition [:and
+                                           [:= :context-type-name (kw->str context-type-name)]
+                                           [:= :resource-id resource-id]]))
+                        [:or]
+                        context-selectors))]
+    {:success? success?
+     :contexts (map db-context->context values)}))
+
 (s/def ::get-context-args (s/cat :db-spec ::db-spec
                                  :context-type-name ::context-type-name
                                  :resource-id ::resource-id))
