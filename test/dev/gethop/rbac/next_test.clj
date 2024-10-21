@@ -358,6 +358,15 @@
       (is success?)
       (is (= created-roles roles)))))
 
+(deftest get-roles-by-names
+  (testing "get-roles-by-names succeeds"
+    (let [created-roles (map :role (rbac/create-roles! db test-roles))
+          test-roles (take 2 created-roles)
+          {:keys [success? roles]} (rbac/get-roles-by-names
+                                    db (map :name test-roles))]
+      (is success?)
+      (is (= test-roles roles)))))
+
 (deftest get-rol-by-*
   (let [created-roles (map :role (rbac/create-roles! db test-roles))]
     (testing "get-role-by-id succeeds"

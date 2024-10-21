@@ -146,6 +146,13 @@
     {:success? success?
      :role (db-role->role (first values))}))
 
+(defn- get-roles-by-*
+  [db-spec column value]
+  (let [{:keys [success? values]} (get-*-where-y db-spec :rbac-role
+                                                 [:= column [:any [:array value]]])]
+    {:success? success?
+     :roles (map db-role->role values)}))
+
 (s/def ::get-role-by-id-args (s/cat :db-spec ::db-spec
                                     :role-id ::id))
 (s/def ::get-role-by-id-ret (s/keys :req-un [::success?]
@@ -179,6 +186,23 @@
   {:pre [(and (s/valid? ::db-spec db-spec)
               (s/valid? ::name name))]}
   (get-role-by-* db-spec :name (kw->str name)))
+
+(s/def ::get-roles-by-names-args (s/cat :db-spec ::db-spec
+                                        :names ::names))
+(s/def ::get-roles-by-names-ret (s/keys :req-un [::success?]
+                                        :opt-un [::roles]))
+(s/fdef get-roles-by-names
+  :args ::get-roles-by-names-args
+  :ret  ::get-roles-by-names-ret)
+
+(defn get-roles-by-names
+  "Get the roles whose name is in `names`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.  "
+  [db-spec names]
+  {:pre [(s/valid? ::db-spec db-spec)
+         (s/valid? ::names names)]}
+  (get-roles-by-* db-spec :name (map kw->str names)))
 
 (s/def ::update-role!-args (s/cat :db-spec ::db-spec
                                   :role ::role))

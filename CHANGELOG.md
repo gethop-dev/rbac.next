@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `get-roles-by-names` to get a subset of the existing roles.
+
 ## [0.1.0-alpha-7] - 2024.10.18
 
 ### Added
