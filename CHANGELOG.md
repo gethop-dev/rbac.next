@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Split pre-conditions into individual predicates, to get details about the failing predicate.
+
 ## [0.1.0-alpha-8] - 2024.10.24
 
 ### Added
