@@ -1,11 +1,39 @@
 (ns dev.gethop.rbac.next
   (:require [clj-uuid :as clj-uuid]
             [clojure.spec.alpha :as s]
+            [clojure.spec.test.alpha :as st]
             [clojure.string :as str]
             [honey.sql :as hsql]
             [next.jdbc :as jdbc]
             [next.jdbc.specs :as jdbc.specs]
             [next.jdbc.sql :as jdbc.sql]))
+
+(declare instrument
+         unstrument
+         has-permission?)
+
+(def fns-to-instrument
+  "Functions in the namespace to instrument/unstrument."
+  (-> (st/enumerate-namespace (ns-name *ns*))
+      (disj (symbol #'has-permission?)
+            (symbol #'instrument)
+            (symbol #'unstrument))))
+
+(defn instrument
+  "Instrument functions in the namespace.
+
+  This is a simple way to instrument the functions with specs in the
+  namespace, so that their arguments are validated against their
+  specs. `has-permission?` is excluded from the instrumentation, for
+  performance purposes. That is the function that will more frequently
+  used, and often in the performance critical paths."
+  []
+  (st/instrument fns-to-instrument))
+
+(defn unstrument
+  "Undo the work done by `instrument`."
+  []
+  (st/unstrument fns-to-instrument))
 
 (defn- kw->str
   [k]
@@ -91,8 +119,6 @@
      {:name        :asset-manager
       :description \"Role used to manage the assets in the application\"}"
   [db-spec role]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::role role)]}
   (try
     (let [role-id (clj-uuid/v7)
           db-role (-> role
@@ -119,8 +145,6 @@
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
   `roles` is collection of `role`, as specified in `create-role!`"
   [db-spec roles]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::roles roles)]}
   (mapv #(create-role! db-spec %) roles))
 
 (s/def ::get-roles-args (s/cat :db-spec ::db-spec))
@@ -135,7 +159,6 @@
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.  "
   [db-spec]
-  {:pre [(s/valid? ::db-spec db-spec)]}
   (let [return (get-* db-spec :rbac_role :roles)]
     (update return :roles #(mapv db-role->role %))))
 
@@ -166,8 +189,6 @@
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec role-id]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::id role-id)]}
   (get-role-by-* db-spec :id role-id))
 
 (s/def ::get-role-by-name-args (s/cat :db-spec ::db-spec
@@ -183,8 +204,6 @@
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.  "
   [db-spec name]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::name name)]}
   (get-role-by-* db-spec :name (kw->str name)))
 
 (s/def ::get-roles-by-names-args (s/cat :db-spec ::db-spec
@@ -200,8 +219,6 @@
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.  "
   [db-spec names]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::names names)]}
   (get-roles-by-* db-spec :name (map kw->str names)))
 
 (s/def ::update-role!-args (s/cat :db-spec ::db-spec
@@ -219,8 +236,6 @@
   `role` is a map, as specified in `create-role!`. Except
   in this case, the role `id` is mandatory."
   [db-spec role]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::role role)]}
   (try
     (let [result (jdbc.sql/update! db-spec
                                    :rbac-role
@@ -248,8 +263,6 @@
   `roles` is collection of `role`, as specified in
   `create-role!`. Except in this case, the role `id` is mandatory."
   [db-spec roles]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::roles roles)]}
   (mapv #(update-role! db-spec %) roles))
 
 (s/def ::delete-role!-args (s/cat :db-spec ::db-spec
@@ -266,9 +279,6 @@
   `role` is a map, as specified in `create-role!`. Except
   in this case, the role `id` is mandatory."
   [db-spec role]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::role role)
-         (s/valid? ::id (:id role))]}
   (delete-where-x! db-spec :rbac-role [:= :id (:id role)]))
 
 (s/def ::delete-role-by-id!-args (s/cat :db-spec ::db-spec
@@ -283,8 +293,6 @@
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec role-id]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::id role-id)]}
   (delete-where-x! db-spec :rbac-role [:= :id role-id]))
 
 (s/def ::delete-role-by-name!-args (s/cat :db-spec ::db-spec
@@ -299,8 +307,6 @@
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec name]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::name name)]}
   (delete-where-x! db-spec :rbac-role [:= :name (kw->str name)]))
 
 (s/def ::delete-roles!-args (s/cat :db-spec ::db-spec
@@ -317,8 +323,6 @@
   `roles` is a collection of maps, as specified in
   `create-role!`. Except in this case, the role `id` is mandatory."
   [db-spec roles]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::roles roles)]}
   (mapv #(delete-role-by-name! db-spec (:id %)) roles))
 
 (s/def ::delete-roles-by-ids!-args (s/cat :db-spec ::db-spec
@@ -578,8 +582,6 @@
 
 (defn get-contexts-by-selectors
   [db-spec context-selectors]
-  {:pre [(s/valid? ::db-spec db-spec)
-         (s/valid? ::context-selectors context-selectors)]}
   (let [{:keys [success? values]}
         (get-*-where-y db-spec :rbac-context
                        (reduce
@@ -706,9 +708,6 @@
 
 (defn add-parent-contexts!
   [db-spec context parent-contexts]
-  {:pre [(and (s/valid? ::db-spec db-spec)
-              (s/valid? ::context context)
-              (s/valid? ::contexts parent-contexts))]}
   (if-not (seq parent-contexts)
     {:success? true}
     (let [parent-ids (mapv :id parent-contexts)
@@ -729,9 +728,6 @@
 
 (defn remove-parent-contexts!
   [db-spec context parent-contexts]
-  {:pre [(and (s/valid? ::db-spec db-spec)
-              (s/valid? ::context context)
-              (s/valid? ::contexts parent-contexts))]}
   (if-not (seq parent-contexts)
     {:success? true}
     (let [child-ids (mapv :id parent-contexts)
@@ -753,9 +749,6 @@
 (defn add-child-contexts!
   "FIXME FIXME FIXME FIXME"
   [db-spec context child-contexts]
-  {:pre [(and (s/valid? ::db-spec db-spec)
-              (s/valid? ::context context)
-              (s/valid? ::contexts child-contexts))]}
   (if-not (seq child-contexts)
     {:success? true}
     (let [child-ids (mapv :id child-contexts)
@@ -777,9 +770,6 @@
 (defn remove-child-contexts!
   "FIXME FIXME FIXME FIXME"
   [db-spec context child-contexts]
-  {:pre [(and (s/valid? ::db-spec db-spec)
-              (s/valid? ::context context)
-              (s/valid? ::contexts child-contexts))]}
   (if-not (seq child-contexts)
     {:success? true}
     (let [child-ids (mapv :id child-contexts)
@@ -1044,9 +1034,6 @@
 
 (defn- set-perm-with-value!
   [db-spec role permission permission-value]
-  {:pre [(s/valid? ::role role)
-         (s/valid? ::permission permission)
-         (s/valid? ::permission-value permission-value)]}
   (let [perm-val (case permission-value
                    ::permission-granted 1
                    ::permission-denied -1)

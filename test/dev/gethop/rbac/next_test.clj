@@ -390,6 +390,8 @@
         (is success?)
         (is (= role-to-update role))))
     (testing "update-role! fails without role :id"
+      (is (thrown? clojure.lang.ExceptionInfo (rbac/update-role! db (dissoc role-to-update :id))))
+      (stest/unstrument ['dev.gethop.rbac.next/update-role!])
       (let [{:keys [success?]} (rbac/update-role! db (dissoc role-to-update :id))]
         (is (not success?))))))
 
@@ -407,8 +409,12 @@
         (is (every? :success? result))
         (mapv #(is (= %1 %2)) roles-to-update (map :role result))))
     (testing "update-roles! fails without role :id"
-      (let [{:keys [success?]} (rbac/update-roles! db (map #(dissoc % :id) roles-to-update))]
-        (is (not success?))))))
+      (let [roles-without-id (map #(dissoc % :id) roles-to-update)]
+        (is (thrown? clojure.lang.ExceptionInfo (rbac/update-roles! db roles-without-id)))
+        (stest/unstrument ['dev.gethop.rbac.next/update-role!
+                           'dev.gethop.rbac.next/update-roles!])
+        (let [{:keys [success?]} (rbac/update-roles! db roles-without-id)]
+          (is (not success?)))))))
 
 (deftest delete-role!
   (let [created-role (first (map :role (rbac/create-roles! db test-roles)))]
@@ -416,7 +422,7 @@
       (let [result (rbac/delete-role! db created-role)]
         (is (:success? result))))
     (testing "delete-role! fails without role :id"
-      (is (thrown? AssertionError (rbac/delete-role! db (dissoc created-role :id)))))))
+      (is (thrown? clojure.lang.ExceptionInfo (rbac/delete-role! db (dissoc created-role :id)))))))
 
 (deftest delete-role-by*!
   (let [created-roles (take 2 (map :role (rbac/create-roles! db test-roles)))]
