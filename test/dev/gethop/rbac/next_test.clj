@@ -45,7 +45,7 @@
              :name "Asset 2"
              :description "Asset 2 description"}})
 
-(defonce ^{:private true, :const true} context-types
+(defonce ^{:private true, :const true} test-context-types
   {:application {:name :application
                  :description "Application context"}
    :organization {:name :organization
@@ -56,32 +56,41 @@
            :description "Assets context"}})
 
 (defonce ^{:private true, :const true} application-context
-  {:context-type-name (get-in context-types [:application :name])
+  {:context-type-name (get-in test-context-types [:application :name])
    :resource-id (get-in app-resources [:application :id])})
 
 (defonce ^{:private true, :const true} organization-1-context
-  {:context-type-name (get-in context-types [:organization :name])
+  {:context-type-name (get-in test-context-types [:organization :name])
    :resource-id (get-in app-resources [:organization-1 :id])})
 
 (defonce ^{:private true, :const true} plant-1-context
-  {:context-type-name (get-in context-types [:plant :name])
+  {:context-type-name (get-in test-context-types [:plant :name])
    :resource-id (get-in app-resources [:plant-1 :id])})
 
 (defonce ^{:private true, :const true} asset-1-context
-  {:context-type-name (get-in context-types [:asset :name])
+  {:context-type-name (get-in test-context-types [:asset :name])
    :resource-id (get-in app-resources [:asset-1 :id])})
 
 (defonce ^{:private true, :const true} organization-2-context
-  {:context-type-name (get-in context-types [:organization :name])
+  {:context-type-name (get-in test-context-types [:organization :name])
    :resource-id (get-in app-resources [:organization-2 :id])})
 
 (defonce ^{:private true, :const true} plant-2-context
-  {:context-type-name (get-in context-types [:plant :name])
+  {:context-type-name (get-in test-context-types [:plant :name])
    :resource-id (get-in app-resources [:plant-2 :id])})
 
 (defonce ^{:private true, :const true} asset-2-context
-  {:context-type-name (get-in context-types [:asset :name])
+  {:context-type-name (get-in test-context-types [:asset :name])
    :resource-id (get-in app-resources [:asset-2 :id])})
+
+(defonce ^{:private true, :const true} test-contexts
+  [application-context
+   organization-1-context
+   plant-1-context
+   asset-1-context
+   organization-2-context
+   plant-2-context
+   asset-2-context])
 
 (defonce ^{:private true, :const true} test-roles
   [{:name :application/manager
@@ -169,7 +178,7 @@
       (is (s/valid? ::rbac/db-spec tx)))))
 
 (deftest test-1
-  (let [_ (rbac/create-context-types! db (vals context-types))
+  (let [_ (rbac/create-context-types! db (vals test-context-types))
         application-ctx (:context (rbac/create-context! db application-context []))
         organization-1-ctx (:context (rbac/create-context! db organization-1-context [application-ctx]))
         organization-2-ctx (:context (rbac/create-context! db organization-2-context []))
@@ -425,13 +434,111 @@
       (is (thrown? clojure.lang.ExceptionInfo (rbac/delete-role! db (dissoc created-role :id)))))))
 
 (deftest delete-role-by*!
-  (let [created-roles (take 2 (map :role (rbac/create-roles! db test-roles)))]
+  (let [created-roles (map :role (rbac/create-roles! db test-roles))]
     (testing "delete-role-by-id! succeeds"
       (let [result (rbac/delete-role-by-id! db (-> created-roles first :id))]
         (is (:success? result))))
     (testing "delete-role-by-name! succeeds"
       (let [result (rbac/delete-role-by-name! db (-> created-roles second :name))]
-        (is (:success? result))))))
+        (is (:success? result))))
+    (testing "delete-role-by-ids! succeeds"
+      (let [result (rbac/delete-roles-by-ids! db (vector (-> created-roles (nth 2) :id)))]
+        (is (every? :success? result))))
+    (testing "delete-roles-by-names! succeeds"
+      (let [result (rbac/delete-roles-by-names! db (vector (-> created-roles (nth 3) :name)))]
+        (is (every? :success? result))))))
+
+(deftest create-context-type!
+  (let [context-type-to-create (first (vals test-context-types))]
+    (testing "create-context-type! succeeds"
+      (let [{:keys [success? context-type]} (rbac/create-context-type! db context-type-to-create)]
+        (is success?)
+        (is (= context-type context-type-to-create))))))
+
+(deftest create-context-types!
+  (testing "create-context-types! succeeds"
+    (let [context-types-to-create (vals test-context-types)
+          result (rbac/create-context-types! db context-types-to-create)]
+      (is (every? identity (map (fn [context-type-to-create {:keys [success? context-type]}]
+                                  (and success?
+                                       (= context-type context-type-to-create)))
+                                context-types-to-create
+                                result))))))
+
+(deftest get-context-types
+  (testing "get-context-types succeeds"
+    (let [created-context-types (vals test-context-types)
+          _ (rbac/create-context-types! db created-context-types)
+          {:keys [success? context-types]} (rbac/get-context-types db)]
+      (is success?)
+      (is (= created-context-types context-types)))))
+
+(deftest get-context-type
+  (testing "get-context-type succeeds"
+    (let [created-context-types (vals test-context-types)
+          _ (rbac/create-context-types! db created-context-types)
+          {:keys [success? context-type]} (rbac/get-context-type db (-> created-context-types first :name))]
+      (is success?)
+      (is (= (first created-context-types) context-type)))))
+
+(deftest update-context-type!
+  (let [context-types-to-create (vals test-context-types)
+        created-context-types (map :context-type (rbac/create-context-types! db context-types-to-create))
+        context-type-to-update (-> created-context-types first (assoc :description "Updated description"))]
+    (testing "update-context-type! succeeds"
+      (let [{:keys [success? context-type]} (rbac/update-context-type! db context-type-to-update)]
+        (is success?)
+        (is (= context-type-to-update context-type))))
+    (testing "update-context-type! fails without context-type :name"
+      (is (thrown? clojure.lang.ExceptionInfo (rbac/update-context-type! db (dissoc context-type-to-update :name))))
+      (stest/unstrument ['dev.gethop.rbac.next/update-context-type!])
+      (let [{:keys [success?]} (rbac/update-context-type! db (dissoc context-type-to-update :name))]
+        (is (not success?))))))
+
+(deftest update-context-types!
+  (let [context-types-to-create (vals test-context-types)
+        created-context-types (map :context-type (rbac/create-context-types! db context-types-to-create))
+        context-types-to-update (map (fn [context-type]
+                                       (update context-type :description
+                                               (fn [desc]
+                                                 (str "updated-" desc))))
+                                     created-context-types)]
+    (testing "update-context-types! succeeds"
+      (let [result (rbac/update-context-types! db context-types-to-update)]
+        (is (every? :success? result))
+        #_(mapv #(is (= %1 %2)) context-types-to-update (map :context-type result))))
+    (testing "update-context-types! fails without context-type :name"
+      (let [context-types-without-id (map #(dissoc % :name) context-types-to-update)]
+        (is (thrown? clojure.lang.ExceptionInfo (rbac/update-context-types! db context-types-without-id)))
+        (stest/unstrument ['dev.gethop.rbac.next/update-context-type!
+                           'dev.gethop.rbac.next/update-context-types!])
+        (let [{:keys [success?]} (rbac/update-context-types! db context-types-without-id)]
+          (is (not success?)))))))
+
+(deftest delete-context-type!
+  (let [context-types-to-create (vals test-context-types)
+        created-context-type (first (map :context-type (rbac/create-context-types! db context-types-to-create)))]
+    (testing "delete-context-type! succeeds"
+      (let [result (rbac/delete-context-type! db created-context-type)]
+        (is (:success? result))))
+    (testing "delete-context-type! fails without context-type :name"
+      (is (thrown? clojure.lang.ExceptionInfo (rbac/delete-context-type! db (dissoc created-context-type :name)))))))
+
+(deftest delete-context-types!
+  (let [context-types-to-create (vals test-context-types)
+        created-context-types (map :context-type (rbac/create-context-types! db context-types-to-create))]
+    (testing "delete-context-types! succeeds"
+      (let [result (rbac/delete-context-types! db (nthrest created-context-types 2))]
+        (is (every? :success? result))))))
+
+(deftest create-context!
+  (let [context-types-to-create (vals test-context-types)
+        _ (rbac/create-context-types! db context-types-to-create)
+        root-context-to-create (first test-contexts)
+        root-context-result (rbac/create-context! db root-context-to-create [])]
+    (testing "create-context! for \"root\" context succeeds"
+      (is (:success? root-context-result))
+      (is (= (dissoc (:context root-context-result) :id) root-context-to-create)))))
 
 (comment
   ;; TODO: Create all the individual unit tests by leveraging the example code below.
@@ -471,8 +578,8 @@
   (rbac/delete-roles-by-names! db [:organization/manager :asset/manager])
 
   ;; -----------------------------------------------------
-  (rbac/create-context-types! db (vals context-types))
-  (rbac/create-context-type! db (:application context-types))
+  (rbac/create-context-types! db (vals test-context-types))
+  (rbac/create-context-type! db (:application test-context-types))
   (rbac/get-context-types db)
   (rbac/get-context-type db :application)
   (rbac/get-context-type db :asset)

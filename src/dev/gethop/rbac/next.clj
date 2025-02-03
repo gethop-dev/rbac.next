@@ -94,11 +94,13 @@
 (s/def ::name keyword?)
 (s/def ::names (s/coll-of ::name))
 (s/def ::description string?)
-(s/def ::role (s/keys :req-un [::name]
-                      :opt-un [::id ::description]))
+(s/def ::role (s/keys :req-un [::id ::name]
+                      :opt-un [::description]))
+(s/def ::create-role (s/keys :req-un [::name]
+                             :opt-un [::id ::description]))
 (s/def ::success? boolean)
 (s/def ::create-role!-args (s/cat :db-spec ::db-spec
-                                  :role ::role))
+                                  :role ::create-role))
 (s/def ::create-role!-ret (s/keys :req-un [::success?]
                                   :opt-un [::role]))
 (s/fdef create-role!
@@ -132,8 +134,9 @@
       {:success? false})))
 
 (s/def ::roles (s/coll-of ::role))
+(s/def ::create-roles (s/coll-of ::create-role))
 (s/def ::create-roles!-args (s/cat :db-spec ::db-spec
-                                   :roles ::roles))
+                                   :roles ::create-roles))
 (s/def ::create-roles!-ret (s/coll-of ::create-role!-ret))
 (s/fdef create-roles!
   :args ::create-roles!-args
@@ -143,7 +146,7 @@
   "Create a collection of `roles`, in the database specified by `db-spec`.
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
-  `roles` is collection of `role`, as specified in `create-role!`"
+  `roles` is a collection of `role`, as specified in `create-role!`"
   [db-spec roles]
   (mapv #(create-role! db-spec %) roles))
 
@@ -157,7 +160,7 @@
 (defn get-roles
   "Get all role definitions, from the db using `db-spec` connection
 
-  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.  "
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec]
   (let [return (get-* db-spec :rbac_role :roles)]
     (update return :roles #(mapv db-role->role %))))
@@ -202,7 +205,7 @@
 (defn get-role-by-name
   "Get the role whose name is `name`, from the db using `db-spec` connection
 
-  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.  "
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec name]
   (get-role-by-* db-spec :name (kw->str name)))
 
@@ -217,7 +220,7 @@
 (defn get-roles-by-names
   "Get the roles whose name is in `names`, from the db using `db-spec` connection
 
-  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.  "
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec names]
   (get-roles-by-* db-spec :name (map kw->str names)))
 
@@ -230,11 +233,10 @@
   :ret  ::update-role!-ret)
 
 (defn update-role!
-  "Update `role` definitionn, in the db using `db-spec` connection
+  "Update `role` definition, in the db using `db-spec` connection
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
-  `role` is a map, as specified in `create-role!`. Except
-  in this case, the role `id` is mandatory."
+  `role` is a map, as returned by `create-role!`."
   [db-spec role]
   (try
     (let [result (jdbc.sql/update! db-spec
@@ -257,11 +259,10 @@
   :ret  ::update-roles!-ret)
 
 (defn update-roles!
-  "Update a collection of `roles`, in the db using `db-spec` connection
+  "Update `roles`, in the db using `db-spec` connection
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
-  `roles` is collection of `role`, as specified in
-  `create-role!`. Except in this case, the role `id` is mandatory."
+  `roles` is a collection of `role`, as returned by `create-role!`."
   [db-spec roles]
   (mapv #(update-role! db-spec %) roles))
 
@@ -276,8 +277,7 @@
   "Delete `role` definition, from the db using `db-spec` connection
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
-  `role` is a map, as specified in `create-role!`. Except
-  in this case, the role `id` is mandatory."
+  `role` is a map, as returned by `create-role!`."
   [db-spec role]
   (delete-where-x! db-spec :rbac-role [:= :id (:id role)]))
 
@@ -289,7 +289,7 @@
   :ret  ::delete-role-by-id!-ret)
 
 (defn delete-role-by-id!
-  "Delete `role` whose id is `role-id`, from the db using `db-spec` connection
+  "Delete role whose id is `role-id`, from the db using `db-spec` connection
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec role-id]
@@ -303,7 +303,7 @@
   :ret  ::delete-role-by-name!-ret)
 
 (defn delete-role-by-name!
-  "Delete `role` whose name is `name`, from the db using `db-spec` connection
+  "Delete role whose name is `name`, from the db using `db-spec` connection
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec name]
@@ -326,15 +326,18 @@
   (mapv #(delete-role-by-name! db-spec (:id %)) roles))
 
 (s/def ::delete-roles-by-ids!-args (s/cat :db-spec ::db-spec
-                                          :ids ::ids))
+                                          :role-ids ::ids))
 (s/def ::delete-roles-by-ids!-ret (s/keys :req-un [::success?]))
 (s/fdef delete-roles-by-ids!
   :args ::delete-roles-by-ids!-args
   :ret  ::delete-roles-by-ids!-ret)
 
 (defn delete-roles-by-ids!
-  [db-spec ids]
-  (mapv #(delete-role-by-id! db-spec %) ids))
+  "Delete roles whose ids are in `role-ids`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
+  [db-spec role-ids]
+  (mapv #(delete-role-by-id! db-spec %) role-ids))
 
 (s/def ::delete-roles-by-names!-args (s/cat :db-spec ::db-spec
                                             :names ::names))
@@ -344,6 +347,9 @@
   :ret  ::delete-roles-by-names!-ret)
 
 (defn delete-roles-by-names!
+  "Delete roles whose names are in `names`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec names]
   (mapv #(delete-role-by-name! db-spec %) names))
 
@@ -371,6 +377,19 @@
   :ret  ::create-context-type!-ret)
 
 (defn create-context-type!
+  "Create a `context-type`, in the database specified by `db-spec`.
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `context-type` is a map with the following keys and values:
+
+   :name A mandatory key which contains a keyword with the context
+         type name.
+   :description An optional key which contains a string with the
+                description of the context type.
+
+  E.g.,
+     {:name        :some-context-type
+      :description \"Context type description\"}"
   [db-spec context-type]
   (try
     (let [db-context-type (context-type->db-context-type context-type)]
@@ -390,6 +409,11 @@
   :ret  ::create-context-types!-ret)
 
 (defn create-context-types!
+  "Create a collection of `context-type`, in the database specified by `db-spec`.
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `context-types` is a collection of `context-type` values, as defined
+                in `create-context-type!`."
   [db-spec context-types]
   (mapv #(create-context-type! db-spec %) context-types))
 
@@ -401,6 +425,9 @@
   :ret  ::get-context-types-ret)
 
 (defn get-context-types
+  "Get all context type definitions, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec]
   (let [return (get-* db-spec :rbac_context_type :context-types)]
     (update return :context-types #(mapv db-context-type->context-type %))))
@@ -413,6 +440,9 @@
   :ret  ::get-context-type-ret)
 
 (defn get-context-type
+  "Get the context type whose name is `name`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec context-type-name]
   (let [{:keys [success? values]}
         (get-*-where-y db-spec :rbac-context-type
@@ -431,6 +461,10 @@
   :ret  ::update-context-type!-ret)
 
 (defn update-context-type!
+  "Update `context-type` definition, in the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `context-type` is a map, as returned by `create-context-type!`."
   [db-spec context-type]
   (try
     (let [db-context-type (context-type->db-context-type context-type)
@@ -455,6 +489,11 @@
   :ret  ::update-context-types!-ret)
 
 (defn update-context-types!
+  "Update `context-types`, in the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `context-types` is a collection of `context-type`, as returned by
+  `create-context-type!`."
   [db-spec context-types]
   (mapv #(update-context-type! db-spec %) context-types))
 
@@ -466,6 +505,10 @@
   :ret  ::delete-context-type!-ret)
 
 (defn delete-context-type!
+  "Delete `context-type`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `context-type` is a map, as returned by `create-context-type!`."
   [db-spec context-type]
   (delete-where-x! db-spec :rbac-context-type
                    [:= :name (kw->str (:name context-type))]))
@@ -478,6 +521,11 @@
   :ret  ::delete-context-types!-ret)
 
 (defn delete-context-types!
+  "Delete `context-types`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `context-types` is a collection of `context-type`, as returned by
+  `create-context-type!`."
   [db-spec context-types]
   (mapv #(delete-context-type! db-spec %) context-types))
 
