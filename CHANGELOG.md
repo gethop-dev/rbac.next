@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use version 7 UUIDs, instead of version 4 UUIDs, for better database performance (indices behaviour is much better). In this case, leaking time information from the UUIDs should not be an issue. In any case, the new `set-primary-key-fn` function allows the user of the library to override how the primary keys values are created. Thus letting the caller use completely different database types, etc. (Issue #4)
+- Don't let internal SQL exception bubble up to the caller. Catch them locally, and simply return a failure condition.
 
 ## [0.1.0-alpha-9] - 2024.10.29
 

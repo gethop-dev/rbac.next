@@ -64,29 +64,35 @@
 
 (defn- get-*
   [db-spec table vals-kw]
-  (let [query (hsql/format {:select [:*]
-                            :from [table]})
-        return-values (jdbc.sql/query db-spec query jdbc/unqualified-snake-kebab-opts)]
-    {:success? true
-     vals-kw return-values}))
+  (try
+    (let [query (hsql/format {:select [:*]
+                              :from [table]})
+          return-values (jdbc.sql/query db-spec query jdbc/unqualified-snake-kebab-opts)]
+      {:success? true
+       vals-kw return-values})
+    (catch Exception _
+      {:success? false})))
 
 (defn- get-*-where-y
   [db-spec table conditions]
-  (let [query (hsql/format {:select [:*]
-                            :from [table]
-                            :where conditions})
-        return-values (jdbc.sql/query db-spec query jdbc/unqualified-snake-kebab-opts)]
-    (if (> (count return-values) 0)
-      {:success? true :values return-values}
+  (try
+    (let [query (hsql/format {:select [:*]
+                              :from [table]
+                              :where conditions})
+          return-values (jdbc.sql/query db-spec query jdbc/unqualified-snake-kebab-opts)]
+      {:success? true
+       :values return-values})
+    (catch Exception _
       {:success? false})))
 
 (defn- delete-where-x!
   [db-spec table conditions]
-  (let [query (hsql/format {:delete-from table
-                            :where conditions})
-        result (jdbc/execute-one! db-spec query)]
-    (if (> (::jdbc/update-count result) 0)
-      {:success? true}
+  (try
+    (let [query (hsql/format {:delete-from table
+                              :where conditions})
+          _ (jdbc/execute-one! db-spec query)]
+      {:success? true})
+    (catch Exception _
       {:success? false})))
 
 (defn- update-if-exists
