@@ -533,11 +533,11 @@
 (deftest create-context!
   (let [context-types-to-create (vals test-context-types)
         _ (rbac/create-context-types! db context-types-to-create)
-        root-context-to-create (first test-contexts)
-        root-context-result (rbac/create-context! db root-context-to-create [])]
-    (testing "create-context! for \"root\" context succeeds"
-      (is (:success? root-context-result))
-      (is (= (dissoc (:context root-context-result) :id) root-context-to-create)))))
+        app-context (first test-contexts)
+        app-context-result (rbac/create-context! db app-context [])]
+    (testing "create-context! for \"application\" context succeeds"
+      (is (:success? app-context-result))
+      (is (= (dissoc (:context app-context-result) :id) app-context)))))
 
 (comment
   ;; TODO: Create all the individual unit tests by leveraging the example code below.
