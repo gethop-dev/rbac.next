@@ -187,15 +187,19 @@
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec]
-  (let [return (get-* db-spec :rbac_role :roles)]
-    (update return :roles #(mapv db-role->role %))))
+  (let [result (get-* db-spec :rbac_role :roles)]
+    (if-not (:success? result)
+      {:success? false}
+      (update result :roles #(mapv db-role->role %)))))
 
 (defn- get-role-by-*
   [db-spec column value]
   (let [{:keys [success? values]} (get-*-where-y db-spec :rbac-role
                                                  [:= column value])]
-    {:success? success?
-     :role (db-role->role (first values))}))
+    (if-not success?
+      {:success? false}
+      {:success? success?
+       :role (db-role->role (first values))})))
 
 (defn- get-roles-by-*
   [db-spec column value]
@@ -454,8 +458,10 @@
 
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec]
-  (let [return (get-* db-spec :rbac_context_type :context-types)]
-    (update return :context-types #(mapv db-context-type->context-type %))))
+  (let [result (get-* db-spec :rbac_context_type :context-types)]
+    (if-not (:success? result)
+      {:success? false}
+      (update result :context-types #(mapv db-context-type->context-type %)))))
 
 (s/def ::get-context-type-args (s/cat :db-spec ::db-spec
                                       :context-type-name ::context-type-name))
@@ -640,8 +646,10 @@
 
 (defn get-contexts
   [db-spec]
-  (let [return (get-* db-spec :rbac_context :contexts)]
-    (update return :contexts #(mapv db-context->context %))))
+  (let [result (get-* db-spec :rbac_context :contexts)]
+    (if-not (:success? result)
+      {:success? false}
+      (update result :contexts #(mapv db-context->context %)))))
 
 (s/def ::context-selector (s/keys :req-un [::context-type-name
                                            ::resource-id]))
@@ -670,8 +678,8 @@
 (s/def ::get-context-args (s/cat :db-spec ::db-spec
                                  :context-type-name ::context-type-name
                                  :resource-id ::resource-id))
-(s/def ::get-context-ret (s/keys :req-un [::success?
-                                          ::context]))
+(s/def ::get-context-ret (s/keys :req-un [::success?]
+                                 :opt-un [::context]))
 (s/fdef get-context
   :args ::get-context-args
   :ret  ::get-context-ret)
@@ -683,8 +691,10 @@
                        [:and
                         [:= :context-type-name (kw->str context-type-name)]
                         [:= :resource-id resource-id]])]
-    {:success? success?
-     :context (db-context->context (first values))}))
+    (if-not success?
+      {:success? false}
+      {:success? success?
+       :context (db-context->context (first values))})))
 
 (s/def ::update-context!-args (s/cat :db-spec ::db-spec
                                      :context ::context))
@@ -924,8 +934,10 @@
   [db-spec column value]
   (let [{:keys [success? values]} (get-*-where-y db-spec :rbac_permission
                                                  [:= column value])]
-    {:success? success?
-     :permission (db-perm->perm (first values))}))
+    (if-not success?
+      {:success? false}
+      {:success? success?
+       :permission (db-perm->perm (first values))})))
 
 (s/def ::get-permission-by-id-args (s/cat :db-spec ::db-spec
                                           :id ::id))
