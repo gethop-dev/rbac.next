@@ -345,6 +345,9 @@
         (is success?)
         (is (= (dissoc role :id) role-to-create))
         (is (:id role))))
+    (testing "create-role! fails when creating an existing role"
+      (let [{:keys [success?]} (rbac/create-role! db role-to-create)]
+        (is (not success?))))
     (testing "create-role! fails with extra rol attributes"
       (let [{:keys [success?]} (rbac/create-role! db role-to-create)]
         (is (not success?))))))
