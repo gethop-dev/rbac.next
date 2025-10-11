@@ -35,6 +35,25 @@
   []
   (st/unstrument fns-to-instrument))
 
+(def gen-primary-key-fn
+  "Atom that contains the function used to generate the primary keys
+  created by the library itself.
+
+  The default function creates UUIDs.
+
+  In case the user of the library needs to use a different data
+  type (or UUID type) in the future, or in case the caller wants to
+  use a different data type. E.g., sqlite3 and MySQL don't have native
+  data types for it, and have to use work-arounds. The caller can set
+  this atom to its own custom function, where such work-arounds are
+  implemented."
+  (atom clj-uuid/v7))
+
+(defn set-primary-key-fn
+  "Use `f` to generate the primary keys of the entities managed by the library"
+  [f]
+  (reset! gen-primary-key-fn f))
+
 (defn- kw->str
   [k]
   (str (symbol k)))
@@ -122,7 +141,7 @@
       :description \"Role used to manage the assets in the application\"}"
   [db-spec role]
   (try
-    (let [role-id (clj-uuid/v7)
+    (let [role-id (@gen-primary-key-fn)
           db-role (-> role
                       (assoc :id role-id)
                       (role->db-role))]
@@ -577,7 +596,7 @@
   will be set as the parents for `context`. To be able to create a
   top-level context, pass an empty collection."
   [db-spec context parent-contexts]
-  (let [context-id (clj-uuid/v7)
+  (let [context-id (@gen-primary-key-fn)
         db-context (-> context
                        (assoc :id context-id)
                        (context->db-context))
@@ -857,7 +876,7 @@
 (defn create-permission!
   [db-spec permission]
   (try
-    (let [permission-id (clj-uuid/v7)
+    (let [permission-id (@gen-primary-key-fn)
           db-permission (-> permission
                             (assoc :id permission-id)
                             perm->db-perm)]

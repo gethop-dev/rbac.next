@@ -5,8 +5,7 @@
             [clojure.test :refer :all]
             [dev.gethop.rbac.next :as rbac]
             [next.jdbc :as jdbc]
-            [next.jdbc.sql :as jdbc.sql])
-  (:import [java.util UUID]))
+            [next.jdbc.sql :as jdbc.sql]))
 
 (def ^:const ^:private db
   (System/getenv "JDBC_DATABASE_URL"))
@@ -15,33 +14,33 @@
   (-> (stest/enumerate-namespace 'dev.gethop.rbac.next) stest/instrument))
 
 (defonce ^{:private true, :const true} app-users
-  {:app-user-1 {:id (UUID/randomUUID)
+  {:app-user-1 {:id (@rbac/gen-primary-key-fn)
                 :username "first.user"
                 :email "first.user@magnet.coop"}
-   :app-user-2 {:id (UUID/randomUUID)
+   :app-user-2 {:id (@rbac/gen-primary-key-fn)
                 :username "second.user"
                 :email "second.user@magnet.coop"}})
 
 (defonce ^{:private true, :const true} app-resources
-  {:application {:id (UUID/randomUUID)
+  {:application {:id (@rbac/gen-primary-key-fn)
                  :name "Application"
                  :description "Application description"}
-   :organization-1 {:id (UUID/randomUUID)
+   :organization-1 {:id (@rbac/gen-primary-key-fn)
                     :name "Organization 1"
                     :description "Organization 1 description"}
-   :organization-2 {:id (UUID/randomUUID)
+   :organization-2 {:id (@rbac/gen-primary-key-fn)
                     :name "Organization 2"
                     :description "Organization 2 description"}
-   :plant-1 {:id (UUID/randomUUID)
+   :plant-1 {:id (@rbac/gen-primary-key-fn)
              :name "Plant 1"
              :description "Plant 1 description"}
-   :plant-2 {:id (UUID/randomUUID)
+   :plant-2 {:id (@rbac/gen-primary-key-fn)
              :name "Plant 2"
              :description "Plant 2 description"}
-   :asset-1 {:id (UUID/randomUUID)
+   :asset-1 {:id (@rbac/gen-primary-key-fn)
              :name "Asset 1"
              :description "Asset 1 description"}
-   :asset-2 {:id (UUID/randomUUID)
+   :asset-2 {:id (@rbac/gen-primary-key-fn)
              :name "Asset 2"
              :description "Asset 2 description"}})
 
