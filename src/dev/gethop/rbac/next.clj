@@ -604,18 +604,19 @@
   `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
 
   `context` is a map with the following keys and values:
-     :resource-id The application id that identifies the resource for
-                  which the context is created.
-     :context-type-name The name of the context type to use for this
-                        context. It must be a valid context-type-name
-                        previously created using `create-context-type!`
-   E.g.,
-     {:resource-id #uuid \"28b81079-a2b7-419d-92b1-7249bc326ea1\"
-      :context-type-name \"device\"}
+     `:resource-id` The application id that identifies the resource
+                    for which the context is created.
+     `:context-type-name` The name (as a keyword) of the context type to
+                          use for this context. It must be a valid
+                          context-type-name previously created using
+                          `create-context-type!`
+     E.g.,
+       {:resource-id #uuid \"28b81079-a2b7-419d-92b1-7249bc326ea1\"
+        :context-type-name :device}
 
-  `parent-contexts` is a collection of already existing contexts, that
-  will be set as the parents for `context`. To be able to create a
-  top-level context, pass an empty collection."
+  `parent-contexts` is a sequential collection of already existing
+  contexts, that will be set as the parents for `context`. To be able
+  to create a top-level context, pass an empty collection."
   [db-spec context parent-contexts]
   (let [context-id (@gen-primary-key-fn)
         db-context (-> context
