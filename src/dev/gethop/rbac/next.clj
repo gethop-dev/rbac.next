@@ -115,9 +115,11 @@
 (s/def ::db-spec ::jdbc.specs/proto-connectable)
 (s/def ::id uuid?)
 (s/def ::string-id (s/and string? (complement str/blank?)))
-(s/def ::ids (s/coll-of ::id))
+(s/def ::ids (s/coll-of ::id
+                        :kind sequential?))
 (s/def ::name keyword?)
-(s/def ::names (s/coll-of ::name))
+(s/def ::names (s/coll-of ::name
+                          :kind sequential?))
 (s/def ::description string?)
 (s/def ::role (s/keys :req-un [::id ::name]
                       :opt-un [::description]))
@@ -158,11 +160,14 @@
     (catch Exception _
       {:success? false})))
 
-(s/def ::roles (s/coll-of ::role))
-(s/def ::create-roles (s/coll-of ::create-role))
+(s/def ::roles (s/coll-of ::role
+                          :kind sequential?))
+(s/def ::create-roles (s/coll-of ::create-role
+                                 :kind sequential?))
 (s/def ::create-roles!-args (s/cat :db-spec ::db-spec
                                    :roles ::create-roles))
-(s/def ::create-roles!-ret (s/coll-of ::create-role!-ret))
+(s/def ::create-roles!-ret (s/coll-of ::create-role!-ret
+                                      :kind sequential?))
 (s/fdef create-roles!
   :args ::create-roles!-args
   :ret  ::create-roles!-ret)
@@ -282,7 +287,8 @@
 
 (s/def ::update-roles!-args (s/cat :db-spec ::db-spec
                                    :roles ::roles))
-(s/def ::update-roles!-ret (s/coll-of ::update-role!-ret))
+(s/def ::update-roles!-ret (s/coll-of ::update-role!-ret
+                                      :kind sequential?))
 (s/fdef update-roles!
   :args ::update-roles!-args
   :ret  ::update-roles!-ret)
@@ -429,10 +435,12 @@
     (catch Exception _
       {:success? false})))
 
-(s/def ::context-types (s/coll-of ::context-type))
+(s/def ::context-types (s/coll-of ::context-type
+                                  :kind sequential?))
 (s/def ::create-context-types!-args (s/cat :db-spec ::db-spec
                                            :context-types ::context-types))
-(s/def ::create-context-types!-ret (s/coll-of ::create-context-type!-ret))
+(s/def ::create-context-types!-ret (s/coll-of ::create-context-type!-ret
+                                              :kind sequential?))
 (s/fdef create-context-types!
   :args ::create-context-types!-args
   :ret  ::create-context-types!-ret)
@@ -579,7 +587,8 @@
 (s/def ::context (s/keys :req-un [::id
                                   ::context-type-name
                                   ::resource-id]))
-(s/def ::contexts (s/coll-of ::context))
+(s/def ::contexts (s/coll-of ::context
+                             :kind sequential?))
 (s/def ::create-context!-args (s/cat :db-spec ::db-spec
                                      :context ::new-context
                                      :parent-contexts ::contexts))
@@ -903,7 +912,8 @@
     (catch Exception _
       {:success? false})))
 
-(s/def ::permissions (s/coll-of ::permission))
+(s/def ::permissions (s/coll-of ::permission
+                                :kind sequential?))
 (s/def ::create-permissions!-args (s/cat :db-spec ::db-spec
                                          :permissions ::permissions))
 (s/def ::create-permissions!-ret (s/keys :req-un [::success?]
@@ -1269,10 +1279,12 @@
     (catch Exception _
       {:success? false})))
 
-(s/def ::role-assignments (s/coll-of ::role-assignment))
+(s/def ::role-assignments (s/coll-of ::role-assignment
+                                     :kind sequential?))
 (s/def ::assign-roles!-args (s/cat :db-spec ::db-spec
                                    :role-assignments ::role-assignments))
-(s/def ::assign-roles!-ret (s/coll-of (s/keys :req-un [::success?])))
+(s/def ::assign-roles!-ret (s/coll-of (s/keys :req-un [::success?])
+                                      :kind sequential?))
 (s/fdef assign-roles!
   :args ::assign-roles!-args
   :ret  ::assign-roles!-ret)
