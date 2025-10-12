@@ -647,6 +647,85 @@
       (catch Exception _
         {:success? false}))))
 
+;; Work-around to use a given spec with a map key name that doesn't
+;; match the spec name. E.g., the spec name that we want to use is
+;; called `::new-context`, but we want to use the key name ::context
+;; for the map that we are specifying. See
+;; https://stackoverflow.com/a/43873866.
+(s/def :dev.gethop.rbac.next.create-contexts!/context ::new-context)
+(s/def :dev.gethop.rbac.next.create-contexts!/parent-contexts ::contexts)
+(s/def ::context-parents-pair (s/keys :req-un [:dev.gethop.rbac.next.create-contexts!/context
+                                               :dev.gethop.rbac.next.create-contexts!/parent-contexts]))
+(s/def ::context-parents-pairs (s/coll-of ::context-parents-pair
+                                          :kind sequential?))
+(s/def ::create-contexts!-args (s/cat :db-spec ::db-spec
+                                      :context-parents-pairs ::context-parents-pairs))
+(s/def ::create-contexts!-ret (s/keys :req-un [::success?]
+                                      :opt-un [::contexts]))
+(s/fdef create-contexts!
+  :args ::create-contexts!-args
+  :ret  ::create-contexts!-ret)
+
+(defn create-contexts!
+  "Create several `context`s, in the database specified by `db-spec`.
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+
+  `context-parents-pairs` is a sequential collection of maps, where
+  each map must have the following keys and values:
+
+    - `:context` A map with the following keys and values:
+         - `:resource-id` The application id that identifies the resource
+                        for which the context is created.
+         - `:context-type-name` The name of the context type to use for this
+                              context. It must be a valid context-type-name
+                              previously created using `create-context-type!`
+         E.g.,
+           {:resource-id #uuid \"28b81079-a2b7-419d-92b1-7249bc326ea1\"
+            :context-type-name :device}
+
+    - `:parent-contexts` A sequential collection of already existing contexts,
+      that will be set as the parents for `context`. To be able to create a
+      top-level context, pass an empty collection."
+  [db-spec context-parents-pairs]
+  (let [data (reduce (fn [acc {:keys [context parent-contexts]}]
+                       (let [context-id (@gen-primary-key-fn)
+                             context (assoc context :id context-id)
+                             parent-ids (mapv :id parent-contexts)
+                             child-parents (mapv (fn [child-id parent-id]
+                                                   {:child-id child-id
+                                                    :parent-id parent-id})
+                                                 (repeat context-id)
+                                                 parent-ids)]
+                         (-> acc
+                             (update :contexts conj context)
+                             (update :db-contexts conj (context->db-context context))
+                             (update :db-child-parents into child-parents))))
+                     {:contexts []
+                      :db-contexts []
+                      :db-child-parents []}
+                     context-parents-pairs)
+        success-result {:success? true
+                        :contexts (:contexts data)}]
+    (try
+      (jdbc/with-transaction [tx db-spec]
+        (jdbc.sql/insert-multi! tx :rbac-context
+                                (:db-contexts data)
+                                (assoc jdbc/unqualified-snake-kebab-opts :batch true))
+        (if (empty? (:db-child-parents data))
+          success-result
+          (let [result (jdbc.sql/insert-multi! tx :rbac-context-parent
+                                               (:db-child-parents data)
+                                               (assoc jdbc/unqualified-snake-kebab-opts :batch true))]
+            (if-not (= (count (:db-child-parents data))
+                       (count result))
+              (do
+                (.rollback tx)
+                {:success? false})
+              success-result))))
+      (catch Exception _
+        {:success? false}))))
+
 (s/def ::get-contexts-args (s/cat :db-spec ::db-spec))
 (s/def ::get-contexts-ret (s/keys :req-un [::success?
                                            ::contexts]))
