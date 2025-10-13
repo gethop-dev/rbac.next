@@ -4,9 +4,9 @@
   :license {:name "Mozilla Public Licence 2.0"
             :url "https://www.mozilla.org/en-US/MPL/2.0/"}
   :min-lein-version "2.11.2"
-  :dependencies [[org.clojure/clojure "1.11.4"]
-                 [com.github.seancorfield/next.jdbc "1.3.939"]
-                 [com.github.seancorfield/honeysql "2.6.1161"]]
+  :dependencies [[org.clojure/clojure "1.12.3"]
+                 [com.github.seancorfield/next.jdbc "1.3.1070"]
+                 [com.github.seancorfield/honeysql "2.7.1350"]]
   :deploy-repositories [["snapshots" {:url "https://clojars.org/repo"
                                       :username :env/clojars_username
                                       :password :env/clojars_password
@@ -20,6 +20,6 @@
    :repl {:repl-options {:host "0.0.0.0"
                          :port 4001}}
    :profiles/dev {}
-   :project/dev {:dependencies [[org.postgresql/postgresql "42.7.4"]]
+   :project/dev {:dependencies [[org.postgresql/postgresql "42.7.8"]]
                  :plugins [[jonase/eastwood "1.4.3"]
-                           [lein-cljfmt "0.9.2"]]}})
+                           [dev.weavejester/lein-cljfmt "0.13.4"]]}})
