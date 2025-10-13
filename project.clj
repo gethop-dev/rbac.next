@@ -5,6 +5,7 @@
             :url "https://www.mozilla.org/en-US/MPL/2.0/"}
   :min-lein-version "2.11.2"
   :dependencies [[org.clojure/clojure "1.12.3"]
+                 [danlentz/clj-uuid "0.2.0"]
                  [com.github.seancorfield/next.jdbc "1.3.1070"]
                  [com.github.seancorfield/honeysql "2.7.1350"]]
   :deploy-repositories [["snapshots" {:url "https://clojars.org/repo"

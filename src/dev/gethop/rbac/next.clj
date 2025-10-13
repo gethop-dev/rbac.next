@@ -1,11 +1,11 @@
 (ns dev.gethop.rbac.next
-  (:require [clojure.spec.alpha :as s]
+  (:require [clj-uuid :as clj-uuid]
+            [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [honey.sql :as hsql]
             [next.jdbc :as jdbc]
             [next.jdbc.specs :as jdbc.specs]
-            [next.jdbc.sql :as jdbc.sql])
-  (:import [java.util UUID]))
+            [next.jdbc.sql :as jdbc.sql]))
 
 (defn- kw->str
   [k]
@@ -94,7 +94,7 @@
   {:pre [(s/valid? ::db-spec db-spec)
          (s/valid? ::role role)]}
   (try
-    (let [role-id (UUID/randomUUID)
+    (let [role-id (clj-uuid/v7)
           db-role (-> role
                       (assoc :id role-id)
                       (role->db-role))]
@@ -525,7 +525,7 @@
   will be set as the parents for `context`. To be able to create a
   top-level context, pass an empty collection."
   [db-spec context parent-contexts]
-  (let [context-id (UUID/randomUUID)
+  (let [context-id (clj-uuid/v7)
         db-context (-> context
                        (assoc :id context-id)
                        (context->db-context))
@@ -819,7 +819,7 @@
 (defn create-permission!
   [db-spec permission]
   (try
-    (let [permission-id (UUID/randomUUID)
+    (let [permission-id (clj-uuid/v7)
           db-permission (-> permission
                             (assoc :id permission-id)
                             perm->db-perm)]
