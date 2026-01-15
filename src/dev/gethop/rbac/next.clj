@@ -1521,8 +1521,8 @@
                    :where  [:and
                             [:= :rra.user-id user-id]
                             [:= :rp.name (kw->str permission-name)]
-                            [:= :rra.context-id [:any {:select [:id]
-                                                       :from [:applicable-contexts]}]]]}]]
+                            [:= :rra.context-id [:any [:array {:select [:id]
+                                                               :from [:applicable-contexts]}]]]]}]]
                 :select [[[:or :sa.super-admin :hp.has-permission] :has-permission]]
                 :from   [[:super-admin :sa]]
                 :join   [[:has-permission :hp] [:= :hp.user-id :sa.user-id]]})
