@@ -355,31 +355,31 @@
 (deftest create-roles!
   (testing "create-roles! succeeds"
     (let [result (rbac/create-roles! db test-roles)]
-      (is (every? identity (map (fn [role-to-create {:keys [success? role]}]
-                                  (and success?
-                                       (= (dissoc role :id) role-to-create)
-                                       (:id role)))
-                                test-roles
-                                result))))))
+      (is (every? identity (mapv (fn [role-to-create {:keys [success? role]}]
+                                   (and success?
+                                        (= (dissoc role :id) role-to-create)
+                                        (:id role)))
+                                 test-roles
+                                 result))))))
 
 (deftest get-roles
   (testing "get-roles succeeds"
-    (let [created-roles (map :role (rbac/create-roles! db test-roles))
+    (let [created-roles (mapv :role (rbac/create-roles! db test-roles))
           {:keys [success? roles]} (rbac/get-roles db)]
       (is success?)
       (is (= created-roles roles)))))
 
 (deftest get-roles-by-names
   (testing "get-roles-by-names succeeds"
-    (let [created-roles (map :role (rbac/create-roles! db test-roles))
+    (let [created-roles (mapv :role (rbac/create-roles! db test-roles))
           test-roles (take 2 created-roles)
           {:keys [success? roles]} (rbac/get-roles-by-names
-                                    db (map :name test-roles))]
+                                    db (mapv :name test-roles))]
       (is success?)
       (is (= test-roles roles)))))
 
 (deftest get-rol-by-*
-  (let [created-roles (map :role (rbac/create-roles! db test-roles))]
+  (let [created-roles (mapv :role (rbac/create-roles! db test-roles))]
     (testing "get-role-by-id succeeds"
       (let [{:keys [success? role]} (rbac/get-role-by-id db (-> created-roles
                                                                 first
@@ -394,7 +394,7 @@
         (is (= (first created-roles) role))))))
 
 (deftest update-role!
-  (let [created-roles (map :role (rbac/create-roles! db test-roles))
+  (let [created-roles (mapv :role (rbac/create-roles! db test-roles))
         role-to-update (-> created-roles first (assoc :name :updated-role))]
     (testing "update-role! succeeds"
       (let [{:keys [success? role]} (rbac/update-role! db role-to-update)]
@@ -407,20 +407,20 @@
         (is (not success?))))))
 
 (deftest update-roles!
-  (let [created-roles (map :role (rbac/create-roles! db test-roles))
-        roles-to-update (map (fn [role]
-                               (update role :name
-                                       (fn [k]
-                                         (keyword (namespace k)
-                                                  (str "updated-"
-                                                       (name k))))))
-                             created-roles)]
+  (let [created-roles (mapv :role (rbac/create-roles! db test-roles))
+        roles-to-update (mapv (fn [role]
+                                (update role :name
+                                        (fn [k]
+                                          (keyword (namespace k)
+                                                   (str "updated-"
+                                                        (name k))))))
+                              created-roles)]
     (testing "update-roles! succeeds"
       (let [result (rbac/update-roles! db roles-to-update)]
         (is (every? :success? result))
-        (mapv #(is (= %1 %2)) roles-to-update (map :role result))))
+        (mapv #(is (= %1 %2)) roles-to-update (mapv :role result))))
     (testing "update-roles! fails without role :id"
-      (let [roles-without-id (map #(dissoc % :id) roles-to-update)]
+      (let [roles-without-id (mapv #(dissoc % :id) roles-to-update)]
         (is (thrown? clojure.lang.ExceptionInfo (rbac/update-roles! db roles-without-id)))
         (stest/unstrument ['dev.gethop.rbac.next/update-role!
                            'dev.gethop.rbac.next/update-roles!])
@@ -428,7 +428,7 @@
           (is (not success?)))))))
 
 (deftest delete-role!
-  (let [created-role (first (map :role (rbac/create-roles! db test-roles)))]
+  (let [created-role (first (mapv :role (rbac/create-roles! db test-roles)))]
     (testing "delete-role! succeeds"
       (let [result (rbac/delete-role! db created-role)]
         (is (:success? result))))
@@ -436,7 +436,7 @@
       (is (thrown? clojure.lang.ExceptionInfo (rbac/delete-role! db (dissoc created-role :id)))))))
 
 (deftest delete-role-by*!
-  (let [created-roles (map :role (rbac/create-roles! db test-roles))]
+  (let [created-roles (mapv :role (rbac/create-roles! db test-roles))]
     (testing "delete-role-by-id! succeeds"
       (let [result (rbac/delete-role-by-id! db (-> created-roles first :id))]
         (is (:success? result))))
@@ -461,11 +461,11 @@
   (testing "create-context-types! succeeds"
     (let [context-types-to-create (vals test-context-types)
           result (rbac/create-context-types! db context-types-to-create)]
-      (is (every? identity (map (fn [context-type-to-create {:keys [success? context-type]}]
-                                  (and success?
-                                       (= context-type context-type-to-create)))
-                                context-types-to-create
-                                result))))))
+      (is (every? identity (mapv (fn [context-type-to-create {:keys [success? context-type]}]
+                                   (and success?
+                                        (= context-type context-type-to-create)))
+                                 context-types-to-create
+                                 result))))))
 
 (deftest get-context-types
   (testing "get-context-types succeeds"
@@ -485,7 +485,7 @@
 
 (deftest update-context-type!
   (let [context-types-to-create (vals test-context-types)
-        created-context-types (map :context-type (rbac/create-context-types! db context-types-to-create))
+        created-context-types (mapv :context-type (rbac/create-context-types! db context-types-to-create))
         context-type-to-update (-> created-context-types first (assoc :description "Updated description"))]
     (testing "update-context-type! succeeds"
       (let [{:keys [success? context-type]} (rbac/update-context-type! db context-type-to-update)]
@@ -499,18 +499,18 @@
 
 (deftest update-context-types!
   (let [context-types-to-create (vals test-context-types)
-        created-context-types (map :context-type (rbac/create-context-types! db context-types-to-create))
-        context-types-to-update (map (fn [context-type]
-                                       (update context-type :description
-                                               (fn [desc]
-                                                 (str "updated-" desc))))
-                                     created-context-types)]
+        created-context-types (mapv :context-type (rbac/create-context-types! db context-types-to-create))
+        context-types-to-update (mapv (fn [context-type]
+                                        (update context-type :description
+                                                (fn [desc]
+                                                  (str "updated-" desc))))
+                                      created-context-types)]
     (testing "update-context-types! succeeds"
       (let [result (rbac/update-context-types! db context-types-to-update)]
         (is (every? :success? result))
-        #_(mapv #(is (= %1 %2)) context-types-to-update (map :context-type result))))
+        (mapv #(is (= %1 %2)) context-types-to-update (mapv :context-type result))))
     (testing "update-context-types! fails without context-type :name"
-      (let [context-types-without-id (map #(dissoc % :name) context-types-to-update)]
+      (let [context-types-without-id (mapv #(dissoc % :name) context-types-to-update)]
         (is (thrown? clojure.lang.ExceptionInfo (rbac/update-context-types! db context-types-without-id)))
         (stest/unstrument ['dev.gethop.rbac.next/update-context-type!
                            'dev.gethop.rbac.next/update-context-types!])
@@ -519,7 +519,7 @@
 
 (deftest delete-context-type!
   (let [context-types-to-create (vals test-context-types)
-        created-context-type (first (map :context-type (rbac/create-context-types! db context-types-to-create)))]
+        created-context-type (first (mapv :context-type (rbac/create-context-types! db context-types-to-create)))]
     (testing "delete-context-type! succeeds"
       (let [result (rbac/delete-context-type! db created-context-type)]
         (is (:success? result))))
@@ -528,7 +528,7 @@
 
 (deftest delete-context-types!
   (let [context-types-to-create (vals test-context-types)
-        created-context-types (map :context-type (rbac/create-context-types! db context-types-to-create))]
+        created-context-types (mapv :context-type (rbac/create-context-types! db context-types-to-create))]
     (testing "delete-context-types! succeeds"
       (let [result (rbac/delete-context-types! db (nthrest created-context-types 2))]
         (is (every? :success? result))))))
