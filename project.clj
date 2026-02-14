@@ -3,11 +3,11 @@
   :url "https://github.com/gethop-dev/rbac"
   :license {:name "Mozilla Public Licence 2.0"
             :url "https://www.mozilla.org/en-US/MPL/2.0/"}
-  :min-lein-version "2.11.2"
-  :dependencies [[org.clojure/clojure "1.12.3"]
-                 [danlentz/clj-uuid "0.2.0"]
-                 [com.github.seancorfield/next.jdbc "1.3.1070"]
-                 [com.github.seancorfield/honeysql "2.7.1350"]]
+  :min-lein-version "2.12.0"
+  :dependencies [[org.clojure/clojure "1.12.4"]
+                 [danlentz/clj-uuid "0.2.5"]
+                 [com.github.seancorfield/next.jdbc "1.3.1093"]
+                 [com.github.seancorfield/honeysql "2.7.1368"]]
   :deploy-repositories [["snapshots" {:url "https://clojars.org/repo"
                                       :username :env/clojars_username
                                       :password :env/clojars_password
@@ -21,6 +21,6 @@
    :repl {:repl-options {:host "0.0.0.0"
                          :port 4001}}
    :profiles/dev {}
-   :project/dev {:dependencies [[org.postgresql/postgresql "42.7.8"]]
+   :project/dev {:dependencies [[org.postgresql/postgresql "42.7.10"]]
                  :plugins [[jonase/eastwood "1.4.3"]
-                           [dev.weavejester/lein-cljfmt "0.13.4"]]}})
+                           [dev.weavejester/lein-cljfmt "0.16.0"]]}})
