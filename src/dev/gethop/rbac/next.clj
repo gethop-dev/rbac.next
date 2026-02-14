@@ -818,6 +818,10 @@
   :ret  ::get-context-ret)
 
 (defn get-context
+  "Get the context with `content-type-name` and `resource-id`,
+  from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec context-type-name resource-id]
   (let [{:keys [success? values]}
         (get-*-where-y db-spec :rbac-context
@@ -838,6 +842,10 @@
   :ret  ::update-context!-ret)
 
 (defn update-context!
+  "Update `context` definition, in the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `context` is a map, as returned by `create-context!`."
   [db-spec context]
   (try
     (let [result (jdbc.sql/update! db-spec
@@ -861,6 +869,11 @@
   :ret  ::update-contexts!-ret)
 
 (defn update-contexts!
+  "Update `contexts`, in the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `contexts` is a collection of `context`, as returned by
+  `create-context!`."
   [db-spec contexts]
   (mapv #(update-context! db-spec %) contexts))
 

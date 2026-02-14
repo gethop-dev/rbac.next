@@ -609,6 +609,55 @@
         (is (every? #(get org-contexts-set (dissoc % :id))
                     (:contexts result)))))))
 
+(deftest get-context
+  (let [_ (rbac/create-context-types! db (vals test-context-types))
+        app-context (first test-contexts)
+        _ (:context (rbac/create-context! db app-context []))]
+    (testing "get-context succeeds"
+      (let [{:keys [success? context]} (rbac/get-context db
+                                                         (:context-type-name app-context)
+                                                         (:resource-id app-context))]
+        (is success?)
+        (is (= (dissoc context :id) app-context))))))
+
+(deftest update-context!
+  (let [_ (rbac/create-context-types! db (vals test-context-types))
+        app-context (first test-contexts)
+        created-context (:context (rbac/create-context! db app-context []))
+        context-to-update (-> created-context (assoc :context-type-name :organization))]
+    (testing "update-context! succeeds"
+      (let [{:keys [success? context]} (rbac/update-context! db context-to-update)]
+        (is success?)
+        (is (= context-to-update context))))
+    (testing "update-context! fails without context :id, :context-type-name, :resource-id"
+      (is (thrown? clojure.lang.ExceptionInfo (rbac/update-context! db (dissoc context-to-update :context-type-name))))
+      (stest/unstrument ['dev.gethop.rbac.next/update-context!])
+      (let [{:keys [success?]} (rbac/update-context! db (dissoc context-to-update :context-type-name))]
+        (is (not success?))))
+    (testing "update-context! fails with and invalid :context-type-name"
+      (stest/unstrument ['dev.gethop.rbac.next/update-context!])
+      (let [{:keys [success?]} (rbac/update-context! db (assoc context-to-update :context-type-name :invalid))]
+        (is (not success?))))))
+
+(deftest update-contexts!
+  (let [_ (rbac/create-context-types! db (vals test-context-types))
+        test-contexts-with-parents (mapv (fn [m] {:context m, :parent-contexts []}) test-contexts)
+        created-contexts (:contexts (rbac/create-contexts! db test-contexts-with-parents))
+        contexts-to-update (mapv (fn [context]
+                                   (assoc context :context-type-name :asset))
+                                 created-contexts)]
+    (testing "update-contexts! succeeds"
+      (let [result (rbac/update-contexts! db contexts-to-update)]
+        (is (every? :success? result))
+        (mapv #(is (= %1 %2)) contexts-to-update (mapv :context result))))
+    (testing "update-contexts! fails without context :id"
+      (let [contexts-without-resource-id (mapv #(dissoc % :id) contexts-to-update)]
+        (is (thrown? clojure.lang.ExceptionInfo (rbac/update-contexts! db contexts-without-resource-id)))
+        (stest/unstrument ['dev.gethop.rbac.next/update-context!
+                           'dev.gethop.rbac.next/update-contexts!])
+        (let [result (rbac/update-contexts! db contexts-without-resource-id)]
+          (is (every? (complement :success?) result)))))))
+
 (comment
   ;; TODO: Create all the individual unit tests by leveraging the example code below.
 
