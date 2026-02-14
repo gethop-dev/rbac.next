@@ -734,6 +734,9 @@
   :ret  ::get-contexts-ret)
 
 (defn get-contexts
+  "Get all the existing `context`s, from the database specified by `db-spec`.
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
   [db-spec]
   (let [result (get-* db-spec :rbac_context :contexts)]
     (if-not (:success? result)

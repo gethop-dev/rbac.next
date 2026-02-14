@@ -560,6 +560,26 @@
       (is (every? #(get org-contexts-to-create-set (dissoc % :id))
                   (:contexts result))))))
 
+(deftest get-contexts
+  (testing "get-contexts succeeds"
+    (let [_ (rbac/create-context-types! db [(:application test-context-types)
+                                            (:organization test-context-types)])
+          app-test-context (first test-contexts)
+          app-context (:context (rbac/create-context! db app-test-context []))
+          org-contexts-parents-to-create [{:context (nth test-contexts 1)
+                                           :parent-contexts [app-context]}
+                                          {:context (nth test-contexts 4)
+                                           :parent-contexts [app-context]}]
+          org-contexts-to-create-set (into #{}
+                                           (map :context)
+                                           org-contexts-parents-to-create)
+          all-contexts-set (conj org-contexts-to-create-set app-test-context)
+          _ (rbac/create-contexts! db org-contexts-parents-to-create)
+          result (rbac/get-contexts db)]
+      (is (:success? result))
+      (is (every? #(get all-contexts-set (dissoc % :id))
+                  (:contexts result))))))
+
 (comment
   ;; TODO: Create all the individual unit tests by leveraging the example code below.
 
