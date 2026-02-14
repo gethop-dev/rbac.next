@@ -580,6 +580,35 @@
       (is (every? #(get all-contexts-set (dissoc % :id))
                   (:contexts result))))))
 
+(deftest get-contexts-by-selectors
+  (let [_ (rbac/create-context-types! db [(:application test-context-types)
+                                          (:organization test-context-types)])
+        app-test-context (first test-contexts)
+        app-context (:context (rbac/create-context! db app-test-context []))
+        org-contexts-parents-to-create [{:context (nth test-contexts 1)
+                                         :parent-contexts [app-context]}
+                                        {:context (nth test-contexts 4)
+                                         :parent-contexts [app-context]}]
+        _ (rbac/create-contexts! db org-contexts-parents-to-create)]
+    (testing "get-contexts-by-selectors succeeds with full selectors"
+      (let [context (nth test-contexts 1)
+            context-selectors [{:context-type-name :organization
+                                :resource-id (:resource-id context)}]
+            result (rbac/get-contexts-by-selectors db context-selectors)]
+        (is (:success? result))
+        (is (= (-> result :contexts first (dissoc :id))
+               context))))
+    (testing "get-contexts-by-selectors succeeds with wildcard selectors"
+      (let [org-contexts-set (into #{}
+                                   (map :context)
+                                   org-contexts-parents-to-create)
+            context-selectors [{:context-type-name :organization
+                                :resource-id :*}]
+            result (rbac/get-contexts-by-selectors db context-selectors)]
+        (is (:success? result))
+        (is (every? #(get org-contexts-set (dissoc % :id))
+                    (:contexts result)))))))
+
 (comment
   ;; TODO: Create all the individual unit tests by leveraging the example code below.
 

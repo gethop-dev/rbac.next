@@ -3,6 +3,7 @@
             [clojure.spec.alpha :as s]
             [clojure.spec.test.alpha :as st]
             [clojure.string :as str]
+            [dev.gethop.rbac.next.get-contexts-by-selectors :as-alias get-contexts-by-selectors]
             [honey.sql :as hsql]
             [next.jdbc :as jdbc]
             [next.jdbc.specs :as jdbc.specs]
@@ -743,9 +744,16 @@
       {:success? false}
       (update result :contexts #(mapv db-context->context %)))))
 
-(s/def ::context-selector (s/keys :req-un [::context-type-name
-                                           ::resource-id]))
-(s/def ::context-selectors (s/coll-of ::context-selector))
+(s/def ::context-type-name-or-wildcard (s/or :context-type-name ::context-type-name
+                                             :wildcard (s/and keyword? #(= % :*))))
+(s/def ::resource-id-or-wildcard (s/or :resource-id ::resource-id
+                                       :wildcard (s/and keyword? #(= % :*))))
+(s/def :get-contexts-by-selectors/context-type-name ::context-type-name-or-wildcard)
+(s/def :get-contexts-by-selectors/resource-id ::resource-id-or-wildcard)
+(s/def ::context-selector (s/keys :req-un [:get-contexts-by-selectors/context-type-name
+                                           :get-contexts-by-selectors/resource-id]))
+(s/def ::context-selectors (s/coll-of ::context-selector
+                                      :kind sequential?))
 (s/def ::get-contexts-by-selectors-args (s/cat :db-spec ::db-spec :context-selectors ::context-selectors))
 (s/def ::get-contexts-by-selectors-ret (s/keys :req-un [::success?
                                                         ::contexts]))
@@ -754,18 +762,51 @@
   :ret  ::get-contexts-by-selectors-ret)
 
 (defn get-contexts-by-selectors
+  "Get a subset of `context`s, from the database specified by `db-spec`.
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+
+  `context-selectors` is sequential collection of maps to specify the
+  selection criteria. Each map will specifiy a set of conditions to
+  select one or more contexts. All of the selection criteria
+  specified in those maps will be OR-ed together.
+
+  Each map of `context-selections` must have the following keys and
+  values, and the selection criteria will be the AND of both values:
+
+    - `:context-type-name` The context must have this value (as a keyword)
+                         as its context type name. The special value
+                         `:*` can be used a wildcard name.
+    - `:resource-id` The context must have this value as its id.
+                   The special value `:*` can be used a wildcard id."
   [db-spec context-selectors]
-  (let [{:keys [success? values]}
-        (get-*-where-y db-spec :rbac-context
-                       (reduce
-                        (fn [condition {:keys [context-type-name resource-id]}]
-                          (conj condition [:and
-                                           [:= :context-type-name (kw->str context-type-name)]
-                                           [:= :resource-id resource-id]]))
-                        [:or]
-                        context-selectors))]
+  (let [where-cond (reduce (fn [condition {:keys [context-type-name resource-id]}]
+                             (let [context-type-cond (when-not (= :* context-type-name)
+                                                       [:= :context-type-name (kw->str context-type-name)])
+                                   resource-id-cond (when-not (= :* resource-id)
+                                                      [:= :resource-id resource-id])
+                                   extra-conds (into [:and] (filter identity)
+                                                     [context-type-cond resource-id-cond])]
+                               (case (count extra-conds)
+                                 ;; We just have the [:and], there are no extra
+                                 ;; conditions (both conditions specified :*)
+                                 1 condition
+
+                                 ;; We just have [:and [a-single-condition]], no need for
+                                 ;; the :and part.
+                                 2 (conj condition (second extra-conds))
+
+                                 ;; We have both conditions, keep the :and, and all conditions.
+                                 (conj condition extra-conds))))
+                           [:or]
+                           context-selectors)
+        ;; If we only have the [:or] condition, pass no condition at
+        ;; all (passing just the [:or] builds an invalid query.
+        where-cond (if (> (count where-cond) 1) where-cond [])
+        {:keys [success? values]}
+        (get-*-where-y db-spec :rbac-context where-cond)]
     {:success? success?
-     :contexts (map db-context->context values)}))
+     :contexts (mapv db-context->context values)}))
 
 (s/def ::get-context-args (s/cat :db-spec ::db-spec
                                  :context-type-name ::context-type-name
