@@ -658,6 +658,49 @@
         (let [result (rbac/update-contexts! db contexts-without-resource-id)]
           (is (every? (complement :success?) result)))))))
 
+(deftest delete-context!
+  (let [context-types-to-create (vals test-context-types)
+        _ (rbac/create-context-types! db context-types-to-create)
+        test-context (first test-contexts)
+        created-context (:context (rbac/create-context! db test-context []))]
+    (testing "delete-context! succeeds"
+      (let [result (rbac/delete-context! db created-context)]
+        (is (:success? result))))
+    (testing "delete-context! fails without context :id"
+      (is (thrown? clojure.lang.ExceptionInfo (rbac/delete-context! db (dissoc created-context :id)))))
+    (testing "delete-context! fails without context :context-type-name or :resource-id"
+      (is (thrown? clojure.lang.ExceptionInfo (rbac/delete-context! db (dissoc created-context :context-type-name))))
+      (is (thrown? clojure.lang.ExceptionInfo (rbac/delete-context! db (dissoc created-context :resource-id)))))))
+
+(deftest delete-context-by-id!
+  (let [context-types-to-create (vals test-context-types)
+        _ (rbac/create-context-types! db context-types-to-create)
+        test-context (first test-contexts)
+        created-context (:context (rbac/create-context! db test-context []))]
+    (testing "delete-context-by-id! succeeds"
+      (let [result (rbac/delete-context-by-id! db (:id created-context))]
+        (is (:success? result))))
+    (testing "delete-context-by-id! fails without context :id"
+      (is (thrown? clojure.lang.ExceptionInfo (rbac/delete-context-by-id! db nil))))))
+
+(deftest delete-contexts-by-ids!
+  (let [context-types-to-create (vals test-context-types)
+        _ (rbac/create-context-types! db context-types-to-create)
+        test-contexts-with-parents (mapv (fn [m] {:context m, :parent-contexts []}) test-contexts)
+        created-contexts (:contexts (rbac/create-contexts! db test-contexts-with-parents))]
+    (testing "delete-contexts! succeeds"
+      (let [result (rbac/delete-contexts-by-ids! db (mapv :id created-contexts))]
+        (is (:success? result))))))
+
+(deftest delete-contexts!
+  (let [context-types-to-create (vals test-context-types)
+        _ (rbac/create-context-types! db context-types-to-create)
+        test-contexts-with-parents (mapv (fn [m] {:context m, :parent-contexts []}) test-contexts)
+        created-contexts (:contexts (rbac/create-contexts! db test-contexts-with-parents))]
+    (testing "delete-contexts! succeeds"
+      (let [result (rbac/delete-contexts! db created-contexts)]
+        (is (:success? result))))))
+
 (comment
   ;; TODO: Create all the individual unit tests by leveraging the example code below.
 

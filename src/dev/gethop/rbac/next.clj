@@ -911,6 +911,21 @@
   [db-spec context-id]
   (delete-where-x! db-spec :rbac-context [:= :id context-id]))
 
+(s/def ::delete-contexts-by-ids!-args (s/cat :db-spec ::db-spec
+                                             :context-ids ::ids))
+(s/def ::delete-contexts-by-ids!-ret (s/keys :req-un [::success?]))
+(s/fdef delete-contexts-by-ids!
+  :args ::delete-contexts-by-ids!-args
+  :ret  ::delete-contexts-by-ids!-ret)
+
+(defn delete-contexts-by-ids!
+  "Delete contexts whose ids are in `context-ids`, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
+  [db-spec context-ids]
+  (let [where-cond [:= :id [:any [:array context-ids]]]]
+    (delete-where-x! db-spec :rbac-context where-cond)))
+
 (s/def ::delete-contexts!-args (s/cat :db-spec ::db-spec
                                       :contexts ::contexts))
 (s/def ::delete-contexts!-ret (s/keys :req-un [::success?]))
@@ -919,30 +934,14 @@
   :ret  ::delete-contexts!-ret)
 
 (defn delete-contexts!
-  "FIXME FIXME FIXME FIXME"
+  "Delete `contexts` definitions, from the db using `db-spec` connection
+
+  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value.
+  `contexts` is a collection of maps, as specified in
+  `create-context!`. Except in this case, the context `id` is mandatory."
   [db-spec contexts]
-  (mapv #(delete-context! db-spec %) contexts))
-
-(s/def ::delete-contexts-by-ids!-args (s/cat :db-spec ::db-spec
-                                             :context-ids ::ids))
-(s/def ::delete-contexts-by-ids!-ret (s/keys :req-un [::success?]))
-(s/fdef delete-contexts-by-ids!
-  :args ::delete-contexts-by-ids!-args
-  :ret  ::delete-contexts-by-ids!-ret)
-
-(s/def ::delete-contexts!-args (s/cat :db-spec ::db-spec
-                                      :contexts ::contexts))
-(s/def ::delete-contexts!-ret (s/keys :req-un [::success?]))
-(s/fdef delete-contexts!
-  :args ::delete-contexts!-args
-  :ret  ::delete-contexts!-ret)
-
-(defn delete-contexts-by-ids!
-  "Delete contexts whose ids are in `context-ids`, from the db using `db-spec` connection
-
-  `db-spec` is a `:next.jdbc.specs/db-spec` compliant value."
-  [db-spec context-ids]
-  (mapv #(delete-context-by-id! db-spec %) context-ids))
+  (let [context-ids (mapv :id contexts)]
+    (delete-contexts-by-ids! db-spec context-ids)))
 
 (defn- add-parent-child-context-rows!
   [db-spec rows]
