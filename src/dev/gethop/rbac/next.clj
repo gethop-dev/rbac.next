@@ -1,5 +1,5 @@
 (ns dev.gethop.rbac.next
-  (:require [clj-uuid :as clj-uuid]
+  (:require [clj-uuid.core :as clj-uuid]
             [clojure.spec.alpha :as s]
             [clojure.spec.test.alpha :as st]
             [clojure.string :as str]
