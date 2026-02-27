@@ -31,18 +31,18 @@ BEGIN
     -- Because this function is used in a TRIGGER, it has access to a
     -- special table called `NEW`, which holds the new row to be
     -- inserted or updated when the trigger is executed.
-    WITH RECURSIVE list_parents(child_id) AS
+    WITH RECURSIVE search_dag(parent_id) AS
                    (
-                    SELECT rcp.child_id
+                    SELECT rcp.parent_id
                     FROM rbac_context_parent AS rcp
-                    WHERE rcp.parent_id = NEW.child_id
+                    WHERE rcp.child_id = NEW.parent_id
                     UNION ALL
-                    SELECT rcp.child_id
-                    FROM rbac_context_parent AS rcp, list_parents as lp
-                    WHERE rcp.parent_id = lp.child_id
-                   ) CYCLE child_id SET is_cycle USING path
-    SELECT child_id, path INTO cycle_path
-    FROM list_parents WHERE list_parents.child_id = NEW.parent_id LIMIT 1;
+                    SELECT rcp.parent_id
+                    FROM rbac_context_parent AS rcp, search_dag as sd
+                    WHERE rcp.child_id = sd.parent_id
+                   ) CYCLE parent_id SET is_cycle USING path
+    SELECT parent_id, path INTO cycle_path
+    FROM search_dag WHERE search_dag.parent_id = NEW.child_id LIMIT 1;
   IF cycle_path IS NOT NULL
   THEN
     RAISE EXCEPTION 'Cycle detected (%)', cycle_path;
