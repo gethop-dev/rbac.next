@@ -6,8 +6,8 @@
   :min-lein-version "2.12.0"
   :dependencies [[org.clojure/clojure "1.12.4"]
                  [danlentz/clj-uuid "0.2.5"]
-                 [com.github.seancorfield/next.jdbc "1.3.1093"]
-                 [com.github.seancorfield/honeysql "2.7.1368"]]
+                 [com.github.seancorfield/next.jdbc "1.3.1118"]
+                 [com.github.seancorfield/honeysql "2.7.1390"]]
   :deploy-repositories [["snapshots" {:url "https://clojars.org/repo"
                                       :username :env/clojars_username
                                       :password :env/clojars_password
@@ -21,6 +21,6 @@
    :repl {:repl-options {:host "0.0.0.0"
                          :port 4001}}
    :profiles/dev {}
-   :project/dev {:dependencies [[org.postgresql/postgresql "42.7.10"]]
+   :project/dev {:dependencies [[org.postgresql/postgresql "42.7.11"]]
                  :plugins [[jonase/eastwood "1.4.3"]
-                           [dev.weavejester/lein-cljfmt "0.16.0"]]}})
+                           [dev.weavejester/lein-cljfmt "0.16.4"]]}})
