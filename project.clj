@@ -7,7 +7,7 @@
   :dependencies [[org.clojure/clojure "1.12.4"]
                  [danlentz/clj-uuid "0.2.5"]
                  [com.github.seancorfield/next.jdbc "1.3.1118"]
-                 [com.github.seancorfield/honeysql "2.7.1390"]]
+                 [com.github.seancorfield/honeysql "2.7.1392"]]
   :deploy-repositories [["snapshots" {:url "https://clojars.org/repo"
                                       :username :env/clojars_username
                                       :password :env/clojars_password
